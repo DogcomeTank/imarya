@@ -1,0 +1,22 @@
+extends layout
+
+block content
+    h1=title
+    p welcome
+    table
+        tr
+            th Username
+            th Firstname
+            th Lastname
+            th Email
+        each student in students
+            tr
+                td
+                    a(href=`/students/${student._id}`)=student.username
+                td
+                    a(href=`/students/${student._id}`)=student.firstName
+                td
+                    a(href=`/students/${student._id}`)=student.lastName
+                td
+                    a(href=`/students/${student._id}`)=student.email
+    a(href="/students/add") Add Students

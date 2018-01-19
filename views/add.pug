@@ -1,0 +1,17 @@
+block content
+    h1 Add new student
+    a(href="/") Home
+    form(action="/students/add" method="POST")
+        label First Name
+        br
+        input(name="firstName" type="text")
+        br
+        label Last Name
+        br
+        input(name="lastName" type="text") 
+        br
+        label Email
+        br
+        input(name="email" type="text")
+        br
+        input(type="submit")

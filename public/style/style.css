@@ -1,0 +1,206 @@
+.w3-sidebar a {
+    font-family: "Roboto", sans-serif
+}
+
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.w3-wide {
+    font-family: "Montserrat", sans-serif;
+}
+
+a {
+    cursor: pointer;
+}
+
+nav a:hover {
+    color: white !important;
+    background-color: rgba(90, 200, 200, 0.6)!important;
+}
+
+.cursorPointer{
+    cursor: pointer;
+}
+
+.mySlides {
+    display: none;
+    max-width: 100%;
+    max-height: 200px;
+
+}
+
+.w3-left,
+.w3-right,
+.w3-badge {
+    cursor: pointer
+}
+
+.w3-badge {
+    height: 13px;
+    width: 13px;
+    padding: 0
+}
+
+.centerItem {
+    margin: auto;
+}
+
+.minWidthOfForm {
+    min-width: 340px;
+}
+
+.productGridClass div:nth-child(2) {
+    margin-bottom: 13px !important;
+}
+
+
+div.productGridClass > div {
+    padding: 5px;
+    margin-bottom: 15px;
+}
+
+.loginPageContent {
+    background-color: #fcfcfc;
+    max-width: 600px;
+}
+
+.loginPage {
+    text-align: center;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.roundedImga {
+    border-radius: 50% !important;
+    width: 25px;
+    height: 25px;
+}
+
+.googleLoginLink {
+    position: relative;
+    width: 80%;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.logoBlueBG,
+.logoBlueHoverBG:hover {
+    color: white;
+    background-color: #5ac8c8;
+}
+
+.logoPink,
+.logoPinkHover:hover {
+    color: #f78389!important;
+}
+
+.logoPinkBG,
+.logoPinkHoverBG:hover {
+    color: white;
+    background-color: #f78389!important;
+}
+
+.logoPinkBGLight,
+.logoPinkHoverBGLight:hover {
+    color: white;
+    background-color: #efc3c5!important;
+}
+
+.logoGreen,
+.logoGreenHover:hover {
+    color: #73b056!important
+}
+
+.logoGreenBG,
+.logoGreenHoverBG:hover {
+    background-color: #73b056!important
+}
+
+.logoOrange {
+    color: #f78e46;
+}
+
+.lightGreyBG {
+    color: #000!important;
+    background-color: #f2f2f2!important
+}
+
+/**************/
+
+#grid[data-columns]::before {
+    content: '3 .column.size-1of3';
+}
+
+/* These are the classes that are going to be applied: */
+
+/* Base styles */
+
+.column {
+    float: left;
+}
+
+.size-1of4 {
+    width: 25%;
+}
+
+.size-1of3 {
+    width: 33.333%;
+}
+
+.size-1of2 {
+    width: 50%;
+}
+
+.size-1of1 {
+    width: 100%;
+}
+
+/* Configurate salvattore with media queries */
+
+@media screen and (max-width: 450px) {
+    #productGrid[data-columns]::before {
+        content: '1 .column.size-1of1';
+    }
+
+    .mySlides {
+        max-height: 126px;
+        max-width: 100%;
+    }
+}
+
+@media screen and (min-width: 451px) and (max-width: 700px) {
+    #productGrid[data-columns]::before {
+        content: '2 .column.size-1of2';
+    }
+
+}
+
+@media screen and (min-width: 701px) and (max-width: 850px) {
+    #productGrid[data-columns]::before {
+        content: '3 .column.size-1of3';
+    }
+
+}
+
+@media screen and (min-width: 851px) {
+    #productGrid[data-columns]::before {
+        content: '4 .column.size-1of4';
+    }
+
+}
+
+/**************/
+
+@media (max-width:993px) {
+
+    .hide-small {
+        display: none!important
+    }
+
+
+}
