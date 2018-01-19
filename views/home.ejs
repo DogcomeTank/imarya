@@ -19,15 +19,29 @@
     <nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
         <div class="w3-container w3-display-container w3-padding-16">
             <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
-            <h3 class="w3-wide w3-center"><b><a href="#"> <img src="icon/GirraffeText.png" width="100"></a> </b></h3>
+            <h3 class="w3-wide w3-center">
+                <b>
+                    <a href="#">
+                        <img src="icon/GirraffeText.png" width="100">
+                    </a>
+                </b>
+            </h3>
+        </div>
+        <div class="w3-large w3-text-grey">
+            <a onclick="document.getElementById('userLogin').style.display='block'" class="w3-bar-item w3-button">
+                <i class="fa fa-user"></i>
+                <span class="w3-margin-left">User Login</span>
+            </a>
         </div>
         <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
             <a href="#" class="w3-bar-item w3-button">Snacks</a>
             <a onclick="myAccFunc()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtn">
-      Jeans <i class="fa fa-caret-down"></i>
-    </a>
+                Jeans
+                <i class="fa fa-caret-down"></i>
+            </a>
             <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-                <a href="http://fontawesome.io/icons/" class="w3-bar-item w3-button logoBlueBG"><i class="fa fa-caret-right w3-margin-right"></i>Skinny</a>
+                <a href="http://fontawesome.io/icons/" class="w3-bar-item w3-button logoBlueBG">
+                    <i class="fa fa-caret-right w3-margin-right"></i>Skinny</a>
                 <a href="#" class="w3-bar-item w3-button">Relaxed</a>
                 <a href="#" class="w3-bar-item w3-button">Bootcut</a>
                 <a href="#" class="w3-bar-item w3-button">Straight</a>
@@ -44,14 +58,19 @@
 
     <!-- Top menu on small screens -->
     <header class="w3-bar w3-top w3-hide-large w3-white w3-xlarge">
-        <div class="w3-bar-item w3-padding-24 w3-wide"><img src="icon/GirraffeText.png" width="70px"> </div>
-        <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></a>
-        <button onclick="document.getElementById('shoppingCart').style.display='block'" class="w3-bar-item w3-button w3-padding-24 w3-right"><i class="fa fa-shopping-cart"></i></button>
-
-        <button onclick="document.getElementById('userLogin').style.display='block'" class="w3-bar-item w3-button w3-padding-24 w3-right"><i class="fa fa-user"></i></button>
+        <div class="w3-bar-item w3-padding-24 w3-wide">
+            <img src="icon/GirraffeText.png" width="70px"> </div>
+        <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()">
+            <i class="fa fa-bars"></i>
+        </a>
+        <button onclick="document.getElementById('shoppingCart').style.display='block'" class="w3-bar-item w3-button w3-padding-24 w3-right">
+            <i class="fa fa-shopping-cart"></i>
+        </button>
 
         <!--        <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right"><i class="fa fa-user"></i></a>-->
-        <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right"><i class="fa fa-search"></i></a>
+        <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right">
+            <i class="fa fa-search"></i>
+        </a>
 
     </header>
 
@@ -67,10 +86,13 @@
         <!-- Top header -->
 
         <header class="w3-container w3-xlarge">
-            <p class="w3-left">Jeans</p>
-            <button onclick="document.getElementById('shoppingCart').style.display='block'" class="w3-bar-item w3-button w3-padding-24 w3-right hide-small"><i class="fa fa-shopping-cart"></i></button>
-            <button onclick="document.getElementById('userLogin').style.display='block'" class="w3-bar-item w3-button w3-padding-24 w3-right hide-small"><i class="fa fa-user"></i></button>
-            <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right hide-small"><i class="fa fa-search"></i></a>
+            <p class="w3-left w3-text-grey">Product</p>
+            <button onclick="document.getElementById('shoppingCart').style.display='block'" class="w3-bar-item w3-button w3-padding-24 w3-right hide-small">
+                <i class="fa fa-shopping-cart"></i>
+            </button>
+            <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right hide-small">
+                <i class="fa fa-search"></i>
+            </a>
         </header>
 
 
@@ -97,7 +119,7 @@
         <!-- Product grid -->
 
 
-        <div id="productGrid" class="productGridClass" data-columns>
+        <div id="productGrid" class="productGridClass w3-container" data-columns>
             <% for (var i = 0; i < products.length; i++) {
             var price = products[i].price.split(".");
         %>
@@ -114,21 +136,27 @@
                             <h3>
                                 <%= products[i].description %>
                             </h3>
-                            <p><span class="w3-large">
-$<%= price[0] %><span class="w3-small">.<%= price[1] %></span></span>
+                            <p>
+                                <span class="w3-large">
+                                    $
+                                    <%= price[0] %>
+                                        <span class="w3-small">.
+                                            <%= price[1] %>
+                                        </span>
+                                </span>
                             </p>
                         </div>
 
                     </div>
                 </div>
-        
-        <% } %>
-</div>
+
+                <% } %>
+        </div>
 
 
 
-            <!-- Subscribe section -->
-            <!--
+        <!-- Subscribe section -->
+        <!--
 <div class="w3-container w3-black w3-padding-32">
     <h1>Subscribe</h1>
     <p>To get special offers and VIP treatment:</p>
@@ -137,61 +165,94 @@ $<%= price[0] %><span class="w3-small">.<%= price[1] %></span></span>
 </div>
 -->
 
-            <!-- Footer -->
-            <footer class="w3-padding-64 w3-small w3-center .lightGreyBG" id="footer">
-                <div class="w3-row-padding">
-                    <div class="w3-col s4">
-                        <h4>Contact</h4>
-                        <p>Questions? Go ahead.</p>
-                        <form action="/action_page.php" target="_blank">
-                            <p><input class="w3-input w3-border" type="text" placeholder="Name" name="Name" required></p>
-                            <p><input class="w3-input w3-border" type="text" placeholder="Email" name="Email" required></p>
-                            <p><input class="w3-input w3-border" type="text" placeholder="Subject" name="Subject" required></p>
-                            <p><input class="w3-input w3-border" type="text" placeholder="Message" name="Message" required></p>
-                            <button type="submit" class="w3-button w3-block w3-black">Send</button>
-                        </form>
-                    </div>
+        <!-- Footer -->
+        <footer class="w3-padding-64 w3-small w3-center .lightGreyBG" id="footer">
+            <div class="w3-row-padding">
+                <div class="w3-col s4">
+                    <h4>Contact</h4>
+                    <p>Questions? Go ahead.</p>
+                    <form action="/action_page.php" target="_blank">
+                        <p>
+                            <input class="w3-input w3-border" type="text" placeholder="Name" name="Name" required>
+                        </p>
+                        <p>
+                            <input class="w3-input w3-border" type="text" placeholder="Email" name="Email" required>
+                        </p>
+                        <p>
+                            <input class="w3-input w3-border" type="text" placeholder="Subject" name="Subject" required>
+                        </p>
+                        <p>
+                            <input class="w3-input w3-border" type="text" placeholder="Message" name="Message" required>
+                        </p>
+                        <button type="submit" class="w3-button w3-block w3-black">Send</button>
+                    </form>
+                </div>
 
-                    <div class="w3-col s4">
-                        <h4>About</h4>
-                        <p><a href="#">About us</a></p>
-                        <p><a href="#">We're hiring</a></p>
-                        <p><a href="#">Support</a></p>
-                        <p><a href="#">Find store</a></p>
-                        <p><a href="#">Shipment</a></p>
-                        <p><a href="#">Payment</a></p>
-                        <p><a href="#">Gift card</a></p>
-                        <p><a href="#">Return</a></p>
-                        <p><a href="#">Help</a></p>
-                    </div>
-                    <!--
+                <div class="w3-col s4">
+                    <h4>About</h4>
+                    <p>
+                        <a href="#">About us</a>
+                    </p>
+                    <p>
+                        <a href="#">We're hiring</a>
+                    </p>
+                    <p>
+                        <a href="#">Support</a>
+                    </p>
+                    <p>
+                        <a href="#">Find store</a>
+                    </p>
+                    <p>
+                        <a href="#">Shipment</a>
+                    </p>
+                    <p>
+                        <a href="#">Payment</a>
+                    </p>
+                    <p>
+                        <a href="#">Gift card</a>
+                    </p>
+                    <p>
+                        <a href="#">Return</a>
+                    </p>
+                    <p>
+                        <a href="#">Help</a>
+                    </p>
+                </div>
+                <!--
                 <div class="w3-col s4">
                     <p></p>
                 </div>
 -->
 
-                    <div class="w3-col s4 w3-justify">
-                        <h4>Store</h4>
-                        <p><i class="fa fa-fw fa-map-marker"></i> Company Name</p>
-                        <p><i class="fa fa-fw fa-phone"></i> 0044123123</p>
-                        <p><i class="fa fa-fw fa-envelope"></i> ex@mail.com</p>
-                        <h4>We accept</h4>
-                        <p><i class="fa fa-fw fa-cc-amex"></i> Amex</p>
-                        <p><i class="fa fa-fw fa-credit-card"></i> Credit Card</p>
-                        <br>
-                        <i class="fa fa-facebook-official w3-hover-opacity w3-large"></i>
-                        <i class="fa fa-instagram w3-hover-opacity w3-large"></i>
-                        <i class="fa fa-snapchat w3-hover-opacity w3-large"></i>
-                        <i class="fa fa-pinterest-p w3-hover-opacity w3-large"></i>
-                        <i class="fa fa-twitter w3-hover-opacity w3-large"></i>
-                        <i class="fa fa-linkedin w3-hover-opacity w3-large"></i>
-                    </div>
+                <div class="w3-col s4 w3-justify">
+                    <h4>Store</h4>
+                    <p>
+                        <i class="fa fa-fw fa-map-marker"></i> Company Name</p>
+                    <p>
+                        <i class="fa fa-fw fa-phone"></i> 0044123123</p>
+                    <p>
+                        <i class="fa fa-fw fa-envelope"></i> ex@mail.com</p>
+                    <h4>We accept</h4>
+                    <p>
+                        <i class="fa fa-fw fa-cc-amex"></i> Amex</p>
+                    <p>
+                        <i class="fa fa-fw fa-credit-card"></i> Credit Card</p>
+                    <br>
+                    <i class="fa fa-facebook-official w3-hover-opacity w3-large"></i>
+                    <i class="fa fa-instagram w3-hover-opacity w3-large"></i>
+                    <i class="fa fa-snapchat w3-hover-opacity w3-large"></i>
+                    <i class="fa fa-pinterest-p w3-hover-opacity w3-large"></i>
+                    <i class="fa fa-twitter w3-hover-opacity w3-large"></i>
+                    <i class="fa fa-linkedin w3-hover-opacity w3-large"></i>
                 </div>
-            </footer>
+            </div>
+        </footer>
 
-            <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">Imarya</a></div>
+        <div class="w3-black w3-center w3-padding-24">Powered by
+            <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">Imarya</a>
+        </div>
 
-            <!-- End page content -->
+        <!-- End page content -->
     </div>
 
     <!-- Newsletter Modal -->
@@ -201,7 +262,9 @@ $<%= price[0] %><span class="w3-small">.<%= price[1] %></span></span>
                 <i onclick="document.getElementById('newsletter').style.display='none'" class="fa fa-remove w3-right w3-button w3-transparent w3-xxlarge"></i>
                 <h2 class="w3-wide">NEWSLETTER</h2>
                 <p>Join our mailing list to receive updates on new arrivals and special offers.</p>
-                <p><input class="w3-input w3-border" type="text" placeholder="Enter e-mail"></p>
+                <p>
+                    <input class="w3-input w3-border" type="text" placeholder="Enter e-mail">
+                </p>
                 <button type="button" class="w3-button w3-padding-large w3-red w3-margin-bottom" onclick="document.getElementById('newsletter').style.display='none'">Subscribe</button>
             </div>
         </div>
@@ -274,10 +337,9 @@ $<%= price[0] %><span class="w3-small">.<%= price[1] %></span></span>
         //        slideShow
         var slideIndex = 1;
         showDivs(slideIndex);
-        setInterval(function() {
+        setInterval(function () {
             plusDivs(1);
         }, 5000);
-
     </script>
     <%
         

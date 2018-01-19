@@ -56,12 +56,16 @@
 
     </table>
 
-    <button class="w3-button w3-margin-top w3-green" onclick="document.getElementById('addProduct').style.display='block'"><i class="fa fa-plus" aria-hidden="true"></i></button>
+    <button class="w3-button w3-margin-top w3-green" onclick="document.getElementById('addProduct').style.display='block'">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+    </button>
 
     <div id="productUpdate" class="w3-modal">
         <div class="w3-modal-content">
             <div class="w3-container">
-                <span onclick="document.getElementById('productUpdate').style.display='none'" class="w3-button w3-display-topright"><i class="fa fa-times"></i></span>
+                <span onclick="document.getElementById('productUpdate').style.display='none'" class="w3-button w3-display-topright">
+                    <i class="fa fa-times"></i>
+                </span>
                 <p>Some text in the Modal..</p>
                 <p>Some text in the Modal..</p>
             </div>
@@ -78,25 +82,36 @@
                     </div>
 
                     <form id="addProductForm" class="w3-container">
-                        <span onclick="document.getElementById('addProduct').style.display='none'" class="w3-button w3-display-topright"><i class="fa fa-times"></i></span>
+                        <span onclick="document.getElementById('addProduct').style.display='none'" class="w3-button w3-display-topright">
+                            <i class="fa fa-times"></i>
+                        </span>
                         <p>
                             <input id="productName" class="w3-input" type="text">
-                            <label>Product name</label></p>
+                            <label>Product name</label>
+                        </p>
                         <p>
                             <input id="description" class="w3-input" type="text">
-                            <label>Description</label></p>
+                            <label>Description</label>
+                        </p>
                         <p>
                             <input id="by" class="w3-input" type="text">
-                            <label>by</label></p>
+                            <label>by</label>
+                        </p>
                         <p>
                             <input id="img" class="w3-input" type="text">
-                            <label>Image</label></p>
+                            <label>Image</label>
+                        </p>
                         <p>
                             <input id="price" class="w3-input" type="text">
-                            <label>Price</label></p>
+                            <label>Price</label>
+                        </p>
 
                     </form>
-                    <p><button onclick="addProduct()" class="w3-button w3-circle w3-teal w3-margin"><i class="fa fa-plus" aria-hidden="true"></i></button></p>
+                    <p>
+                        <button onclick="addProduct()" class="w3-button w3-circle w3-teal w3-margin">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                        </button>
+                    </p>
 
                 </div>
             </div>
@@ -111,7 +126,7 @@
                 data: JSON.stringify(data),
                 contentType: 'application/json',
                 url: '/productEdit',
-                success: function(data) {
+                success: function (data) {
                     console.log(JSON.stringify(data));
                 }
             });
@@ -127,7 +142,7 @@
                 data: JSON.stringify(data),
                 contentType: 'application/json',
                 url: '/productEdit',
-                success: function(data) {
+                success: function (data) {
                     console.log(data.id + ": is deleted.");
                 }
             });
@@ -154,12 +169,11 @@
                 data: JSON.stringify(data),
                 contentType: 'application/json',
                 url: '/productEdit',
-                success: function(data) { 
-                    
+                success: function (data) {
+
                 }
             });
         }
-
     </script>
 
 

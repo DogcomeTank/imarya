@@ -8,8 +8,7 @@ router.get('/', (req, res) => {
         if (err) {
             return next(err);
         }
-        console.log(students);
-        res.render('index', {
+        res.render('/', {
             title: "Welcome to Full-Stack",
             students
         });

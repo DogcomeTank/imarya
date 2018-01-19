@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+app.set('view engine', 'ejs');
 
 //middleware
 app.use(logger('dev')); // log requests in server console
@@ -40,29 +40,17 @@ passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
 // connect mongoDB
-mongoose.connect('mongodb://localhost:27017/webdxd', {
-    useMongoClient: true
-});
-//mongoose.connect('mongodb://localhost:27017/imarya', { useMongoClient:true });
+mongoose.connect('mongodb://admin:Password@ds157097.mlab.com:57097/webdxd', { useMongoClient:true });
+mongoose.Promise = global.Promise
 
 //router
-const index = require('./routes/index');
-const students = require('./routes/students');
-const chat = require('./routes/chat');
-const user = require('./routes/user');
-//const Products = require('./routes/product');
+const index = require('./routes/product');
 
 //
 app.use(bodyParser.urlencoded({
     extended: true
 }))
 app.use('/', index);
-app.use('/students', students);
-app.use('/chat', chat);
-app.use('/user', user);
-//app.use('/',Products);
-//app.use('/productManagement',Products);
-//app.use('/productEdit',Products);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
