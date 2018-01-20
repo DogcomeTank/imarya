@@ -34,7 +34,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //passport config
-const Account = require('./models/students');
+const Account = require('./models/userLocal');
 passport.use(new localStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
@@ -45,12 +45,15 @@ mongoose.Promise = global.Promise
 
 //router
 const index = require('./routes/product');
+const localLogin = require('./routes/userLocalRoutes');
 
 //
 app.use(bodyParser.urlencoded({
     extended: true
 }))
+
 app.use('/', index);
+app.use('/oAuth', localLogin);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
