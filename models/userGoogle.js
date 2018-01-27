@@ -1,13 +1,12 @@
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-passport.use(
-    new GoogleStrategy({
-        //option for the google strat
-        callbackURL:'',
-        clientID:'',
-        clientSecret:''
-    },()=>{
-        //passport callback function
-    })
-)
+const userSchema = new Schema({
+    username: String,
+    googleId: String,
+    oAuthProvider: String
+})
+
+const googleUser = mongoose.model('users',userSchema);
+
+module.exports = googleUser;

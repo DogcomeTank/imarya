@@ -21,31 +21,36 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/scripts', express.static(path.join(__dirname, 'node_modules/')));
 app.use(session({
-    secret: 'webdxd',
+    secret: 'imarya',
     resave: false,
     saveUninitialized: false,
     cookie: { secure: false } //only set this to true if you are in HTTPS connection
 }));
 
-//user authentication
+//user authentication local
 const passport = require('passport');
-const localStrategy = require('passport-local').Strategy;
+// const localStrategy = require('passport-local').Strategy;
 app.use(passport.initialize());
 app.use(passport.session());
 
-//passport config
-const Account = require('./models/userLocal');
-passport.use(new localStrategy(Account.authenticate()));
-passport.serializeUser(Account.serializeUser());
-passport.deserializeUser(Account.deserializeUser());
+//passport local config
+// const Account = require('./models/userLocal');
+// passport.use(new localStrategy(Account.authenticate()));
+// passport.serializeUser(Account.serializeUser());
+// passport.deserializeUser(Account.deserializeUser());
+
+//passport google config
+const GoogleLoginConfig = require('./config/googleConfig');
 
 // connect mongoDB
-mongoose.connect('mongodb://admin:Password@ds157097.mlab.com:57097/webdxd', { useMongoClient:true });
+const keys = require('./models/keys');
+mongoose.connect(keys.mongoose.link, { useMongoClient:true });
 mongoose.Promise = global.Promise
 
 //router
 const index = require('./routes/product');
 const localLogin = require('./routes/userLocalRoutes');
+const googleRoutes = require('./routes/loginWithGoogle/googleRoutes');
 
 //
 app.use(bodyParser.urlencoded({
@@ -54,6 +59,7 @@ app.use(bodyParser.urlencoded({
 
 app.use('/', index);
 app.use('/oAuth', localLogin);
+app.use('/googleOauth/',googleRoutes);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
