@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
         if (err) {
             return next(err);
         }
-        console.log(products);
+        console.log(req.session.webUser);
         res.render('home', {
             products
         });

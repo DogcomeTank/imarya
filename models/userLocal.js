@@ -8,6 +8,14 @@ const UserSchema = new Schema({
     lastName: String,
     email: String,
     password: String,
+    oAuthProvider: {
+        type: String,
+        default: 'l',
+    },
+    accessLevel: {
+        type:Number,
+        default: 0,
+    },
     createdAt:{
         type:Date,
         default:Date.now

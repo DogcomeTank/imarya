@@ -5,13 +5,11 @@ const keys = require('../models/keys');
 const googleUser = require('../models/userGoogle');
 
 passport.serializeUser((gUser, done)=>{
-  console.log('serialized: '+gUser.id);
   done(null, gUser.id);
 });
 
 passport.deserializeUser((id, done)=>{
   googleUser.findOne({'_id':id}).then((user)=>{
-    console.log('find:' + user);
     done(null, user);
   });
 });
@@ -23,25 +21,26 @@ passport.use(new GoogleStrategy({
   },
   function (accessToken, refreshToken, profile, cb) {
     googleUser.findOne({'googleId':profile.id}, (err, gUser)=>{
-      if(gUser.id){
-        console.log('gUser:' + gUser);
+      if(gUser != null){
+        
         return cb(err, gUser);
       }else{
         //Add new user to database
         var newGoogleUser = new googleUser({
           username: profile.displayName,
           googleId:profile.id,
+          email: profile.emails[0].value,
           oAuthProvider: 'google',
-          createdAt: { type: Date, default: Date.now }
+          accessLevel:0,
     
         });
     
-        newGoogleUser.save(function (err, newAddedGoogleUser) {
+        newGoogleUser.save(function (err, gUser) {
           if (err){
+            console.log(err);
             return cb(null, err); 
           }
-          console.log('new user save: '+ newAddedGoogleUser);
-            return cb(err, newAddedGoogleUser); 
+            return cb(err, gUser); 
           
         })
       }

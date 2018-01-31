@@ -4,20 +4,19 @@ const router = express.Router();
 const User = require('../models/userLocal');
 const passport = require('passport');
 
-// const localStrategy = require('passport-local').Strategy;
+const localStrategy = require('passport-local').Strategy;
 
-// passport.use(new localStrategy(User.authenticate()));
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
+passport.use(new localStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 router.get('/login', (req, res) => {
     res.render('users/login');
 });
 
 router.post('/login', passport.authenticate('local'), (req, res) => {
-    console.log('check user if exsit');
     res.send(req.body);
-  });
+});
 
 // router.post('/login', passport.authenticate('local', {
 //     // successRedirect:'/',
@@ -31,10 +30,10 @@ router.get('/signup', (req, res) => {
 });
 
 router.post('/signup', (req, res, next) => {
-
     //register a new user
     User.register(new User({
-        username: req.body.username
+        username: req.body.username,
+        email: req.body.email
     }), req.body.password, (err, userInfo) => {
         if (err) {
             res.json(err);
@@ -42,7 +41,7 @@ router.post('/signup', (req, res, next) => {
         }
 
         passport.authenticate('local')(req, res, () => {
-            res.redirect('/loginStatu');
+            res.send(req.body);
         });
     });
 
