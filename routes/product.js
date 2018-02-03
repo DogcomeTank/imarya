@@ -5,11 +5,11 @@ const Products = require('../models/productList');
 
 
 router.get('/', (req, res) => {
+    console.log(req.user.accessLevel);
     Products.find({}, (err, products) => {
         if (err) {
             return next(err);
         }
-        console.log(req.session.webUser);
         res.render('home', {
             products
         });
@@ -37,7 +37,7 @@ router.post('/productEdit', (req, res) => {
         const product = new Products(data.info);
         product.save((err,doc)=>{
             if(err){
-                console.log("**************");
+                console.log("err: " + err);
                 return next(err);
             }else{
                 req.body = "New item added";

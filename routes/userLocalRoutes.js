@@ -15,6 +15,7 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/login', passport.authenticate('local'), (req, res) => {
+    req.test = 'test Value';
     res.send(req.body);
 });
 
@@ -45,6 +46,11 @@ router.post('/signup', (req, res, next) => {
         });
     });
 
+});
+
+router.get('/logout', (req,res)=>{
+    req.logOut();
+    res.send('logout.');
 });
 
 

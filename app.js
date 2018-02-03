@@ -12,7 +12,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 //middleware
-app.use(logger('dev')); // log requests in server console
+//app.use(logger('dev')); // log requests in server console
 app.use(bodyParser.json()); // parse client request data to json format
 app.use(bodyParser.urlencoded({
     extended: false
@@ -29,15 +29,9 @@ app.use(session({
 
 //user authentication local
 const passport = require('passport');
-// const localStrategy = require('passport-local').Strategy;
 app.use(passport.initialize());
 app.use(passport.session());
 
-//passport local config
-// const Account = require('./models/userLocal');
-// passport.use(new localStrategy(Account.authenticate()));
-// passport.serializeUser(Account.serializeUser());
-// passport.deserializeUser(Account.deserializeUser());
 
 //passport google config
 const GoogleLoginConfig = require('./config/googleConfig');
@@ -49,8 +43,9 @@ mongoose.Promise = global.Promise
 
 //router
 const index = require('./routes/product');
-const localLogin = require('./routes/userLocalRoutes');
-const googleRoutes = require('./routes/loginWithGoogle/googleRoutes');
+const login = require('./config/loginConfig');
+//const localLogin = require('./routes/userLocalRoutes');
+//const googleRoutes = require('./routes/loginWithGoogle/googleRoutes');
 
 //
 app.use(bodyParser.urlencoded({
@@ -60,8 +55,10 @@ app.use(bodyParser.urlencoded({
 
 
 app.use('/', index);
-app.use('/oAuth', localLogin);
-app.use('/googleOauth/',googleRoutes);
+app.use('/login', login);
+//app.use('/oAuth', localLogin);
+//app.use('/googleOauth/',googleRoutes);
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
