@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const http = require('http');
 const mongoose = require('mongoose');
 const session = require('express-session');
+const keys = require('./models/keys');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -21,7 +22,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/scripts', express.static(path.join(__dirname, 'node_modules/')));
 app.use(session({
-    secret: 'imarya',
+    secret: keys.sessionSecrete.mySecrete,
     resave: false,
     saveUninitialized: false,
     cookie: { secure: false } //only set this to true if you are in HTTPS connection
@@ -37,7 +38,6 @@ app.use(passport.session());
 const GoogleLoginConfig = require('./config/googleConfig');
 
 // connect mongoDB
-const keys = require('./models/keys');
 mongoose.connect(keys.mongoose.link, { useMongoClient:true });
 mongoose.Promise = global.Promise
 
