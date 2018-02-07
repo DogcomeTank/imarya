@@ -14,15 +14,6 @@ const ProductSchema = new Schema({
         default: Date.now
     }
 });
-
-const ProductInfoSchema = new Schema({
-    productId:{
-        type: Schema.Types.ObjectId,
-        ref: 'Products'
-    },
-});
-
 const Products = mongoose.model('Products', ProductSchema);
-const ProductInfo = mongoose.model('ProductInfo',ProductInfoSchema);
 
 module.exports = Products;
