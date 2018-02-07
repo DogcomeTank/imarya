@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const Products = require('../models/productList');
+const Products = require('../models/products/product');
+const ProductInfo = require('../models/products/productInfo');
 
 
 
@@ -15,9 +16,6 @@ router.get('/', (req, res) => {
     });
 
 });
-router.get('/addItem', (req, res) => {
-    res.send('addItem');
-});
 
 router.post('/addItem', (req, res) => {
     const product = new Products(req.body);
@@ -30,6 +28,23 @@ router.post('/addItem', (req, res) => {
     });
 });
 
+router.get('/productInfo',(req, res)=>{
+    newInfo = {
+        productId: '5a792cd27db0582524720c65',
+        description:'testing',
+        price: '3.44',
+    }
+    
+    const newProductInfo = new ProductInfo(newInfo);
+    newProductInfo.save((err,doc)=>{
+        if(err){
+            console.log(err);
+            return next(err);
+        }
+        res.send(doc);
+    });
+});
+
 router.get('/deleteItem', (req, res) => {
     res.send('delete');
 });
@@ -37,40 +52,6 @@ router.get('/deleteItem', (req, res) => {
 router.get('/updateItem', (req, res) => {
 
 });
-
-// router.post('/productEdit', (req, res) => {
-//     var data = req.body;
-
-//     if (data.action == 'addItem') {
-//         let dataJson = JSON.stringify(data.info);
-//         console.log(data.info);
-//         const product = new Products(data.info);
-//         product.save((err, doc) => {
-//             if (err) {
-//                 console.log("err: " + err);
-//                 return next(err);
-//             } else {
-//                 req.body = "New item added";
-//             }
-//         });
-
-//     } else if (data.action == 'deleteProduct') {
-//         Products.remove({
-//             _id: data.id
-//         }, (err, msg) => {
-//             if (err) {
-//                 return next(err);
-//             } else {
-//                 console.log(msg);
-//             }
-//         })
-//     } else if (data.action == 'updateItem') {
-//         console.log(action);
-//     }
-
-//     res.send(req.body);
-// });
-
 
 
 
