@@ -34,18 +34,15 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-//passport google config
-const GoogleLoginConfig = require('./config/googleConfig');
 
 // connect mongoDB
 mongoose.connect(keys.mongoose.link, { useMongoClient:true });
 mongoose.Promise = global.Promise
 
 //router
-const index = require('./routes/product');
+const index = require('./routes/index');
 const login = require('./config/loginConfig');
-//const localLogin = require('./routes/userLocalRoutes');
-//const googleRoutes = require('./routes/loginWithGoogle/googleRoutes');
+const productManage = require('./routes/productManage');
 
 //
 app.use(bodyParser.urlencoded({
@@ -56,9 +53,7 @@ app.use(bodyParser.urlencoded({
 
 app.use('/', index);
 app.use('/login', login);
-//app.use('/oAuth', localLogin);
-//app.use('/googleOauth/',googleRoutes);
-
+app.use('/productManage', productManage);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

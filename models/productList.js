@@ -13,7 +13,11 @@ const ProductSchema = new Schema({
         type: Date,
         default: Date.now
     }
-})
+});
+
+const ProductInfoSchema = new Schema({
+    
+});
 
 const Products = mongoose.model('Products', ProductSchema);
 

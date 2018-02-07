@@ -70,19 +70,17 @@ passport.deserializeUser(function (obj, done) {
   done(null, obj);
 });
 
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next(null);
-  }
-  res.redirect('/error')
-}
 
 
 
 
 router.get('/',
   function (req, res) {
-    res.send('Hello World.');
+    if (req.user) {
+      res.send('req.user:' + JSON.stringify(req.user));
+    } else {
+      res.send('not login');
+    }
   });
 
 router.get('/google-login', passport.authenticate('google', {
@@ -95,7 +93,7 @@ router.get('/google-token', passport.authenticate('google', {
   }),
   function (req, res) {
 
-    res.json(JSON.stringify(req.user));
+    res.send(JSON.stringify(req.user));
   });
 
 router.get('/facebook-login', passport.authenticate('facebook', {
@@ -110,10 +108,17 @@ router.get('/facebook-token', passport.authenticate('facebook', {
     res.send(JSON.stringify(req.user));
   });
 
+router.get('/logout', (req,res)=>{
+  req.logout();
+  res.send('logout');
+});
 
 router.get('/error', function (req, res) {
   res.send('An error has occured.');
 });
+
+
+
 
 
 module.exports = router;
