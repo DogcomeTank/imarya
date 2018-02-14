@@ -2,7 +2,6 @@
     font-family: "Roboto", sans-serif
 }
 
-
 body,
 h1,
 h2,
@@ -20,10 +19,10 @@ a {
 
 nav a:hover {
     color: white !important;
-    background-color: rgba(90, 200, 200, 0.6)!important;
+    background-color: rgba(90, 200, 200, 0.6) !important;
 }
 
-.cursorPointer{
+.cursorPointer {
     cursor: pointer;
 }
 
@@ -31,7 +30,6 @@ nav a:hover {
     display: none;
     max-width: 100%;
     max-height: 200px;
-
 }
 
 .w3-left,
@@ -58,8 +56,7 @@ nav a:hover {
     margin-bottom: 13px !important;
 }
 
-
-div.productGridClass > div {
+div.productGridClass>div {
     padding: 5px;
     margin-bottom: 15px;
 }
@@ -87,6 +84,49 @@ div.productGridClass > div {
     cursor: pointer;
     margin: 0 auto;
 }
+.scContainer{
+    height: 85vh;
+    position: relative;
+}
+.scHeader{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    position: absolute;
+    width: 100%;
+}
+
+.scList{
+    overflow: scroll;
+    height: 480px;
+    padding-top: 56px;
+}
+.scCard{
+    margin:10px;
+}
+.scCheckoutFooter{
+    padding: 0px 16px 8px 16px;
+    width: 100%;
+    line-height: 100%;
+    position: absolute;
+    bottom: 0px;
+}
+.scCheckoutPrice{
+    float: left;
+    height: 100%;
+}
+.scCheckoutPriceContent{
+    display: inline-block;
+    vertical-align: middle;
+}
+.scCheckoutBtn{
+    height: 60px;
+    float: right;
+}
+.scCheckoutBtnC{
+    margin-top: 15px;
+}
+
+
 
 .logoBlueBG,
 .logoBlueHoverBG:hover {
@@ -96,29 +136,29 @@ div.productGridClass > div {
 
 .logoPink,
 .logoPinkHover:hover {
-    color: #f78389!important;
+    color: #f78389 !important;
 }
 
 .logoPinkBG,
 .logoPinkHoverBG:hover {
     color: white;
-    background-color: #f78389!important;
+    background-color: #f78389 !important;
 }
 
 .logoPinkBGLight,
 .logoPinkHoverBGLight:hover {
     color: white;
-    background-color: #efc3c5!important;
+    background-color: #efc3c5 !important;
 }
 
 .logoGreen,
 .logoGreenHover:hover {
-    color: #73b056!important
+    color: #73b056 !important
 }
 
 .logoGreenBG,
 .logoGreenHoverBG:hover {
-    background-color: #73b056!important
+    background-color: #73b056 !important
 }
 
 .logoOrange {
@@ -126,8 +166,15 @@ div.productGridClass > div {
 }
 
 .lightGreyBG {
-    color: #000!important;
-    background-color: #f2f2f2!important
+    color: #000 !important;
+    background-color: #f2f2f2 !important
+}
+
+.whiteBG {
+    background-color: white !important;
+}
+.greyBG {
+    background-color:rgb(226, 226, 226) !important;
 }
 
 /**************/
@@ -166,7 +213,6 @@ div.productGridClass > div {
     #productGrid[data-columns]::before {
         content: '2 .column.size-1of2';
     }
-
     .mySlides {
         max-height: 126px;
         max-width: 100%;
@@ -177,30 +223,24 @@ div.productGridClass > div {
     #productGrid[data-columns]::before {
         content: '2 .column.size-1of2';
     }
-
 }
 
 @media screen and (min-width: 701px) and (max-width: 850px) {
     #productGrid[data-columns]::before {
         content: '3 .column.size-1of3';
     }
-
 }
 
 @media screen and (min-width: 851px) {
     #productGrid[data-columns]::before {
         content: '4 .column.size-1of4';
     }
-
 }
 
 /**************/
 
 @media (max-width:993px) {
-
     .hide-small {
-        display: none!important
+        display: none !important
     }
-
-
 }

@@ -275,12 +275,46 @@
     <!--   Shopping Cart Modal ******************-->
     <div id="shoppingCart" class="w3-modal">
         <div class="w3-modal-content">
-            <div class="w3-container">
-                <span onclick="document.getElementById('shoppingCart').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                <p>Some text. Some text. Some text.</p>
-                <p>Some text. Some text. Some text.</p>
+            <div class="scContainer">
+                <div class="scHeader whiteBG">
+                    <span onclick="document.getElementById('shoppingCart').style.display='none'" class="w3-button w3-display-topright">
+                        <i class="fa fa-times"></i>
+                    </span>
+                    <div class="w3-bar" style="width: 100%;">
+                        <button class="w3-bar-item w3-button" onclick="openCity('London')">Cart</button>
+                        <button class="w3-bar-item w3-button" onclick="openCity('Paris')">History</button>
+                    </div>
+                </div>
+                <div class="scList greyBG">
+                    <div class="w3-card-4 scCard whiteBG">
+                        <img src="/img/mb.jpg" alt="Norway">
+                        <div class="w3-container w3-center">
+                            <p>The Troll's tongue in Hardanger, Norway</p>
+                        </div>
+                    </div>
+                    <div class="w3-card-4 scCard whiteBG">
+                        <img src="/img/mb.jpg" alt="Norway">
+                        <div class="w3-container w3-center">
+                            <p>The Troll's tongue in Hardanger, Norway</p>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <div class="scCheckoutFooter whiteBG">
+                <div class="scCheckoutPrice">
+                    <div class="scCheckoutPriceContent">
+                        <h6>Total</h6>
+                        <h3>$9.99</h3>
+                    </div>
+
+                </div>
+                <div class="scCheckoutBtn">
+                    <button class="w3-btn scCheckoutBtnC w3-round-xlarge logoPinkBG">Checkout</button>
+                </div>
+            </div>
+
         </div>
+
     </div>
     <!--    Modal ******************-->
 
@@ -341,14 +375,8 @@
             plusDivs(1);
         }, 5000);
     </script>
-    <%
-        
-        for (var i = 0; i < products.length; i++) {
-            console.log(products[i].description);
-        } 
-    %>
 
-        <script src="script/Salvattore.js"></script>
+    <script src="script/Salvattore.js"></script>
 
 </body>
 

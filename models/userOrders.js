@@ -2,20 +2,21 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const CategorySchema = new Schema({
+const UserOrdersSchema = new Schema({
     productId:{
         type: Schema.Types.ObjectId,
         ref: 'Products'
     },
-    categoryId:{
+    userId:{
         type: Schema.Types.ObjectId,
-        ref: 'Categorys'
+        ref: 'Users'
     },
+    qty: Number, 
     createdAt: {
         type: Date,
         default: Date.now,
     }
 });
-const ProductCategory = mongoose.model('ProductCategory',CategorySchema);
+const UserOrders = mongoose.model('ProductQty',UserOrdersSchema);
 
-module.exports = ProductCategory;
+module.exports = UserOrders;

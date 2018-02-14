@@ -42,7 +42,8 @@ mongoose.Promise = global.Promise
 //router
 const index = require('./routes/index');
 const login = require('./config/loginConfig');
-const productManage = require('./routes/productManage');
+// const productManage = require('./routes/productManage');
+const products = require('./routes/products');
 
 //
 app.use(bodyParser.urlencoded({
@@ -53,7 +54,8 @@ app.use(bodyParser.urlencoded({
 
 app.use('/', index);
 app.use('/login', login);
-app.use('/productManage', productManage);
+// app.use('/productManage', productManage);
+app.use('/products', products);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
