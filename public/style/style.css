@@ -60,7 +60,29 @@ div.productGridClass>div {
     padding: 5px;
     margin-bottom: 15px;
 }
-
+.userInfo{
+    height: 600px;
+}
+.userInfo h3{
+    padding: 16px;
+}
+.userInfoCard{
+    margin: 8px;
+}
+.userInfoEdit{
+    display:grid;
+    grid-template-columns: 50% 50%;
+}
+.userInfoDisplay h5{
+    margin-bottom: 0px;
+}
+.userInfoDisplay p{
+    margin-top: 0px;
+}
+.userInfoEditBtn{
+    position: absolute;
+    right: 32px;
+}
 .loginPageContent {
     background-color: #fcfcfc;
     max-width: 600px;
@@ -70,8 +92,11 @@ div.productGridClass>div {
     text-align: center;
     padding-top: 60px;
     padding-bottom: 60px;
+    height: 500px;
 }
-
+.loginForm{
+    padding-bottom: 16px;
+}
 .roundedImga {
     border-radius: 50% !important;
     width: 25px;
@@ -84,11 +109,15 @@ div.productGridClass>div {
     cursor: pointer;
     margin: 0 auto;
 }
+.scContent{
+    max-width: 500px;
+}
 .scContainer{
     height: 85vh;
     position: relative;
 }
 .scHeader{
+    height: 60px;
     padding-top: 5px;
     padding-bottom: 5px;
     position: absolute;
@@ -97,13 +126,54 @@ div.productGridClass>div {
 
 .scList{
     overflow: scroll;
-    height: 480px;
+    height: 100%;
     padding-top: 56px;
+    padding-bottom: 120px;
+}
+.scImgDiv{
+    float: left;
 }
 .scCard{
     margin:10px;
+    border-radius: 10px;
+}
+.scCard::after{
+    display: block;
+    content: "";
+    clear: both;
+}
+.scImg{
+    border-radius: 10px;
+    float: left;
+    display: block;
+    width: 88px;
+    height: 88px;
+}
+.scListDescription{
+    overflow: hidden;
+    width: 33%;
+    float: left;
+    height: 80px;
+    margin-bottom: 8px;
+}
+.scListDescription h5{
+    margin-bottom: 0px;
+}
+.scListDescription p{
+    margin-top: 0px;
+    font-size: 60%;
+}
+.scListQty{
+    float: right;
+    margin: 25px 16px 25px 0px;
+}
+.scListQtyNum{
+    display: inline-block;
+    padding-right: 8px;
+    padding-left: 8px;
 }
 .scCheckoutFooter{
+    height: 70px;
     padding: 0px 16px 8px 16px;
     width: 100%;
     line-height: 100%;

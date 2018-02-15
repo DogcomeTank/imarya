@@ -34,21 +34,21 @@
             </a>
         </div>
         <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
+            <a href="#" class="w3-bar-item w3-button">All</a>
+            <a href="#" class="w3-bar-item w3-button">New Arrivals</a>
             <a href="#" class="w3-bar-item w3-button">Snacks</a>
             <a onclick="myAccFunc()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtn">
-                Jeans
+                Clothing
                 <i class="fa fa-caret-down"></i>
             </a>
             <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
                 <a href="http://fontawesome.io/icons/" class="w3-bar-item w3-button logoBlueBG">
-                    <i class="fa fa-caret-right w3-margin-right"></i>Skinny</a>
-                <a href="#" class="w3-bar-item w3-button">Relaxed</a>
-                <a href="#" class="w3-bar-item w3-button">Bootcut</a>
-                <a href="#" class="w3-bar-item w3-button">Straight</a>
+                    <i class="fa fa-caret-right w3-margin-right"></i>Hot</a>
+                <a href="#" class="w3-bar-item w3-button">Boy</a>
+                <a href="#" class="w3-bar-item w3-button">Girl</a>
             </div>
-            <a href="#" class="w3-bar-item w3-button">Jackets</a>
-            <a href="#" class="w3-bar-item w3-button">Gymwear</a>
-            <a href="#" class="w3-bar-item w3-button">Blazers</a>
+            <a href="#" class="w3-bar-item w3-button">Baby Skin Care</a>
+            <a href="#" class="w3-bar-item w3-button">Accessory</a>
             <a href="#" class="w3-bar-item w3-button">Shoes</a>
         </div>
         <a href="#footer" class="w3-bar-item w3-button w3-padding">Contact</a>
@@ -274,11 +274,11 @@
 
     <!--   Shopping Cart Modal ******************-->
     <div id="shoppingCart" class="w3-modal">
-        <div class="w3-modal-content">
+        <div class="w3-modal-content scContent">
             <div class="scContainer">
                 <div class="scHeader whiteBG">
                     <span onclick="document.getElementById('shoppingCart').style.display='none'" class="w3-button w3-display-topright">
-                        <i class="fa fa-times"></i>
+                        <i class="fa fa-remove w3-xlarge"></i>
                     </span>
                     <div class="w3-bar" style="width: 100%;">
                         <button class="w3-bar-item w3-button" onclick="openCity('London')">Cart</button>
@@ -287,8 +287,39 @@
                 </div>
                 <div class="scList greyBG">
                     <div class="w3-card-4 scCard whiteBG">
+                        <div class="scImgDiv">
+                            <img src="/img/mb.jpg" class="scImg">
+                        </div>
+                        <div class="scListDescription">
+                            <h5>Shoes</h5>
+                            <p>The Troll's tongue in Hardanger, Norway</p>
+                        </div>
+                        <div class="scListQty">
+                            <button class="w3-btn w3-circle">-</button>
+                            <div class="scListQtyNum">8</div>
+                            <button class="w3-btn w3-circle">+</button>
+                        </div>
+                    </div>
+
+                    <div class="w3-card-4 scCard whiteBG">
+                        <div class="scImgDiv">
+                            <img src="/img/mb.jpg" class="scImg">
+                        </div>
+                        <div class="scListDescription">
+                            <h5>Shoes</h5>
+                            <p>The Troll's tongue in Hardanger, Norway</p>
+                        </div>
+                        <div class="scListQty">
+                            <button class="w3-btn w3-circle">-</button>
+                            <div class="scListQtyNum">8</div>
+                            <button class="w3-btn w3-circle">+</button>
+                        </div>
+                    </div>
+
+                    <div class="w3-card-4 scCard whiteBG">
                         <img src="/img/mb.jpg" alt="Norway">
                         <div class="w3-container w3-center">
+                            <h5>Shoes</h5>
                             <p>The Troll's tongue in Hardanger, Norway</p>
                         </div>
                     </div>
@@ -321,11 +352,64 @@
     <!--   User Modal ******************-->
     <div id="userLogin" class="w3-modal">
         <div class="w3-modal-content loginPageContent">
+            <!-- <div class="userInfo">
+                <span onclick="document.getElementById('userLogin').style.display='none'" class="w3-button w3-display-topright fa fa-remove w3-xlarge"></span>
+                <h3>Login and Security</h3>
+                <div class="w3-card userInfoCard">
+                    <ul class="w3-ul">
+                        <li class="userInfoEdit">
+                            <div class="userInfoDisplay">
+                                <h5>Name</h5>
+                                <p>Scott Liu</p>
+                            </div>
+                            <div>
+                                <button class="w3-btn scCheckoutBtnC w3-round-xlarge logoPinkBG userInfoEditBtn">Edit</button>
+                            </div>
+                        </li>
+                        <li class="userInfoEdit">
+                            <div class="userInfoDisplay">
+                                <h5>Email</h5>
+                                <p>dogcometank@gmail.com</p>
+                            </div>
+                            <div>
+                                <button class="w3-btn scCheckoutBtnC w3-round-xlarge logoPinkBG userInfoEditBtn">Edit</button>
+                            </div>
+                        </li>
+                        <li class="userInfoEdit">
+                            <div class="userInfoDisplay">
+                                <h5>Phone Number</h5>
+                                <p>778-996-3244</p>
+                            </div>
+                            <div>
+                                <button class="w3-btn scCheckoutBtnC w3-round-xlarge logoPinkBG userInfoEditBtn">Edit</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div> -->
             <div class="w3-container loginPage">
                 <span onclick="document.getElementById('userLogin').style.display='none'" class="w3-button w3-display-topright fa fa-times"></span>
-                <h1 class="">Sign Up With</h1>
-                <!--        <a class="googleLoginLink"><img style="height: 80px;margin-top: 20px;" src="icon/btn_google_signin_dark_normal_web@2x.png"></a>-->
-                <div class="w3-row" style="width: 80%; margin: auto;margin-top: 60px;">
+                <div class="w3-card-4 loginForm">
+
+                    <div class="w3-container">
+                        <h2>Login</h2>
+                    </div>
+
+                    <form class="w3-container">
+
+                        <label>Username</label>
+                        <input class="w3-input" type="text">
+
+                        <label>Password</label>
+                        <input class="w3-input" type="password">
+                        <h6>Don't have account? sign up</h6>
+                    </form>
+
+                </div>
+                <!-- ************************* -->
+                <p>OR</p>
+                <h5>Sign Up With</h5>
+                <div class="w3-row" style="width: 80%; margin: auto;">
                     <a class="w3-col s4 w3-center" href="https://accounts.google.com/o/oauth2/auth?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%2Fw3Template%2Findex.html&client_id=188803597009-hf6q4ip2bhrgdiekrn8jbsjqk8do4poa.apps.googleusercontent.com&scope=email&access_type=offline&approval_prompt=force">
                         <img style="width: 60%;" class="w3-circle" src="icon/Google-plus-circle-icon-png.png">
                     </a>
@@ -336,8 +420,8 @@
                         <img style="width: 60%;" class="w3-circle" src="icon/Facebook-Home-Logo.png">
                     </a>
                 </div>
-
             </div>
+
         </div>
     </div>
     <!--    Modal ******************-->
