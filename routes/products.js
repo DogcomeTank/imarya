@@ -31,7 +31,6 @@ router.get('/joins', (req, res) => {
             products
         });
     });
-
 });
 
 router.post('/addItem', (req, res) => {

@@ -51,6 +51,13 @@ app.use(bodyParser.urlencoded({
 }))
 
 
+const requestTime = function (req, res, next) {
+    var time = Date();
+    console.log(time.toLocaleString());
+    next()
+}
+
+app.use(requestTime);
 
 app.use('/', index);
 app.use('/login', login);
