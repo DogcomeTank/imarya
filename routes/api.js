@@ -5,15 +5,18 @@ const router = express.Router();
 
 
 router.get('/', (req, res) => {
-    Products.find({}, (err, products) => {
-        if (err) {
-            return next(err);
+    let login = {
+        "login": false
+    };
+    if (req.user) {
+        login = {
+            "login": true,
+            "displayName": req.user.displayName,
         }
-        res.render('home', {
-            products
-        });
-    });
-
+        // res.json(req.user);
+    }
+    res.send(JSON.stringify(login));
+    // res.json(login);
 });
 
 

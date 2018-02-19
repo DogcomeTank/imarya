@@ -35,6 +35,24 @@ function showDivs(n) {
 
 }
 
+function userLoginBtn(){
+    document.getElementById('userLogin').style.display='block';
+    $('.userInfo').css('display', 'none');
+    $('.loginPage').css('display', 'none');
+    $.ajax({
+        datatype: 'json',
+        url:'/api/',
+        success:function(data){
+            dataJson = JSON.parse(data);
+            if(dataJson.login){
+                $('.userInfo').css('display', 'block');
+            }else{
+                $('.loginPage').css('display', 'block');
+            }
+        },
+    });
+}
+
 //function getLoginInfo() {
 //    $.ajax({
 //        type: 'post',

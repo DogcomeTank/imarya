@@ -44,6 +44,7 @@ const index = require('./routes/index');
 const login = require('./config/loginConfig');
 // const productManage = require('./routes/productManage');
 const products = require('./routes/products');
+const api = require('./routes/api');
 
 //
 app.use(bodyParser.urlencoded({
@@ -51,22 +52,22 @@ app.use(bodyParser.urlencoded({
 }))
 
 
-const requestTime = function (req, res, next) {
-    var time = Date();
-    console.log(time.toLocaleString());
-    next()
+const separator = function (req, res, next) {
+    console.log('***********************');
+    next();
 }
 
-app.use(requestTime);
+app.use(separator);
 
 app.use('/', index);
 app.use('/login', login);
 // app.use('/productManage', productManage);
 app.use('/products', products);
+app.use('/api', api);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
-    const err = new Error('Page Not Found');
+    const err = new Error('Page Not Found!!');
     err.status = 404;
     next(err);
 });
@@ -74,7 +75,7 @@ app.use((req, res, next) => {
 // error handler
 app.use((err, req, res, next) => {
     res.status(err.status || 500);
-    res.render('error', {
+    res.render('./error', {
         message: err.message,
         error: err
     });

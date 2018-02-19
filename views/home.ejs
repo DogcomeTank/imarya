@@ -28,9 +28,16 @@
             </h3>
         </div>
         <div class="w3-large w3-text-grey">
-            <a onclick="document.getElementById('userLogin').style.display='block'" class="w3-bar-item w3-button">
-                <i class="fa fa-user"></i>
-                <span class="w3-margin-left">User Login</span>
+            <a onclick="userLoginBtn()" class="w3-bar-item w3-button userLoginBtn">
+                <% if(userLoginInfo){ %>
+                    <span class="w3-center">Hello, <%= userLoginInfo.displayName; %></span>
+                    
+                <%    }else{ %>
+                    <i class="fa fa-user"></i>
+                    <span class="w3-margin-left">User Login</span>
+                <% }  %>
+                
+                
             </a>
         </div>
         <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
@@ -349,41 +356,48 @@
     <!--   User Modal ******************-->
     <div id="userLogin" class="w3-modal">
         <div class="w3-modal-content loginPageContent">
-            <!-- <div class="userInfo">
+            <div class="userInfo">
                 <span onclick="document.getElementById('userLogin').style.display='none'" class="w3-button w3-display-topright fa fa-remove w3-xlarge"></span>
                 <h3>Login and Security</h3>
                 <div class="w3-card userInfoCard">
+                    <% if(userLoginInfo){ 
+                            let email = 'n/a';
+                            let phoneNumber = "n/a";
+                            if(userLoginInfo.email){
+                                email = userLoginInfo.email;
+                            }  
+                            if(userLoginInfo.phoneNumber){
+                                phoneNumber = userLoginInfo.phoneNumber;
+                            }    
+                    %>
                     <ul class="w3-ul">
                         <li class="userInfoEdit">
                             <div class="userInfoDisplay">
                                 <h5>Name</h5>
-                                <p>Scott Liu</p>
-                            </div>
-                            <div>
-                                <button class="w3-btn scCheckoutBtnC w3-round-xlarge logoPinkBG userInfoEditBtn">Edit</button>
+                                <p><%= userLoginInfo.displayName; %></p>
                             </div>
                         </li>
                         <li class="userInfoEdit">
                             <div class="userInfoDisplay">
                                 <h5>Email</h5>
-                                <p>dogcometank@gmail.com</p>
-                            </div>
-                            <div>
-                                <button class="w3-btn scCheckoutBtnC w3-round-xlarge logoPinkBG userInfoEditBtn">Edit</button>
+                                <p><%= email; %></p>
                             </div>
                         </li>
                         <li class="userInfoEdit">
                             <div class="userInfoDisplay">
                                 <h5>Phone Number</h5>
-                                <p>778-996-3244</p>
+                                <p><%= phoneNumber; %></p>
                             </div>
                             <div>
                                 <button class="w3-btn scCheckoutBtnC w3-round-xlarge logoPinkBG userInfoEditBtn">Edit</button>
                             </div>
                         </li>
                     </ul>
+                    <% } %>
                 </div>
-            </div> -->
+                <br>
+                    <a class="w3-btn logoPinkBG logoutBtn" href="./login/logout">Logout</a>
+            </div>
             <div class="w3-container loginPage">
                 <span onclick="document.getElementById('userLogin').style.display='none'" class="w3-button w3-display-topright fa fa-times"></span>
                 <div class="w3-card-4 loginForm">
@@ -404,13 +418,13 @@
                 <br>or<br>
                 <h5>Sign Up With</h5>
                 <div class="w3-row" style="width: 80%; margin: auto;">
-                    <a class="w3-col s4 w3-center" href="https://accounts.google.com/o/oauth2/auth?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%2Fw3Template%2Findex.html&client_id=188803597009-hf6q4ip2bhrgdiekrn8jbsjqk8do4poa.apps.googleusercontent.com&scope=email&access_type=offline&approval_prompt=force">
+                    <a class="w3-col s4 w3-center" href="http://localhost:3000/login/google-login">
                         <img style="width: 60%;" class="w3-circle" src="icon/Google-plus-circle-icon-png.png">
                     </a>
                     <a class="w3-col s4 w3-center">
                         <img style="width: 60%" class="w3-circle" src="icon/wechatLogo.svg">
                     </a>
-                    <a class="w3-col s4 w3-center" href="https://www.facebook.com/v2.10/dialog/oauth?client_id=137348590289174&state=2ef99e5a0e7769a1c40f2b22207013c5&response_type=code&sdk=php-sdk-5.6.1&redirect_uri=http%3A%2F%2Flocalhost%2Fw3Template%2Findex.html&scope=email">
+                    <a class="w3-col s4 w3-center" href="http://localhost:3000/login/facebook-login">
                         <img style="width: 60%;" class="w3-circle" src="icon/Facebook-Home-Logo.png">
                     </a>
                 </div>

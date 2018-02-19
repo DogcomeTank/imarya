@@ -83,6 +83,12 @@ div.productGridClass>div {
     position: absolute;
     right: 32px;
 }
+.logoutBtn{
+    position: absolute;
+    margin: 16px;
+    bottom: 0px;
+}
+
 .loginPageContent {
     background-color: #fcfcfc;
     max-width: 600px;

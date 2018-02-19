@@ -9,6 +9,12 @@ const UserSchema = new Schema({
     displayName: String,
     email: String,
     password: String,
+    streetAndNumber: String,
+    apartmentNumber:String,
+    city:String,
+    province: String,
+    postalCode: String,
+    phone: String,
     oAuthId: String,
     oAuthProvider: {
         type: String,
