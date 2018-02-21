@@ -41,17 +41,18 @@ passport.use(new GoogleStractege({
       oAuthId: profile.id,
       oAuthProvider: 'google',
     }, function (err, user) {
-      if(!user){
+      if (!user) {
         const newUserForInsert = {
           displayName: profile.displayName,
           email: profile.emails[0].value,
           oAuthId: profile.id,
           oAuthProvider: profile.provider,
         };
-        myUser.insertMany(newUserForInsert,(err,newInserted)=>{
+        myUser.create(newUserForInsert, (err, newInserted) => {
           return cb(err, newInserted);
         });
-      }else{
+
+      } else {
         return cb(err, user);
       }
     });
@@ -64,14 +65,13 @@ passport.use(new FacebookStrategy({
     callbackURL: keys.facebook.AppCallbackURL
   },
   function (accessToken, refreshToken, profile, cb) {
-    console.log(profile);
     myUser.findOne({
       oAuthId: profile.id,
       oAuthProvider: 'facebook',
     }, function (err, user) {
-      if(!user){
+      if (!user) {
         let userEmail = null;
-        if(profile.email){
+        if (profile.email) {
           userEmail = profile.email;
         }
         const newUserForInsert = {
@@ -80,13 +80,16 @@ passport.use(new FacebookStrategy({
           oAuthId: profile.id,
           oAuthProvider: profile.provider,
         };
-        myUser.insertMany(newUserForInsert,(err,newInserted)=>{
+
+        myUser.create(newUserForInsert, (err, newInserted) => {
           return cb(err, newInserted);
         });
-      }else{
+
+
+      } else {
         return cb(err, user);
       }
-      
+
     });
   }
 ));
@@ -107,7 +110,11 @@ passport.deserializeUser(function (obj, done) {
 router.get('/',
   function (req, res) {
     if (req.user) {
-      res.send('req.user:' + JSON.stringify(req.user));
+      let su = req.user;
+      if (typeof (req.user) === 'object') {
+        su = req.user[0];
+      }
+      res.send('req.user:' + JSON.stringify(su.displayName));
     } else {
       res.send('not login');
     }
@@ -139,14 +146,29 @@ router.get('/facebook-token', passport.authenticate('facebook', {
     res.redirect('/');
   });
 
-router.get('/editContactInfo',(req,res)=>{
-  res.render('./users/userInfoEdit');
-});
-router.post('/editContactInfo',(req,res)=>{
+router.get('/editContactInfo', (req, res) => {
+  if (req.user) {
+    const userInfo = req.user;
+    res.render('./users/userInfoEdit', {
+      userInfo
+    });
+  }else{
+    res.redirect('/');
+  }
 
 });
+router.post('/editContactInfo', (req, res) => {
+  if (req.user) {
+    myUser.findByIdAndUpdate(req.user._id, {$set: req.body}, (err, userInfo) => {
+      if (err) return handleError(err);
+      res.render('./users/userInfoEdit', {
+        userInfo
+      });
+    });
+  }
+});
 
-router.get('/logout', (req,res)=>{
+router.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/');
 });

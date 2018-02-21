@@ -1,3 +1,4 @@
+
 const express = require('express');
 const router = express.Router();
 const Products = require('../models/products/product');
@@ -14,7 +15,7 @@ router.get('/', (req, res) => {
         if (err) {
             return next(err);
         }
-        res.render('home', {
+        res.render('index', {
             products,
             userLoginInfo,
         });
@@ -22,9 +23,6 @@ router.get('/', (req, res) => {
 
 });
 
-function createLoginPageContent(){
-
-}
 
 
 module.exports = router;

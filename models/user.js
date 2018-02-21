@@ -3,19 +3,59 @@ const Schema = mongoose.Schema;
 const findOrCreate = require('mongoose-findorcreate');
 
 const UserSchema = new Schema({
-    username: String,
-    firstName: String,
-    lastName: String,
-    displayName: String,
-    email: String,
+    username: {
+        type: String,
+        default: null
+    },
+    firstName: {
+        type: String,
+        default: null
+    },
+    lastName: {
+        type: String,
+        default: null
+    },
+    displayName: {
+        type: String,
+        default: null
+    },
+    email: {
+        type: String,
+        default: null
+    },
     password: String,
-    streetAndNumber: String,
-    apartmentNumber:String,
-    city:String,
-    province: String,
-    postalCode: String,
-    phone: String,
-    oAuthId: String,
+    mailName: {
+        type: String,
+        default: null
+    },
+    streetAndNumber: {
+        type: String,
+        default: null,
+    },
+    apartmentNumber:{
+        type: String,
+        default: null
+    },
+    city:{
+        type: String,
+        default: null
+    },
+    province: {
+        type: String,
+        default: null
+    },
+    postalCode: {
+        type: String,
+        default: null
+    },
+    phone: {
+        type: String,
+        default: null
+    },
+    oAuthId: {
+        type: String,
+        default: null
+    },
     oAuthProvider: {
         type: String,
         default: 'l',

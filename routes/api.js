@@ -12,11 +12,9 @@ router.get('/', (req, res) => {
         login = {
             "login": true,
             "displayName": req.user.displayName,
-        }
-        // res.json(req.user);
+        };
     }
     res.send(JSON.stringify(login));
-    // res.json(login);
 });
 
 

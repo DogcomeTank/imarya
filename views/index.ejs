@@ -222,11 +222,7 @@
                         <a href="#">Help</a>
                     </p>
                 </div>
-                <!--
-                <div class="w3-col s4">
-                    <p></p>
-                </div>
--->
+
 
                 <div class="w3-col s4 w3-justify">
                     <h4>Store</h4>
@@ -385,11 +381,11 @@
                         </li>
                         <li class="userInfoEdit">
                             <div class="userInfoDisplay">
-                                <h5>Phone Number</h5>
-                                <p><%= phoneNumber; %></p>
+                                <h5>Address</h5>
+                                <p></p>
                             </div>
                             <div>
-                                <button class="w3-btn scCheckoutBtnC w3-round-xlarge logoPinkBG userInfoEditBtn">Edit</button>
+                                <a class="w3-btn scCheckoutBtnC w3-round-xlarge logoPinkBG userInfoEditBtn" href="./login/editContactInfo">Edit</a>
                             </div>
                         </li>
                     </ul>
@@ -400,23 +396,8 @@
             </div>
             <div class="w3-container loginPage">
                 <span onclick="document.getElementById('userLogin').style.display='none'" class="w3-button w3-display-topright fa fa-times"></span>
-                <div class="w3-card-4 loginForm">
 
-                    <div class="w3-container">
-                        <h2>Login</h2>
-                    </div>
-
-                    <form class="w3-container">
-                        <input class="w3-input" type="text" placeholder="Username">
-                        <input class="w3-input" type="password" placeholder="Password">
-                        <button class="w3-btn logoPinkBG loginFormBtn">Login</button>
-                        <h6>Don't have account? sign up</h6>
-                    </form>
-
-                </div>
-                <!-- ************************* -->
-                <br>or<br>
-                <h5>Sign Up With</h5>
+                <h3>Sign Up With</h3>
                 <div class="w3-row" style="width: 80%; margin: auto;">
                     <a class="w3-col s4 w3-center" href="http://localhost:3000/login/google-login">
                         <img style="width: 60%;" class="w3-circle" src="icon/Google-plus-circle-icon-png.png">

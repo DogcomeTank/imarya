@@ -98,7 +98,7 @@ div.productGridClass>div {
     text-align: center;
     padding-top: 60px;
     padding-bottom: 60px;
-    height: 520px;
+    /* height: 520px; */
 }
 .loginForm{
     margin: auto;
