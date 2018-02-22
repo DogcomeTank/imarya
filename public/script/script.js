@@ -14,6 +14,8 @@ function currentDiv(n) {
 
 }
 
+
+//slide show
 function showDivs(n) {
     var i;
     var x = document.getElementsByClassName("mySlides");

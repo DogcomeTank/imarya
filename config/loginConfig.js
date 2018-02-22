@@ -129,7 +129,6 @@ router.get('/google-token', passport.authenticate('google', {
     failureRedirect: '/login/error'
   }),
   function (req, res) {
-    // res.send(JSON.stringify(req.user.displayName));
     res.redirect('/');
   });
 
@@ -142,7 +141,6 @@ router.get('/facebook-token', passport.authenticate('facebook', {
     failureRedirect: '/login/error'
   }),
   function (req, res) {
-    // res.send(JSON.stringify(req.user.displayName));
     res.redirect('/');
   });
 

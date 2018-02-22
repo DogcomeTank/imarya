@@ -1,17 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const Category = require('../models/products/category');
-const Location = require('../models/products/location')
-const Products = require('../models/products/product');
-const ProductCategory = require('../models/products/productCategory');
-const ProductHistory = require('../models/products/productHistory');
-const ProductInfo = require('../models/products/productInfo');
-const ProductQty = require('../models/products/productQty');
+// const Category = require('../models/products/category');
+// const Location = require('../models/products/location')
+// const Products = require('../models/products/product');
+// const ProductCategory = require('../models/products/productCategory');
+// const ProductHistory = require('../models/products/productHistory');
+// const ProductInfo = require('../models/products/productInfo');
+// const ProductQty = require('../models/products/productQty');
 
-
+const m = require('../models/models');
 
 router.get('/', (req, res) => {
-    Products.find({}, (err, products) => {
+    m.Products.find({}, (err, products) => {
         if (err) {
             return next(err);
         }
@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/joins', (req, res) => {
-    Products.find({}, (err, products) => {
+    m.Products.find({}, (err, products) => {
         if (err) {
             return next(err);
         }
@@ -34,7 +34,7 @@ router.get('/joins', (req, res) => {
 });
 
 router.post('/addItem', (req, res) => {
-    const product = new Products(req.body);
+    const product = new m.Products(req.body);
     product.save((err, doc) => {
         if (err) {
             console.log("err: " + err);
@@ -51,7 +51,7 @@ router.get('/t',(req, res)=>{
         qty: 4,
     }
     
-    const newProductInfo = new ProductQty(newInfo);
+    const newProductInfo = new m.ProductQty(newInfo);
     newProductInfo.save((err,doc)=>{
         if(err){
             console.log(err);

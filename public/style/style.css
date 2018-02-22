@@ -60,6 +60,10 @@ div.productGridClass>div {
     padding: 5px;
     margin-bottom: 15px;
 }
+.productGridClass{
+    padding-left: 2px !important;
+    padding-right: 2px !important;
+}
 .userInfo{
     height: 600px;
 }

@@ -42,7 +42,6 @@ mongoose.Promise = global.Promise
 //router
 const index = require('./routes/index');
 const login = require('./config/loginConfig');
-// const productManage = require('./routes/productManage');
 const products = require('./routes/products');
 const api = require('./routes/api');
 
@@ -61,7 +60,6 @@ app.use(separator);
 
 app.use('/', index);
 app.use('/login', login);
-// app.use('/productManage', productManage);
 app.use('/products', products);
 app.use('/api', api);
 
