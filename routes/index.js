@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 // const Products = require('../models/products/product');
-const Products = require('../models/models');
+const m = require('../models/models');
 
 
 
@@ -11,8 +11,8 @@ router.get('/', (req, res) => {
     if(req.user){
         userLoginInfo = req.user;
     }
-    
-    Products.find({}, (err, products) => {
+
+    m.Products.find({}, (err, products) => {
         if (err) {
             return next(err);
         }

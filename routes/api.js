@@ -30,6 +30,16 @@ router.get('/getProduct', (req, res) => {
 
 });
 
+router.post('/productInfo', (req, res)=>{
+    m.Products.findById(req.body.id,(err, p)=>{
+        if(err) return handleError(err);
+
+        res.send(JSON.stringify(p));
+    });
+
+
+});
+
 router.get('/addC',(req,res)=>{
     let i = null;
     m.Products.findOne({productName: 'agw'}, (err, doc)=>{

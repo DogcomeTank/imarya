@@ -1,12 +1,5 @@
 const express = require('express');
 const router = express.Router();
-// const Category = require('../models/products/category');
-// const Location = require('../models/products/location')
-// const Products = require('../models/products/product');
-// const ProductCategory = require('../models/products/productCategory');
-// const ProductHistory = require('../models/products/productHistory');
-// const ProductInfo = require('../models/products/productInfo');
-// const ProductQty = require('../models/products/productQty');
 
 const m = require('../models/models');
 

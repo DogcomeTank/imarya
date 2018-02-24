@@ -6,7 +6,14 @@ const ProductSchema = new Schema({
     description: String,
     by: String,
     img: String,
-    tag: Array,
+    size: {
+        type: String,
+        default: null,
+    },
+    color:{
+        type: String,
+        default: null, 
+    },
     price: String,
     createDay: {
         type: Date,
@@ -52,14 +59,14 @@ const ProductHistorySchema = new Schema({
     }
 });
 
-const ProductInfoSchema = new Schema({
-    productId:{
-        type: Schema.Types.ObjectId,
-        ref: 'Products'
-    },
-    description: String,
-    price: String,
-});
+// const ProductInfoSchema = new Schema({
+//     productId:{
+//         type: Schema.Types.ObjectId,
+//         ref: 'Products'
+//     },
+//     description: String,
+//     price: String,
+// });
 
 const ProductQtySchema = new Schema({
     productId:{
@@ -77,7 +84,7 @@ const ProductQtySchema = new Schema({
     }
 });
 const ProductQty = mongoose.model('ProductQty',ProductQtySchema);
-const ProductInfo = mongoose.model('ProductInfo',ProductInfoSchema);
+// const ProductInfo = mongoose.model('ProductInfo',ProductInfoSchema);
 const ProductHistory = mongoose.model('ProductHistory',ProductHistorySchema);
 const ProductCategory = mongoose.model('ProductCategory',ProductCategorySchema);
 const PLocation = mongoose.model('Location',LocationSchema);
@@ -90,6 +97,6 @@ module.exports = {
     PLocation: PLocation,
     ProductCategory: ProductCategory,
     ProductHistory: ProductHistory,
-    ProductInfo: ProductInfo,
+    // ProductInfo: ProductInfo,
     ProductQty: ProductQty,
 };

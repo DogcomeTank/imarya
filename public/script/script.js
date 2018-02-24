@@ -55,6 +55,44 @@ function userLoginBtn(){
     });
 }
 
+function checkLoginForBtn(n){
+    $.ajax({
+        datatype: 'json',
+        url:'/api/',
+        success:function(data){
+            dataJson = JSON.parse(data);
+            if(dataJson.login){
+                $('#'+ n).css('display', 'block');
+            }else{
+                document.getElementById('userLogin').style.display='block';
+                $('.userInfo').css('display', 'none');
+                $('.loginPage').css('display', 'none');
+                $('.loginPage').css('display', 'block');
+            }
+        },
+    });
+}
+
+function productOnClick(pId){
+    $.ajax({
+        datatype: 'json',
+        url:'/api/',
+        success:function(data){
+            dataJson = JSON.parse(data);
+            if(dataJson.login){
+                document.getElementById('ProductDetail').style.display='block';
+            }else{
+                document.getElementById('userLogin').style.display='block';
+                $('.userInfo').css('display', 'none');
+                $('.loginPage').css('display', 'none');
+                $('.loginPage').css('display', 'block');
+            }
+        },
+    });
+
+    
+}
+
 //function getLoginInfo() {
 //    $.ajax({
 //        type: 'post',

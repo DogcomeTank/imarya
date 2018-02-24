@@ -30,14 +30,16 @@
         <div class="w3-large w3-text-grey">
             <a onclick="userLoginBtn()" class="w3-bar-item w3-button userLoginBtn">
                 <% if(userLoginInfo){ %>
-                    <span class="w3-center">Hello, <%= userLoginInfo.displayName; %></span>
-                    
-                <%    }else{ %>
-                    <i class="fa fa-user"></i>
-                    <span class="w3-margin-left">User Login</span>
-                <% }  %>
-                
-                
+                    <span class="w3-center">Hello,
+                        <%= userLoginInfo.displayName; %>
+                    </span>
+
+                    <%    }else{ %>
+                        <i class="fa fa-user"></i>
+                        <span class="w3-margin-left">User Login</span>
+                        <% }  %>
+
+
             </a>
         </div>
         <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
@@ -94,9 +96,12 @@
 
         <header class="w3-container w3-xlarge">
             <p class="w3-left w3-text-grey">Product</p>
-            <button onclick="document.getElementById('shoppingCart').style.display='block'" class="w3-bar-item w3-button w3-padding-24 w3-right hide-small">
+            <button onclick="checkLoginForBtn('shoppingCart')" class="w3-bar-item w3-button w3-padding-24 w3-right hide-small">
                 <i class="fa fa-shopping-cart"></i>
             </button>
+            <!-- <button onclick="document.getElementById('shoppingCart').style.display='block'" class="w3-bar-item w3-button w3-padding-24 w3-right hide-small">
+                <i class="fa fa-shopping-cart"></i>
+            </button> -->
             <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right hide-small">
                 <i class="fa fa-search"></i>
             </a>
@@ -127,24 +132,22 @@
 
 
         <div id="productGrid" class="productGridClass w3-container" data-columns>
+
+
             <% for (var i = 0; i < products.length; i++) {
             var price = products[i].price.split(".");
         %>
-
                 <div class="w3-card-4">
                     <div class="w3-display-container w3-text-white">
-                        <img src="img/<%= products[i].img %>" style="width: 100%">
-                        <div class="w3-xlarge w3-display-bottomleft w3-padding-small">
-                            <%= products[i].productName %>
-                        </div>
+                        <a id="<%= products[i]._id %>" onclick="productOnClick(this.id)">
+                            <img src="img/<%= products[i].img %>" style="width: 100%">
+                        </a>
+
                     </div>
-                    <div class="w3-row">
+                    <div class="productRowInfo">
                         <div class="w3-padding-small">
-                            <h3>
-                                <%= products[i].description %>
-                            </h3>
-                            <p>
-                                <span class="w3-large">
+                            <p class="productPrice">
+                                <span class="w3-xlarge">
                                     $
                                     <%= price[0] %>
                                         <span class="w3-small">.
@@ -152,8 +155,10 @@
                                         </span>
                                 </span>
                             </p>
+                            <p class="productNameOnHomePage">
+                                <%= products[i].productName %>
+                            </p>
                         </div>
-
                     </div>
                 </div>
 
@@ -271,6 +276,54 @@
     </div>
 
 
+    <!--   Add to Cart Modal ******************-->
+    <div id="ProductDetail" class="w3-modal">
+        <div class="w3-modal-content productDetailContent">
+            <div class="productInfoDiv">
+                <div class="w3-row productInfoHeader w3-xlarge">
+                    <div class="w3-col l11 m11 s10 productInfoName">Product Name sdf g sa gsrs rdrgs</div>
+                    <a onclick="document.getElementById('ProductDetail').style.display='none'" class="w3-col l1 m1 s2 productX logoPink">
+                        <i class="fa fa-remove"></i>
+
+                    </a>
+                </div>
+                <img src="/img/ng-55633.jpg">
+                <h6>Description</h6>
+                <p>Product Name sdf g sa gs a gaeg aegaesga gaesg aseg aseg aes gae grs rdrgs</p>
+
+                <ul class="w3-ul w3-margin-top productDetailUl w3-margin-bottom">
+                    <li>
+                        <select class="w3-select" name="option">
+                            <option value="" disabled selected>Quantity</option>
+                            <option value="2">1</option>
+                            <option value="3">2</option>
+                        </select>
+                    </li>
+                    <li>
+                        <select class="w3-select" name="option">
+                            <option value="" disabled selected>Size</option>
+                            <option value="1">S</option>
+                            <option value="2">M</option>
+                            <option value="3">L</option>
+                        </select>
+                    </li>
+                    <li>
+                        <button class="w3-btn productDetailBtn logoPinkBG">Add To Cart</button>
+                    </li>
+                    <li>
+                        <button class="w3-btn productDetailBtn logoPinkBG">Check Out</button>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
 
     <!--   Shopping Cart Modal ******************-->
     <div id="shoppingCart" class="w3-modal">
@@ -366,33 +419,37 @@
                                 phoneNumber = userLoginInfo.phoneNumber;
                             }    
                     %>
-                    <ul class="w3-ul">
-                        <li class="userInfoEdit">
-                            <div class="userInfoDisplay">
-                                <h5>Name</h5>
-                                <p><%= userLoginInfo.displayName; %></p>
-                            </div>
-                        </li>
-                        <li class="userInfoEdit">
-                            <div class="userInfoDisplay">
-                                <h5>Email</h5>
-                                <p><%= email; %></p>
-                            </div>
-                        </li>
-                        <li class="userInfoEdit">
-                            <div class="userInfoDisplay">
-                                <h5>Address</h5>
-                                <p></p>
-                            </div>
-                            <div>
-                                <a class="w3-btn scCheckoutBtnC w3-round-xlarge logoPinkBG userInfoEditBtn" href="./login/editContactInfo">Edit</a>
-                            </div>
-                        </li>
-                    </ul>
-                    <% } %>
+                        <ul class="w3-ul">
+                            <li class="userInfoEdit">
+                                <div class="userInfoDisplay">
+                                    <h5>Name</h5>
+                                    <p>
+                                        <%= userLoginInfo.displayName; %>
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="userInfoEdit">
+                                <div class="userInfoDisplay">
+                                    <h5>Email</h5>
+                                    <p>
+                                        <%= email; %>
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="userInfoEdit">
+                                <div class="userInfoDisplay">
+                                    <h5>Address</h5>
+                                    <p></p>
+                                </div>
+                                <div>
+                                    <a class="w3-btn scCheckoutBtnC w3-round-xlarge logoPinkBG userInfoEditBtn" href="./login/editContactInfo">Edit</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <% } %>
                 </div>
                 <br>
-                    <a class="w3-btn logoPinkBG logoutBtn" href="./login/logout">Logout</a>
+                <a class="w3-btn logoPinkBG logoutBtn" href="./login/logout">Logout</a>
             </div>
             <div class="w3-container loginPage">
                 <span onclick="document.getElementById('userLogin').style.display='none'" class="w3-button w3-display-topright fa fa-times"></span>
