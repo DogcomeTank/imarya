@@ -6,14 +6,14 @@ const ProductSchema = new Schema({
     description: String,
     by: String,
     img: String,
-    size: {
-        type: String,
-        default: null,
-    },
-    color:{
-        type: String,
-        default: null, 
-    },
+    // size: {
+    //     type: String,
+    //     default: null,
+    // },
+    // color:{
+    //     type: String,
+    //     default: null, 
+    // },
     price: String,
     createDay: {
         type: Date,
@@ -77,7 +77,18 @@ const ProductQtySchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Locations'
     },
-    qty: String, 
+    qty: {
+        type: String,
+        default: '0',
+    }, 
+    size:{
+        type: String,
+        default: null,
+    },
+    color:{
+        type: String,
+        default: null
+    },
     createdAt: {
         type: Date,
         default: Date.now,

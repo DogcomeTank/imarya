@@ -279,17 +279,37 @@
     <!--   Add to Cart Modal ******************-->
     <div id="ProductDetail" class="w3-modal">
         <div class="w3-modal-content productDetailContent">
+            <div class="cartModalLoading" id="cartModalLoading">
+                <div class="loader" id="loader"></div>
+            </div>
             <div class="productInfoDiv">
                 <div class="w3-row productInfoHeader w3-xlarge">
-                    <div class="w3-col l11 m11 s10 productInfoName">Product Name sdf g sa gsrs rdrgs</div>
+                    <div class="w3-col l11 m11 s10 productInfoName" id="productInfoName">Product Name</div>
                     <a onclick="document.getElementById('ProductDetail').style.display='none'" class="w3-col l1 m1 s2 productX logoPink">
                         <i class="fa fa-remove"></i>
 
                     </a>
                 </div>
-                <img src="/img/ng-55633.jpg">
-                <h6>Description</h6>
-                <p>Product Name sdf g sa gs a gaeg aegaesga gaesg aseg aseg aes gae grs rdrgs</p>
+                <img id="cartModalImg" src="/img/ng-55633.jpg">
+                <div class="w3-row">
+                    <div class="w3-col l6 m6 s6">
+                        <h6>Description</h6>
+                    </div>
+
+                    <div class="w3-col l6 m6 s6" style="text-align:right;">
+                        <!-- <h4 class="logoPink w3-margin-right" id="cartModalPrice">Price</h4> -->
+                        <p>
+                            <span class="w3-large logoPink" id="cartModalPrice0">
+                                price 0
+
+                            </span>
+                            <span class="w3-small logoPink" id="cartModalPrice1">. price 1
+                            </span>
+                        </p>
+                    </div>
+                </div>
+
+                <p id="cartModalDescription">Product description</p>
 
                 <ul class="w3-ul w3-margin-top productDetailUl w3-margin-bottom">
                     <li>
@@ -369,19 +389,7 @@
                         </div>
                     </div>
 
-                    <div class="w3-card-4 scCard whiteBG">
-                        <img src="/img/mb.jpg" alt="Norway">
-                        <div class="w3-container w3-center">
-                            <h5>Shoes</h5>
-                            <p>The Troll's tongue in Hardanger, Norway</p>
-                        </div>
-                    </div>
-                    <div class="w3-card-4 scCard whiteBG">
-                        <img src="/img/mb.jpg" alt="Norway">
-                        <div class="w3-container w3-center">
-                            <p>The Troll's tongue in Hardanger, Norway</p>
-                        </div>
-                    </div>
+
                 </div>
             </div>
             <div class="scCheckoutFooter whiteBG">

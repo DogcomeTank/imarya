@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<title>imarya</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="./icon/linkLogo.png">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- data table -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js" type="text/javascript"></script>
+<!-- <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script> -->
+
+
+<head>
+    <script>
+        $(document).ready(function () {
+            var table = $('#products').DataTable({
+                "ajax": "/api/allProducts",
+                "columns": [{
+                        "data": "_id"
+                    },
+                    {
+                        "data": "productName"
+                    },
+                    {
+                        "data": "description"
+                    },
+                    {
+                        "data": "by"
+                    },
+                    {
+                        "data": "img"
+                    },
+                    {
+                        "data": "price"
+                    },
+                    {
+                        "data": "createDay"
+                    }
+                ],
+            });
+
+            // click listener for table
+            $('#products tbody').on('click', 'tr', function () {
+                var data = table.row(this).data();
+                
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+    <div class="tableContainer" style="width:90%; margin:auto;">
+        <table id="products" class="display" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>productName</th>
+                    <th>description</th>
+                    <th>by</th>
+                    <th>img</th>
+                    <th>price</th>
+                    <th>createDay</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>ID</th>
+                    <th>productName</th>
+                    <th>description</th>
+                    <th>by</th>
+                    <th>img</th>
+                    <th>price</th>
+                    <th>createDay</th>
+                </tr>
+            </tfoot>
+
+
+        </table>
+    </div>
+</body>
+<script>
+</script>
+
+</html>

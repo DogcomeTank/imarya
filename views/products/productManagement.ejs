@@ -18,7 +18,7 @@
 
 </body>
 <div class="w3-container">
-    <table class="w3-table w3-striped w3-margin-top" style="width:1000px; w3-margin">
+    <table class="w3-table w3-striped w3-margin-top" style="width:1000px;">
         <tr>
             <th>ID</th>
             <th>Product name</th>
@@ -152,13 +152,13 @@
             // addProductForm
             // var data = $('#productName').val();
             var myData = {
-                    'productName': $('#productName').val(),
-                    'description': $('#description').val(),
-                    'by': $('#by').val(),
-                    'img': $('#img').val(),
-                    'tag': {},
-                    'price': $('#price').val(),
-                    createDay: Date.now
+                'productName': $('#productName').val(),
+                'description': $('#description').val(),
+                'by': $('#by').val(),
+                'img': $('#img').val(),
+                'tag': {},
+                'price': $('#price').val(),
+                createDay: Date.now
             };
             $.ajax({
                 type: 'POST',
