@@ -3,12 +3,13 @@
 <title>imarya</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="./icon/linkLogo.png">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="/style/productsManagement.css">
+<link rel="icon" href="/icon/linkLogo.png">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- data table -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js" type="text/javascript"></script>
-<!-- <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script> -->
 
 
 <head>
@@ -43,7 +44,30 @@
             // click listener for table
             $('#products tbody').on('click', 'tr', function () {
                 var data = table.row(this).data();
-                
+                document.getElementById('productDetails').style.display = 'block';
+                console.log(data._id);
+                document.getElementById('modalProductName').innerHTML = data.productName;
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: '/api/showProductQty',
+                    data: {
+                        productId: data._id
+                    },
+                    success: function (doc) {
+                        console.log(Object.keys(doc).length);
+                        if(Object.keys(doc).length > 0){
+                            
+                            for (var key in doc) {
+                                console.log(doc[key]);
+                            }
+                        }else{
+                            var noResult = $('<p></p>').text("0 result");
+                        }
+                        var txt2 = $("<p></p>").text("Text.");
+
+                    }
+                });
             });
         });
     </script>
@@ -78,6 +102,29 @@
 
 
         </table>
+    </div>
+
+    <!-- Modals -->
+    <div id="productDetails" class="w3-modal">
+        <div class="w3-modal-content">
+            <div class="w3-container">
+                <span onclick="document.getElementById('productDetails').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span>
+
+                <div class="w3-cell-row productInfo">
+                    <div class="w3-container w3-cell">
+                        <h4 id="modalProductName">Hello W3.CSS Layout.</h4>
+                    </div>
+                    <div class="w3-container w3-cell w3-cell-middle modalProductEdit">
+                        <button class="w3-btn">Edit</button>
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+        </div>
     </div>
 </body>
 <script>

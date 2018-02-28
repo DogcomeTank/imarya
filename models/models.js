@@ -6,14 +6,6 @@ const ProductSchema = new Schema({
     description: String,
     by: String,
     img: String,
-    // size: {
-    //     type: String,
-    //     default: null,
-    // },
-    // color:{
-    //     type: String,
-    //     default: null, 
-    // },
     price: String,
     createDay: {
         type: Date,
@@ -58,15 +50,6 @@ const ProductHistorySchema = new Schema({
         default: Date.now,
     }
 });
-
-// const ProductInfoSchema = new Schema({
-//     productId:{
-//         type: Schema.Types.ObjectId,
-//         ref: 'Products'
-//     },
-//     description: String,
-//     price: String,
-// });
 
 const ProductQtySchema = new Schema({
     productId:{

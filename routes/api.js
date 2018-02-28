@@ -55,16 +55,28 @@ router.post('/addToCartModal', (req, res) => {
 
 
 // For product management
+// display all product in dataTables, need login
 router.get('/allProducts', (req, res) => {
-
-        m.Products.find({}, (err, p) => {
-            if (err) return next(err);
-            let data = {'data': p};
-            res.json(data);
-        });
-    
+    m.Products.find({}, (err, p) => {
+        if (err) return next(err);
+        let data = {
+            'data': p
+        };
+        res.json(data);
+    });
 
 });
+// display product Qty, size, color etc..
+router.post('/showProductQty', (req, res) => {
+
+    m.ProductQty.find({'productId': req.body.productId}, (err, p) => {
+        if (err) return next(err);
+        res.json(p);
+    });
+});
+
+
+
 
 router.get('/addC', (req, res) => {
     let i = null;
