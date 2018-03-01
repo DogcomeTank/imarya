@@ -45,7 +45,6 @@
             $('#products tbody').on('click', 'tr', function () {
                 var data = table.row(this).data();
                 document.getElementById('productDetails').style.display = 'block';
-                console.log(data._id);
                 document.getElementById('modalProductName').innerHTML = data.productName;
                 $.ajax({
                     type: 'POST',
@@ -55,14 +54,24 @@
                         productId: data._id
                     },
                     success: function (doc) {
-                        console.log(Object.keys(doc).length);
-                        if(Object.keys(doc).length > 0){
-                            
+
+                        // display location and Qty in modal
+                        $('#productQtyDiv').empty();
+                        var table = $('<table></table>').addClass('w3-table');
+                        table.append('<tr><th>Location</th><th>Quantity</th></tr>')
+                        if (Object.keys(doc).length > 0) {
                             for (var key in doc) {
-                                console.log(doc[key]);
+                                var tableR = $('<tr></tr>').addClass('w3-left-align');
+                                tableR.append('<td>' + doc[key].locationId.location +
+                                    '</td>');
+                                tableR.append('<td>' + doc[key].qty +
+                                '</td>');
+                                tableR.appendTo(table);
                             }
-                        }else{
+                            table.appendTo('#productQtyDiv');
+                        } else {
                             var noResult = $('<p></p>').text("0 result");
+                            $(noResult).appendTo('#productQtyDiv');
                         }
                         var txt2 = $("<p></p>").text("Text.");
 
@@ -117,6 +126,9 @@
                     <div class="w3-container w3-cell w3-cell-middle modalProductEdit">
                         <button class="w3-btn">Edit</button>
                     </div>
+                </div>
+
+                <div class="w3-cell-row w3-margin-bottom" id="productQtyDiv">
                 </div>
 
 

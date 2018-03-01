@@ -69,10 +69,15 @@ router.get('/allProducts', (req, res) => {
 // display product Qty, size, color etc..
 router.post('/showProductQty', (req, res) => {
 
-    m.ProductQty.find({'productId': req.body.productId}, (err, p) => {
-        if (err) return next(err);
-        res.json(p);
-    });
+    m.ProductQty.find({'productId': req.body.productId}).
+    populate({
+        path: 'locationId',
+        select:'location'
+    }).
+    exec(function (err, itemInfo) {
+        if (err) return handleError(err);
+        res.json(itemInfo);
+    });;
 });
 
 

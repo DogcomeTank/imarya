@@ -22,7 +22,7 @@ const CategorySchema = new Schema({
 });
 
 const LocationSchema = new Schema({
-    location: String,
+    locationName: String,
     createdAt: {
         type: Date,
         default: Date.now,
@@ -58,7 +58,7 @@ const ProductQtySchema = new Schema({
     },
     locationId:{
         type: Schema.Types.ObjectId,
-        ref: 'Locations'
+        ref: 'Location'
     },
     qty: {
         type: String,
@@ -78,19 +78,17 @@ const ProductQtySchema = new Schema({
     }
 });
 const ProductQty = mongoose.model('ProductQty',ProductQtySchema);
-// const ProductInfo = mongoose.model('ProductInfo',ProductInfoSchema);
 const ProductHistory = mongoose.model('ProductHistory',ProductHistorySchema);
 const ProductCategory = mongoose.model('ProductCategory',ProductCategorySchema);
-const PLocation = mongoose.model('Location',LocationSchema);
+const Location = mongoose.model('Location',LocationSchema);
 const Category = mongoose.model('Category',CategorySchema);
 const Products = mongoose.model('Products', ProductSchema);
 
 module.exports = {
     Products: Products,
     Category: Category,
-    PLocation: PLocation,
+    Location: Location,
     ProductCategory: ProductCategory,
     ProductHistory: ProductHistory,
-    // ProductInfo: ProductInfo,
     ProductQty: ProductQty,
 };
