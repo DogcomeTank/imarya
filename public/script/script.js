@@ -95,8 +95,6 @@ function productOnClick(pId){
                 // continue here&&&&&&&&&&&&&&&&&&*******************&^^^^^^^^^^^^^^^^%%
 
 
-
-
             }
         },
     });
