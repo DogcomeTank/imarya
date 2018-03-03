@@ -66,18 +66,47 @@ router.get('/allProducts', (req, res) => {
     });
 
 });
+// get one product by ID
+router.post('/getProductById', (req, res) => {
+    m.Products.findById(req.body.productId, (err, item) => {
+        if (err) return next(err);
+        res.json(item);
+    });
+
+});
 // display product Qty, size, color etc..
 router.post('/showProductQty', (req, res) => {
 
-    m.ProductQty.find({'productId': req.body.productId}).
+    m.ProductQty.find({
+        'productId': req.body.productId
+    }).
     populate({
         path: 'locationId',
-        select:'location'
+        select: 'location'
     }).
     exec(function (err, itemInfo) {
         if (err) return handleError(err);
         res.json(itemInfo);
     });;
+});
+// update product information
+router.post('/updateProductInformation', (req, res) => {
+    let formDataForUpdate = JSON.parse(req.body.myData);
+    m.Products.findById(formDataForUpdate._id, function (err, updatedItem) {
+        if (err) return handleError(err);
+      
+        updatedItem.set({ productName:  formDataForUpdate.productName,
+            description: formDataForUpdate.description,
+            by: formDataForUpdate.by,
+            price: formDataForUpdate.price,
+            img: formDataForUpdate.img
+        });
+        updatedItem.save(function (err, updatedupdatedItem) {
+          if (err) return handleError(err);
+          res.json(updatedupdatedItem);
+        });
+      });
+    
 });
 
 

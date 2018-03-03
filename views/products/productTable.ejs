@@ -14,9 +14,61 @@
 
 <head>
     <script>
+        let updateProductFormStatus = true;
+        var rowIndexNum;
         $(document).ready(function () {
+
+            // update product info when Update btn pressed on modal
+            $("#updateProductInfoForm").submit(function (event) {
+                event.preventDefault();
+                var disabled = $('#updateProductInfoForm').find(':input:disabled').removeAttr(
+                    'disabled');
+
+                var iniFormData = $(this).serializeArray();
+                var returnArray = {};
+                for (var i = 0; i < iniFormData.length; i++) {
+                    if (iniFormData[i]['name'] == 'productIdForm') {
+                        iniFormData[i]['name'] = '_id'
+                    }
+                    returnArray[iniFormData[i]['name']] = iniFormData[i]['value'];
+                }
+
+
+                var formData = JSON.stringify(returnArray);
+                disabled.attr('disabled', 'disabled');
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        myData: formData
+                    },
+                    url: '/api/updateProductInformation',
+                    success: function (infoFromUpdated) {
+                        // update data in the datatable
+                        var temp = table.row(rowIndexNum).data();
+                        temp['productName'] = infoFromUpdated.productName;
+                        temp['description'] = infoFromUpdated.description;
+                        temp['by'] = infoFromUpdated.by;
+                        temp['price'] = infoFromUpdated.price;
+                        table.row(rowIndexNum).data(temp).draw();
+                        document.getElementById('productDetails').style.display = 'none';
+                    }
+                });
+
+            });
+
+
+            // if modal Edit product info form change
+            if (updateProductFormStatus) {
+                $('#updateProductInfoForm').change(function () {
+                    $('#modalUpdateProductBtn').prop('disabled', false);
+                });
+            }
+
+
             var table = $('#products').DataTable({
                 "ajax": "/api/allProducts",
+                stateSave: true,
                 "columns": [{
                         "data": "_id"
                     },
@@ -41,11 +93,18 @@
                 ],
             });
 
-            // click listener for table
+            // click listener for table, open modal of product location and Qty
             $('#products tbody').on('click', 'tr', function () {
                 var data = table.row(this).data();
-                document.getElementById('productDetails').style.display = 'block';
+                document.getElementById('productQty').style.display = 'block';
                 document.getElementById('modalProductName').innerHTML = data.productName;
+                // add id to Edit btn
+                $('#productQtyBtn').val(data._id);
+
+                //get the row index when click
+                rowIndexNum = table.row(this).index();
+
+
                 $.ajax({
                     type: 'POST',
                     dataType: 'json',
@@ -58,14 +117,20 @@
                         // display location and Qty in modal
                         $('#productQtyDiv').empty();
                         var table = $('<table></table>').addClass('w3-table');
-                        table.append('<tr><th>Location</th><th>Quantity</th></tr>')
+                        table.append(
+                            '<tr><th>Location</th><th>Size</th><th>Color</th><th>Quantity</th></tr>'
+                        )
                         if (Object.keys(doc).length > 0) {
                             for (var key in doc) {
                                 var tableR = $('<tr></tr>').addClass('w3-left-align');
                                 tableR.append('<td>' + doc[key].locationId.location +
                                     '</td>');
+                                tableR.append('<td>' + doc[key].size +
+                                    '</td>');
+                                tableR.append('<td>' + doc[key].color +
+                                    '</td>');
                                 tableR.append('<td>' + doc[key].qty +
-                                '</td>');
+                                    '</td>');
                                 tableR.appendTo(table);
                             }
                             table.appendTo('#productQtyDiv');
@@ -73,18 +138,56 @@
                             var noResult = $('<p></p>').text("0 result");
                             $(noResult).appendTo('#productQtyDiv');
                         }
-                        var txt2 = $("<p></p>").text("Text.");
 
                     }
                 });
             });
-        });
+
+
+        }); //document.ready end 
+
+        // display productEdit Form
+        function productEditBtn() {
+            document.getElementById('productQty').style.display = 'none'
+            document.getElementById('productDetails').style.display = 'block';
+            // disable updateBtn if no change
+            $('#modalUpdateProductBtn').prop('disabled', true);
+
+            // empty productInfo Form
+            updateProductFormStatus = false;
+            document.getElementById("updateProductInfoForm").reset();
+            updateProductFormStatus = true;
+
+
+            let findProductInfo = $('#productQtyBtn').val();
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '/api/getProductById',
+                data: {
+                    productId: findProductInfo
+                },
+                success: function (doc) {
+                    jsonDoc = JSON.stringify(doc);
+                    $('#productIdForm').val(doc._id);
+                    $('#productName').val(doc.productName);
+                    $('#description').val(doc.description);
+                    $('#by').val(doc.by);
+                    $('#img').val(doc.img);
+                    $('#price').val(doc.price);
+
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
     </script>
 
 </head>
 
 <body>
-    <div class="tableContainer" style="width:90%; margin:auto;">
+    <div class="tableContainer w3-margin-top" style="width:95%; margin:auto;">
         <table id="products" class="display" cellspacing="0" width="100%">
             <thead>
                 <tr>
@@ -114,30 +217,66 @@
     </div>
 
     <!-- Modals -->
-    <div id="productDetails" class="w3-modal">
+    <!-- display product Qty -->
+    <div id="productQty" class="w3-modal">
         <div class="w3-modal-content">
             <div class="w3-container">
-                <span onclick="document.getElementById('productDetails').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span>
+                <span onclick="document.getElementById('productQty').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span>
 
                 <div class="w3-cell-row productInfo">
                     <div class="w3-container w3-cell">
-                        <h4 id="modalProductName">Hello W3.CSS Layout.</h4>
+                        <h4 id="modalProductName">Hello.</h4>
                     </div>
                     <div class="w3-container w3-cell w3-cell-middle modalProductEdit">
-                        <button class="w3-btn">Edit</button>
+                        <button class="w3-btn" id="productQtyBtn" onclick="productEditBtn()">Edit</button>
                     </div>
                 </div>
 
                 <div class="w3-cell-row w3-margin-bottom" id="productQtyDiv">
                 </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- update product info -->
+    <div id="productDetails" class="w3-modal">
+        <div class="w3-modal-content">
+            <div class="w3-container">
+                <span onclick="document.getElementById('productDetails').style.display='none'" class="w3-button w3-display-topright w3-xlarge w3-text-red">&times;</span>
 
+                <form class="w3-container w3-light-grey w3-margin w3-padding" id="updateProductInfoForm">
+                    <h2>Edit Product Info</h2>
+                    <label>Product ID</label>
+                    <input class="w3-input w3-border-0" type="text" name="productIdForm" id="productIdForm" disabled>
 
+                    <label>Product Name</label>
+                    <input class="w3-input w3-border-0" type="text" name="productName" id="productName">
+
+                    <label>Last Name</label>
+                    <input class="w3-input w3-border-0" type="text" name="description" id="description">
+
+                    <label>Made by</label>
+                    <input class="w3-input w3-border-0" type="text" name="by" id="by">
+
+                    <label>Price</label>
+                    <input class="w3-input w3-border-0" type="text" name="price" id="price">
+
+                    <label>Image</label>
+                    <input class="w3-input w3-border-0" type="text" name="img" id="img">
+
+                    <input type="submit" class="w3-btn w3-margin-top w3-deep-orange" value="Submit" id="modalUpdateProductBtn">
+
+                    <!-- <button class="w3-btn w3-margin-top w3-deep-orange" id="modalUpdateProductBtn" onclick="updateProductInfo()">Update</button> -->
+                </form>
 
 
             </div>
         </div>
     </div>
+
+
+
+
 </body>
 <script>
 </script>
