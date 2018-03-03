@@ -110,8 +110,6 @@ router.post('/updateProductInformation', (req, res) => {
 });
 
 
-
-
 router.get('/addC', (req, res) => {
     let i = null;
     m.Products.findOne({

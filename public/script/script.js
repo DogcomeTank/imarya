@@ -85,7 +85,6 @@ function productOnClick(pId){
             document.getElementById('cartModalLoading').style.display='none';
             dataJson = JSON.parse(doc);
             var price = dataJson['productInfo'].price.split(".");
-            console.log(price);
             $('#productInfoName').text(dataJson['productInfo'].productName)
             $("#cartModalImg").attr("src",'img/'+dataJson['productInfo'].img);
             $('#cartModalDescription').text(dataJson['productInfo'].description);
@@ -93,16 +92,12 @@ function productOnClick(pId){
             $('#cartModalPrice1').text('.'+price[1]);
             if(dataJson['productQty']){
                 // console.log(data);
+                // continue here&&&&&&&&&&&&&&&&&&*******************&^^^^^^^^^^^^^^^^%%
+
+
+
+
             }
-            // if(dataJson.login){
-            //     document.getElementById('ProductDetail').style.display='block';
-                
-            // }else{
-            //     document.getElementById('userLogin').style.display='block';
-            //     $('.userInfo').css('display', 'none');
-            //     $('.loginPage').css('display', 'none');
-            //     $('.loginPage').css('display', 'block');
-            // }
         },
     });
 }
