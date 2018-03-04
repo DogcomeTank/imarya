@@ -1,3 +1,7 @@
+
+
+
+/* modal */
 .productInfo{
     margin-top: 36px;
     width: 100%;
@@ -5,4 +9,9 @@
 
 .modalProductEdit{
     width: 61px;
+}
+
+
+.modalLocationList{
+    width: 100%;
 }

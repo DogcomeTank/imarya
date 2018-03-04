@@ -86,12 +86,12 @@ nav a:hover {
 }
 
 .productGridClass div:nth-child(2) {
-    margin-bottom: 13px !important;
+    margin-bottom: 24px !important;
 }
 
 div.productGridClass>div {
-    padding: 5px;
-    margin-bottom: 15px;
+    padding: 12px;
+    margin-bottom: 20px;
 }
 .productGridClass{
     padding-left: 2px !important;
@@ -371,6 +371,10 @@ div.productGridClass>div {
     float: left;
 }
 
+.size-1of5 {
+    width: 20%;
+}
+
 .size-1of4 {
     width: 25%;
 }
@@ -397,26 +401,48 @@ div.productGridClass>div {
         max-height: 126px;
         max-width: 100%;
     }
+    div.productGridClass>div {
+        padding: 4px;
+        margin-bottom: 15px;
+    }
+
 }
 
 @media screen and (min-width: 451px) and (max-width: 700px) {
     #productGrid[data-columns]::before {
         content: '2 .column.size-1of2';
     }
+    div.productGridClass>div {
+        padding: 4px;
+        margin-bottom: 15px;
+    }
+    
+
 }
 
-@media screen and (min-width: 701px) and (max-width: 850px) {
+@media screen and (min-width: 701px) and (max-width: 800px) {
     #productGrid[data-columns]::before {
         content: '3 .column.size-1of3';
     }
 }
 
-@media screen and (min-width: 851px) {
+@media screen and (min-width: 801px) and (max-width: 1400px) {
+    #productGrid[data-columns]::before {
+        content: '4 .column.size-1of4';
+    } 
+ } 
+
+@media screen and (min-width: 1401px) {
+    #productGrid[data-columns]::before {
+        content: '5 .column.size-1of5';
+    }
+} 
+
+/* @media screen and (min-width: 801px) {
     #productGrid[data-columns]::before {
         content: '4 .column.size-1of4';
     }
-}
-
+} */
 /**************/
 
 @media (max-width:993px) {

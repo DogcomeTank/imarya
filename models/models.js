@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ProductSchema = new Schema({
+    ipn: {
+        type: String,
+        unique: true,
+    },
     productName: String,
     description: String,
     by: String,
@@ -22,7 +26,7 @@ const CategorySchema = new Schema({
 });
 
 const LocationSchema = new Schema({
-    locationName: String,
+    location: String,
     createdAt: {
         type: Date,
         default: Date.now,

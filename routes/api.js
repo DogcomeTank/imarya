@@ -95,7 +95,9 @@ router.post('/updateProductInformation', (req, res) => {
     m.Products.findById(formDataForUpdate._id, function (err, updatedItem) {
         if (err) return handleError(err);
       
-        updatedItem.set({ productName:  formDataForUpdate.productName,
+        updatedItem.set({ 
+            ipn: formDataForUpdate.ipn,
+            productName:  formDataForUpdate.productName,
             description: formDataForUpdate.description,
             by: formDataForUpdate.by,
             price: formDataForUpdate.price,
@@ -110,34 +112,53 @@ router.post('/updateProductInformation', (req, res) => {
 });
 
 
-router.get('/addC', (req, res) => {
-    let i = null;
-    m.Products.findOne({
-        productName: 'agw'
-    }, (err, doc) => {
-        i = doc._id;
-        const pc = new m.ProductCategory({
-            productId: i,
-        });
-
-        pc.save();
-    });
-
-    res.render('./test');
+// productTable.ejs Add location list
+router.get('/location',(req, res)=>{
+    m.Location.find({}).sort('location').exec(
+        (err, allLocation)=>{
+            res.json(allLocation);
+        }
+    )
+});
+router.post('/location',(req, res)=>{
+    var l = req.body.location;
+    var newLocation = new m.Location({location: l});
+    newLocation.save((err, doc)=>{
+        res.json(doc);
+    })
 });
 
-router.post('/addC', (req, res) => {
-    const n = new Products(req.body);
-    n.save((err, doc) => {
+router.get('/category', (req, res)=>{
+    m.Category.find({}, (err, catList)=>{
+        res.json(catList);
+    });
+});
+
+router.post('/category', (req, res)=>{
+    var categoryFromForm = req.body.category;
+    var newCategory = new m.Category({category: categoryFromForm});
+
+    newCategory.save((err, doc)=>{
+        res.json(doc);
+    });
+});
+
+
+router.post('/addNewProduct', (req, res)=>{
+    let newProduct = JSON.parse(req.body.newProductFormDataArray);
+    const product = new m.Products(newProduct);
+    product.save((err, doc) => {
         if (err) {
-            console.log(err)
-        };
-
-        res.send(doc);
+            console.log("err:  " + err);
+            return next(err);
+        }
+        res.json(doc);
     });
-
-
 });
+
+
+
+
 
 
 module.exports = router;

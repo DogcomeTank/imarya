@@ -91,7 +91,7 @@ function productOnClick(pId){
             $('#cartModalPrice0').text('$'+price[0]);
             $('#cartModalPrice1').text('.'+price[1]);
             if(dataJson['productQty']){
-                // console.log(data);
+                console.log(dataJson);
                 // continue here&&&&&&&&&&&&&&&&&&*******************&^^^^^^^^^^^^^^^^%%
 
 
