@@ -13,38 +13,34 @@ router.get('/', (req, res) => {
 
 });
 
-router.get('/joins', (req, res) => {
-    m.Products.find({}, (err, products) => {
-        if (err) {
-            return next(err);
-        }
-        res.render('./products/products', {
-            products
-        });
-    });
-});
 
-router.post('/addItem', (req, res) => {
-    const product = new m.Products(req.body);
-    product.save((err, doc) => {
-        if (err) {
-            console.log("err: " + err);
-            return next(err);
-        }
-        res.send(doc._id);
-    });
+router.get('/receiving', (req, res)=>{
+    res.render('./products/receiving.ejs');
 });
 
 
 
-router.get('/deleteItem', (req, res) => {
-    res.send('delete');
-});
+// router.post('/addItem', (req, res) => {
+//     const product = new m.Products(req.body);
+//     product.save((err, doc) => {
+//         if (err) {
+//             console.log("err: " + err);
+//             return next(err);
+//         }
+//         res.send(doc._id);
+//     });
+// });
 
-router.get('/updateItem', (req, res) => {
-
-});
-
+// router.get('/joins', (req, res) => {
+//     m.Products.find({}, (err, products) => {
+//         if (err) {
+//             return next(err);
+//         }
+//         res.render('./products/products', {
+//             products
+//         });
+//     });
+// });
 
 
 module.exports = router;

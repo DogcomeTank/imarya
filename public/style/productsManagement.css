@@ -15,3 +15,7 @@
 .modalLocationList{
     width: 100%;
 }
+
+#modalReceivingList td{
+    vertical-align: middle !important;
+}

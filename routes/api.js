@@ -111,6 +111,17 @@ router.post('/updateProductInformation', (req, res) => {
     
 });
 
+router.get('/receiving', (req, res)=>{
+    m.ProductQty.find({productId: req.body.productId}).
+    populate({path:'productId', select:['productName', 'ipn']}).
+    exec((err, receivedProductInfo)=>{
+        if(err) console.log('router - receiving err: ' + err);
+
+        res.json(receivedProductInfo);
+    });
+});
+
+
 
 // productTable.ejs Add location list
 router.get('/location',(req, res)=>{
