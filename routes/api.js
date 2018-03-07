@@ -89,6 +89,22 @@ router.post('/showProductQty', (req, res) => {
         res.json(itemInfo);
     });;
 });
+
+router.post('/qtyUpdate', (req,res)=>{
+    let qtyToUpdate = JSON.parse((req.body.jsonQtyToUpdateArry));
+    m.ProductQty.findById(qtyToUpdate.pQtyId, 'qty', (err, doc)=>{
+        const qtyInStock = doc.qty;
+        console.log(typeof(qtyToUpdate.qtyToUpdate));
+        const totalQty = qtyInStock + Number(qtyToUpdate.qtyToUpdate);
+
+        m.ProductQty.findByIdAndUpdate(qtyToUpdate.pQtyId, {'qty': totalQty},{new: true }, (err, newQty)=>{
+            res.json(newQty);
+        });
+
+    });
+});
+
+
 // update product information
 router.post('/updateProductInformation', (req, res) => {
     let formDataForUpdate = JSON.parse(req.body.myData);

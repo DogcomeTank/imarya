@@ -65,7 +65,7 @@ const ProductQtySchema = new Schema({
         ref: 'Location'
     },
     qty: {
-        type: String,
+        type: Number,
         default: '0',
     }, 
     size:{

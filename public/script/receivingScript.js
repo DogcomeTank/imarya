@@ -48,28 +48,38 @@ $(document).ready(function () {
                 productId: data._id
             },
             success: function (doc) {
-                console.log(doc);
+
+                // display product information in the header of modal
                 $('#modalReceivingProductName').text(data.productName);
                 $('#modalReceivingIPN').text(data.ipn);
                 $("#modalReceivingTable").empty();
-                if (Object.keys(doc).length > 0) {
-                    $('<tr><th>Quantity</th><th>Color</th><th>Size</th><th>Location</th><th>Receive</th></tr>').appendTo('#modalReceivingTable');
 
+                
+                if (Object.keys(doc).length > 0) {
+                    $('<tr><th>Quantity</th><th>Color</th><th>Size</th><th>Location</th><th style="width: 200px">Receive</th></tr>').appendTo('#modalReceivingTable');
+
+
+                    // loop all info in table
                     for (var i in doc) {
                         var TR = $('<tr></tr>');
                         var TD = $('<td></td>');
-                        var receiveBtn = $('<button onclick="modalReceiveBtnToggle()">+</button>');
-                        $('<td>'+ doc[i].qty +'</td>').appendTo(TR);
+
+                        
+                        $('<td id="td'+ doc[i]._id +'">'+ doc[i].qty +'</td>').appendTo(TR);
                         $('<td>'+ doc[i].color +'</td>').appendTo(TR);
                         $('<td>'+ doc[i].size +'</td>').appendTo(TR);
                         $('<td>'+ doc[i].locationId.location +'</td>').appendTo(TR);
+
+                        // btn to show input and enter button
+                        var receiveBtn = $('<button style="display: inline-block" onclick="modalReceiveBtnToggle($(this).val())">+</button>');
                         receiveBtn.val(doc[i]._id);
                         TD.append(receiveBtn);
-                        TD.append('<input type="number" min="0" style="display:none" name="' + doc[i]._id + '">');
+
+                        // append input after "+"" button
+                        TD.append('<span id="' + doc[i]._id + '" style="display:none"><span><input style="width: 80px;" name="' + doc[i]._id + '" type="number"></span><span><button value="' + doc[i]._id + '" onclick="modalReceivingEnterNumberBtn($(this).val())">Enter</button></span></span>');
 
                         TD.appendTo(TR);
                         TR.addClass('w3-border-bottom w3-hover-sand');
-                        // TR.addClass('w3-hover-sand');
                         TR.appendTo('#modalReceivingTable');
                     }                   
                 } else {
@@ -81,9 +91,43 @@ $(document).ready(function () {
     });
 
 
-
 }); //document.ready end
 
-function modalReceiveBtnToggle(){
-    $(selector).toggle(speed,easing,callback)
+function modalReceiveBtnToggle(inputId){
+    $('#'+inputId).toggle();
+}
+
+function modalReceivingEnterNumberBtn(btnVal){
+    var qtyToUpdate = $("input[name="+ btnVal +"]").val();
+
+    var qtyToUpdateArry = {
+        pQtyId: btnVal,
+        qtyToUpdate: qtyToUpdate,
+    }
+
+    jsonQtyToUpdateArry = JSON.stringify(qtyToUpdateArry);
+
+    $.ajax({
+        type: 'post',
+        dataType: 'json',
+        url: '/api/qtyUpdate',
+        data:{
+            jsonQtyToUpdateArry
+        },
+        success: function(newQty){
+
+            //update display value in table row
+            $('#td' + btnVal).html(newQty.qty);
+
+            // clear input field
+            $("input[name="+ btnVal +"]").val('');
+
+            // hide input field
+            $('#'+btnVal).toggle();
+        }
+    });
+}
+
+function addNewLocationBtn(){
+    console.log('add new location');
 }
