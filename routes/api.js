@@ -94,8 +94,11 @@ router.post('/qtyUpdate', (req,res)=>{
     let qtyToUpdate = JSON.parse((req.body.jsonQtyToUpdateArry));
     m.ProductQty.findById(qtyToUpdate.pQtyId, 'qty', (err, doc)=>{
         const qtyInStock = doc.qty;
-        console.log(typeof(qtyToUpdate.qtyToUpdate));
-        const totalQty = qtyInStock + Number(qtyToUpdate.qtyToUpdate);
+        let totalQty = qtyInStock + Number(qtyToUpdate.qtyToUpdate);
+
+        if(totalQty < 0){
+            totalQty = 0;
+        }
 
         m.ProductQty.findByIdAndUpdate(qtyToUpdate.pQtyId, {'qty': totalQty},{new: true }, (err, newQty)=>{
             res.json(newQty);
@@ -135,6 +138,22 @@ router.get('/receiving', (req, res)=>{
 
         res.json(receivedProductInfo);
     });
+});
+
+router.post('/newLocationQty', (req, res)=>{
+    let newLocationQty = JSON.parse(req.body.jsonNewLocationQty);
+
+    m.Products.findOne({'ipn': newLocationQty.ipn}, 'ipn' ,  (err, productId)=>{
+
+        newLocationQty.productId = productId._id;
+
+        let mLocationQty = new m.ProductQty(newLocationQty);
+        mLocationQty.save((err, newSaveLocationQty)=>{
+            res.json(newSaveLocationQty);
+        });
+    });
+
+    
 });
 
 

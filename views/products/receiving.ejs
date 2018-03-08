@@ -71,10 +71,10 @@
                         </div>
                         <div class="w3-col s4 m4 l4">
                             IPN:
-                            <h4 id="modalReceivingIPN"> </h4>
+                            <h4 id="modalReceivingIPN"></h4>
                         </div>
                         <div class="w3-col s2 m2 l2">
-                            <span onclick="document.getElementById('productQty').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span>
+                            <span onclick="productQtyClose()" class="w3-button w3-display-topright w3-xlarge">&times;</span>
                         </div>
                     </div>
 
@@ -102,7 +102,43 @@
 
                     </table>
 
-                    <button class="w3-btn w3-white w3-border w3-border-blue w3-round w3-margin-bottom" onclick="addNewLocationBtn()">New</button>
+                    <button class="w3-btn w3-white w3-border w3-border-blue w3-round w3-margin-bottom" id="addNewLocationBtn" onclick="addNewLocationBtn()">New</button>
+
+
+                    <form class="w3-container w3-margin-bottom" style="display: none" id="addNewLocationForm">
+                        <p onclick="closeAddNewLocationForm()" class="w3-button w3-xlarge">&times;</p>
+                        <input type="text" id="newLocationQtyProductIPN" name="ipn" type="text" style="display: none">
+
+                        <div class="w3-row-padding">
+                            <div class="w3-col s2 m2 l2">
+                                <label>Quantity</label>
+                                <input class="w3-input w3-border" name="qty" min="0" type="number" required>
+                            </div>
+                            <div class="w3-col s2 m2 l2">
+                                <label>Color</label>
+                                <input class="w3-input w3-border" name="color" type="text" placeholder="Color">
+                            </div>
+                            <div class="w3-col s2 m2 l2">
+                                <label>Size</label>
+                                <input class="w3-input w3-border" name="size" type="text" placeholder="Size">
+                            </div>
+                            <div class="w3-col s3 m3 l3">
+                                <label>Location</label>
+                                <select class="w3-select w3-border" name="locationId" required>
+                                    <option value="" disabled selected>Choose your option</option>
+                                    <option value="1">Option 1</option>
+                                    <option value="2">Option 2</option>
+                                    <option value="3">Option 3</option>
+                                </select>
+                            </div>
+                            <div class="w3-col s3 m3 l3">
+                                <br>
+                                <button class="w3-btn w3-blue">Add To New Location</button>
+                            </div>
+                        </div>
+
+                    </form>
+
 
 
                 </div>
