@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<title>imarya</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="/style/productsManagement.css">
+<link rel="icon" href="/icon/linkLogo.png">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- data table -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js" type="text/javascript"></script>
+<script src="/script/receivingScript.js"></script>
+
+
+<head>
+    <script>
+    </script>
+</head>
+
+<body>
+
+    <div class="w3-bar productManagementNav">
+        <a href="/products/" class="w3-bar-item w3-button">Home</a>
+        <a href="/products/receiving" class="w3-bar-item w3-button">Receiving</a>
+    </div>
+
+    <div class="tableContainer w3-margin-top" style="width:95%; margin:auto;">
+        <table id="products" class="display" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>IPN</th>
+                    <th>productName</th>
+                    <th>description</th>
+                    <th>by</th>
+                    <th>img</th>
+                    <th>price</th>
+                    <th>createDay</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>ID</th>
+                    <th>IPN</th>
+                    <th>productName</th>
+                    <th>description</th>
+                    <th>by</th>
+                    <th>img</th>
+                    <th>price</th>
+                    <th>createDay</th>
+                </tr>
+            </tfoot>
+
+
+        </table>
+    </div>
+
+    <!-- Modals -->
+    <!-- display product Qty -->
+    <div id="productQty" class="w3-modal">
+        <div class="w3-modal-content">
+            <div class="w3-container">
+
+
+                <div class="productInfo">
+                    <div class="w3-row w3-margin">
+                        <div class="w3-col s6 m6 l6">
+                            Product Name
+                            <h4 id="modalReceivingProductName"></h4>
+                        </div>
+                        <div class="w3-col s4 m4 l4">
+                            IPN:
+                            <h4 id="modalReceivingIPN"></h4>
+                        </div>
+                        <div class="w3-col s2 m2 l2">
+                            <span onclick="productQtyClose()" class="w3-button w3-display-topright w3-xlarge">&times;</span>
+                        </div>
+                    </div>
+
+                    <table class="w3-table w3-margin-bottom" id="modalReceivingTable">
+                        <tr>
+                            <th>Quantity</th>
+                            <th>Color</th>
+                            <th>Size</th>
+                            <th>Location</th>
+                            <th>Receive</th>
+
+                        </tr>
+                        <div id="modalReceivingList">
+                            <tr>
+                                <td>4</td>
+                                <td>Red</td>
+                                <th>M</th>
+                                <td>M</td>
+                                <td>B-01</td>
+                                <td>
+                                    <button>+</button>
+                                </td>
+                            </tr>
+                        </div>
+
+                    </table>
+
+                    <button class="w3-btn w3-white w3-border w3-border-blue w3-round w3-margin-bottom" id="addNewLocationBtn" onclick="addNewLocationBtn()">New</button>
+
+
+                    <form class="w3-container w3-margin-bottom" style="display: none" id="addNewLocationForm">
+                        <p onclick="closeAddNewLocationForm()" class="w3-button w3-xlarge">&times;</p>
+                        <input type="text" id="newLocationQtyProductIPN" name="ipn" type="text" style="display: none">
+
+                        <div class="w3-row-padding">
+                            <div class="w3-col s2 m2 l2">
+                                <label>Quantity</label>
+                                <input class="w3-input w3-border" name="qty" min="0" type="number" required>
+                            </div>
+                            <div class="w3-col s2 m2 l2">
+                                <label>Color</label>
+                                <input class="w3-input w3-border" name="color" type="text" placeholder="Color">
+                            </div>
+                            <div class="w3-col s2 m2 l2">
+                                <label>Size</label>
+                                <input class="w3-input w3-border" name="size" type="text" placeholder="Size">
+                            </div>
+                            <div class="w3-col s3 m3 l3">
+                                <label>Location</label>
+                                <select class="w3-select w3-border" name="locationId" required>
+                                    <option value="" disabled selected>Choose your option</option>
+                                    <option value="1">Option 1</option>
+                                    <option value="2">Option 2</option>
+                                    <option value="3">Option 3</option>
+                                </select>
+                            </div>
+                            <div class="w3-col s3 m3 l3">
+                                <br>
+                                <button class="w3-btn w3-blue">Add To New Location</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+</body>
+<script>
+</script>
+
+</html>

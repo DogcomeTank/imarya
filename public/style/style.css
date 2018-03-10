@@ -2,7 +2,6 @@
     font-family: "Roboto", sans-serif
 }
 
-
 body,
 h1,
 h2,
@@ -12,6 +11,7 @@ h5,
 h6,
 .w3-wide {
     font-family: "Montserrat", sans-serif;
+    color: #181818;
 }
 
 a {
@@ -20,10 +20,42 @@ a {
 
 nav a:hover {
     color: white !important;
-    background-color: rgba(90, 200, 200, 0.6)!important;
+    background-color: rgba(90, 200, 200, 0.6) !important;
 }
+.cartModalLoading{
+    position: absolute;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    background-color: #fcfcfc;
+}
+.loader {
+    position: relative;
+    top: 100px;
+    background-color: #fcfcfc;
+    margin: auto;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
 
-.cursorPointer{
+
+.cursorPointer {
     cursor: pointer;
 }
 
@@ -31,7 +63,6 @@ nav a:hover {
     display: none;
     max-width: 100%;
     max-height: 200px;
-
 }
 
 .w3-left,
@@ -55,13 +86,100 @@ nav a:hover {
 }
 
 .productGridClass div:nth-child(2) {
-    margin-bottom: 13px !important;
+    margin-bottom: 24px !important;
+}
+
+div.productGridClass>div {
+    padding: 12px;
+    margin-bottom: 20px;
+}
+.productGridClass{
+    padding-left: 2px !important;
+    padding-right: 2px !important;
+}
+.productRowInfo{
+    width: 100%;
+}
+.productPrice{
+    margin-bottom: 0px !important;
+}
+.productNameOnHomePage{
+    margin-top: 0px !important;
+    font-size: 80%;
 }
 
 
-div.productGridClass > div {
-    padding: 5px;
-    margin-bottom: 15px;
+/* Product Detail modal */
+.productDetailContent{
+    margin-bottom: 36px;
+    max-width: 414px;
+}
+.productInfoDiv{
+    width: 100%;
+}
+.productInfoHeader{
+    padding-top: 16px;
+    padding-bottom: 6px;
+}
+.productInfoName{
+    overflow: hidden;
+    padding-left: 10px;
+    height: 36px;
+    text-overflow: ellipsis;
+}
+.productInfoDiv p,h6{
+    color: #bebebe;
+    margin: px 16px 2px 16px;
+    padding: 0px 16px 0px 16px;
+}
+.productInfoDiv img{
+    width: 100%;
+    padding: 6px;
+}
+
+
+.productX{
+    text-align: center;
+}
+.productDetailUl{
+    padding-bottom: 16px;
+}
+.productDetailUl li{
+    border-bottom: 0px !important;
+}
+.productDetailBtn{
+    text-align: center;
+    width: 100%;
+}
+
+
+.userInfo{
+    height: 600px;
+}
+.userInfo h3{
+    padding: 16px;
+}
+.userInfoCard{
+    margin: 8px;
+}
+.userInfoEdit{
+    display:grid;
+    grid-template-columns: 50% 50%;
+}
+.userInfoDisplay h5{
+    margin-bottom: 0px;
+}
+.userInfoDisplay p{
+    margin-top: 0px;
+}
+.userInfoEditBtn{
+    position: absolute;
+    right: 32px;
+}
+.logoutBtn{
+    position: absolute;
+    margin: 16px;
+    bottom: 0px;
 }
 
 .loginPageContent {
@@ -73,9 +191,20 @@ div.productGridClass > div {
     text-align: center;
     padding-top: 60px;
     padding-bottom: 60px;
+    /* height: 520px; */
+}
+.loginForm{
+    margin: auto;
+    max-width: 500px;
+    padding-bottom: 16px;
 }
 
-.roundedImga {
+.loginFormBtn{
+    margin-top: 16px;
+    width: 100%;
+    border-radius: 50px;
+}
+.roundedImg {
     border-radius: 50% !important;
     width: 25px;
     height: 25px;
@@ -87,6 +216,94 @@ div.productGridClass > div {
     cursor: pointer;
     margin: 0 auto;
 }
+.scContent{
+    max-width: 500px;
+}
+.scContainer{
+    height: 85vh;
+    position: relative;
+}
+.scHeader{
+    height: 60px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    position: absolute;
+    width: 100%;
+}
+
+.scList{
+    overflow: scroll;
+    height: 100%;
+    padding-top: 56px;
+    padding-bottom: 120px;
+}
+.scImgDiv{
+    float: left;
+}
+.scCard{
+    margin:10px;
+    border-radius: 10px;
+}
+.scCard::after{
+    display: block;
+    content: "";
+    clear: both;
+}
+.scImg{
+    border-radius: 10px;
+    float: left;
+    display: block;
+    width: 88px;
+    height: 88px;
+}
+.scListDescription{
+    overflow: hidden;
+    width: 33%;
+    float: left;
+    height: 80px;
+    margin-bottom: 8px;
+}
+.scListDescription h5{
+    margin-bottom: 0px;
+}
+.scListDescription p{
+    margin-top: 0px;
+    font-size: 60%;
+}
+.scListQty{
+    float: right;
+    margin: 25px 16px 25px 0px;
+}
+.scListQtyNum{
+    display: inline-block;
+    padding-right: 8px;
+    padding-left: 8px;
+}
+.scCheckoutFooter{
+    height: 70px;
+    padding: 0px 16px 8px 16px;
+    width: 100%;
+    line-height: 100%;
+    position: absolute;
+    bottom: 0px;
+}
+.scCheckoutPrice{
+    float: left;
+    height: 100%;
+}
+.scCheckoutPriceContent{
+    display: inline-block;
+    vertical-align: middle;
+}
+.scCheckoutBtn{
+    height: 60px;
+    float: right;
+}
+.scCheckoutBtnC{
+    margin-top: 15px;
+}
+
+
 
 .logoBlueBG,
 .logoBlueHoverBG:hover {
@@ -96,29 +313,29 @@ div.productGridClass > div {
 
 .logoPink,
 .logoPinkHover:hover {
-    color: #f78389!important;
+    color: #f78389 !important;
 }
 
 .logoPinkBG,
 .logoPinkHoverBG:hover {
     color: white;
-    background-color: #f78389!important;
+    background-color: #f78389 !important;
 }
 
 .logoPinkBGLight,
 .logoPinkHoverBGLight:hover {
     color: white;
-    background-color: #efc3c5!important;
+    background-color: #efc3c5 !important;
 }
 
 .logoGreen,
 .logoGreenHover:hover {
-    color: #73b056!important
+    color: #73b056 !important
 }
 
 .logoGreenBG,
 .logoGreenHoverBG:hover {
-    background-color: #73b056!important
+    background-color: #73b056 !important
 }
 
 .logoOrange {
@@ -126,8 +343,18 @@ div.productGridClass > div {
 }
 
 .lightGreyBG {
-    color: #000!important;
-    background-color: #f2f2f2!important
+    color: #000 !important;
+    background-color: #f2f2f2 !important
+}
+
+.whiteBG {
+    background-color: white !important;
+}
+.greyBG {
+    background-color:rgb(226, 226, 226) !important;
+}
+.textLigthGrey{
+    color: #c4c4c4;
 }
 
 /**************/
@@ -142,6 +369,10 @@ div.productGridClass > div {
 
 .column {
     float: left;
+}
+
+.size-1of5 {
+    width: 20%;
 }
 
 .size-1of4 {
@@ -166,41 +397,56 @@ div.productGridClass > div {
     #productGrid[data-columns]::before {
         content: '2 .column.size-1of2';
     }
-
     .mySlides {
         max-height: 126px;
         max-width: 100%;
     }
+    div.productGridClass>div {
+        padding: 4px;
+        margin-bottom: 15px;
+    }
+
 }
 
 @media screen and (min-width: 451px) and (max-width: 700px) {
     #productGrid[data-columns]::before {
         content: '2 .column.size-1of2';
     }
+    div.productGridClass>div {
+        padding: 4px;
+        margin-bottom: 15px;
+    }
+    
 
 }
 
-@media screen and (min-width: 701px) and (max-width: 850px) {
+@media screen and (min-width: 701px) and (max-width: 800px) {
     #productGrid[data-columns]::before {
         content: '3 .column.size-1of3';
     }
-
 }
 
-@media screen and (min-width: 851px) {
+@media screen and (min-width: 801px) and (max-width: 1400px) {
+    #productGrid[data-columns]::before {
+        content: '4 .column.size-1of4';
+    } 
+ } 
+
+@media screen and (min-width: 1401px) {
+    #productGrid[data-columns]::before {
+        content: '5 .column.size-1of5';
+    }
+} 
+
+/* @media screen and (min-width: 801px) {
     #productGrid[data-columns]::before {
         content: '4 .column.size-1of4';
     }
-
-}
-
+} */
 /**************/
 
 @media (max-width:993px) {
-
     .hide-small {
-        display: none!important
+        display: none !important
     }
-
-
 }

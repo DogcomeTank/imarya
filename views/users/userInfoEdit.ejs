@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<title>imarya.com</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+    body {
+        font-family: "Montserrat", sans-serif;
+        line-height: 2;
+        background-color: #efefef;
+        width: 100%;
+    }
+
+
+
+    .cardStyle {
+        margin: auto;
+        width: 100%;
+        max-width: 500px;
+        padding: 8px;
+
+    }
+
+    .textColor {
+        color: #000;
+    }
+
+    .btnStyle {
+        color: white;
+        background-color: #f78389;
+        border-radius: 10px
+    }
+
+    .textCenter {
+        text-align: center;
+    }
+
+
+</style>
+
+
+
+<body>
+
+
+        <div class="w3-card-4 cardStyle">
+
+            <form class="w3-container" method="POST" action="./editContactInfo">
+                <h2 class="textCenter">Mailing Address</h2>
+
+                <label class="textColor">
+                    <b>Mail Name</b>
+                </label>
+                <input class="w3-input w3-border" placeholder="Your official name" type="text" name="mailName" value="<%= userInfo.mailName %>">
+
+                <label class="textColor">
+                    <b>Street address</b>
+                </label>
+                <input class="w3-input w3-border" type="text" name="streetAndNumber" placeholder="Street and number, P.O.box, c/o." value="<%= userInfo.streetAndNumber %>">
+                <input class="w3-input w3-border" type="text" name="apartmentNumber" placeholder="Apartment, suite, unit, building, floor, etc." value="<%= userInfo.apartmentNumber %>">
+
+                <label class="textColor">
+                    <b>City</b>
+                </label>
+                <input class="w3-input w3-border" type="text" name="city" value="<%= userInfo.city %>">
+
+                <label class="textColor">
+                    <b>Province/Territory</b>
+                </label>
+                <input class="w3-input w3-border" type="text" name="province" value="<%= userInfo.province %>">
+
+                <label class="textColor">
+                    <b>Postal Code</b>
+                </label>
+                <input class="w3-input w3-border" type="text" name="postalCode" value="<%= userInfo.postalCode %>">
+
+                <label class="textColor">
+                    <b>Phone number</b>
+                </label>
+                <input class="w3-input w3-border" type="tel" name="phone" value="<%= userInfo.phone %>">
+
+                <br>
+                <button class="w3-btn btnStyle">Save changes</button>
+                <a href="/" class="w3-btn btnStyle">Back</a>
+
+            </form>
+        </div>
+
+</body>
+
+</html>

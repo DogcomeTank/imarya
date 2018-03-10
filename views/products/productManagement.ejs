@@ -18,7 +18,7 @@
 
 </body>
 <div class="w3-container">
-    <table class="w3-table w3-striped w3-margin-top" style="width:1000px; w3-margin">
+    <table class="w3-table w3-striped w3-margin-top" style="width:1000px;">
         <tr>
             <th>ID</th>
             <th>Product name</th>
@@ -149,28 +149,24 @@
         }
 
         function addProduct() {
-            //            addProductForm
-            var data = $('#productName').val();
-            var data = {
-                "action": "addItem",
-                "info": {
-                    "productName": $('#productName').val(),
-                    "description": $('#description').val(),
-                    "by": $('#by').val(),
-                    "img": $('#img').val(),
-                    "tag": {},
-                    "price": $('#price').val(),
-                    createDay: Date.now
-                }
+            // addProductForm
+            // var data = $('#productName').val();
+            var myData = {
+                'productName': $('#productName').val(),
+                'description': $('#description').val(),
+                'by': $('#by').val(),
+                'img': $('#img').val(),
+                'tag': {},
+                'price': $('#price').val(),
+                createDay: Date.now
             };
-            console.log(data.info);
             $.ajax({
                 type: 'POST',
-                data: JSON.stringify(data),
+                data: JSON.stringify(myData),
                 contentType: 'application/json',
-                url: '/productEdit',
+                url: '/productManage/addItem',
                 success: function (data) {
-
+                    console.log(data);
                 }
             });
         }
