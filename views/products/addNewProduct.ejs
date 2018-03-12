@@ -1,0 +1,79 @@
+<!-- <form action="/api/formidable" method="POST" enctype="multipart/form-data">
+    <input name="data" type="text">
+    <input name="myImage" type="file">
+    <input type="submit">
+</form> -->
+<!DOCTYPE html>
+<html>
+<title>imarya</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="/style/productsManagement.css">
+<link rel="icon" href="/icon/linkLogo.png">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- data table -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js" type="text/javascript"></script>
+<script src="/script/productTableScript.js"></script>
+
+
+<head>
+    <script>
+    </script>
+</head>
+
+<body>
+
+    <div style="width: 800px; margin: auto;">
+
+        <!-- add new product -->
+        <form action="/api/addNewProduct" method="POST" enctype="multipart/form-data">
+            <h2>Add New Product</h2>
+
+            <label>IPN</label>
+            <input class="w3-input w3-border-bottom" type="number" name="ipn" id="ipn" required>
+
+            <label>Product Name</label>
+            <input class="w3-input w3-border-bottom" type="text" name="productName" id="newProductName" required>
+
+            <label>Description</label>
+            <input class="w3-input w3-border-bottom" type="text" name="description" id="newDescription" required>
+
+            <label>Made by</label>
+            <input class="w3-input w3-border-bottom" type="text" name="by" id="newBy">
+
+            <label>Price</label>
+            <input class="w3-input w3-border-bottom" type="text" name="price" id="newPrice" required>
+
+            <br>
+            <label>Img</label>
+            <input name="myImage" id="myImage" type="file">
+
+            <br>
+            <br>
+            <label>Category: </label>
+
+            <input class="w3-check" name="category[0]" type="checkbox">
+            <label>Milk</label>
+
+            <input class="w3-check" name="category[1]" type="checkbox">
+            <label>Sugar</label>
+            
+            <input class="w3-check" name="category" type="checkbox">
+            <label>Salt</label>
+
+            <br>
+            <input type="submit" class="w3-btn w3-margin-top w3-deep-orange" value="Submit" id="modalAddNewProductBtn">
+
+        </form>
+
+        <%
+         if(doc){  %>
+                <h3>New product added.</h3>
+                <p><%= doc %></p>
+        <%}else{%>
+            <br><input type="button" value="Refresh Page" onClick="window.location.reload()">
+        <%}%>
+    </div>
+</body>

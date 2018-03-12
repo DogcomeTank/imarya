@@ -82,7 +82,7 @@ function productOnClick(pId){
         url:'/api/addToCartModal',
         data: {id: pId},
         success:function(doc){
-            document.getElementById('cartModalLoading').style.display='none';
+            
             dataJson = JSON.parse(doc);
             var price = dataJson['productInfo'].price.split(".");
             $('#productInfoName').text(dataJson['productInfo'].productName)
@@ -91,38 +91,15 @@ function productOnClick(pId){
             $('#cartModalPrice0').text('$'+price[0]);
             $('#cartModalPrice1').text('.'+price[1]);
             if(dataJson['productQty']){
-                console.log(dataJson);
-                // continue here&&&&&&&&&&&&&&&&&&*******************&^^^^^^^^^^^^^^^^%%
-
 
             }
+            
         },
     });
+    document.getElementById('cartModalLoading').style.display='none';
 }
 
-//function getLoginInfo() {
-//    $.ajax({
-//        type: 'post',
-//        url: 'content/loginStatus.php',
-//        data: {
-//            userData: "check",
-//        },
-//        error: function () {
-//            console.log("ERROR");
-//        },
-//        async: true,
-//        dataType: 'json',
-//        success: function (data) {
-//            console.log(data);
-//            if (typeof data['adsf'] === 'undefined') {
-//                // does not exist
-//            } else {
-//                console.log('need login');
-//            }
-//        },
-//        type: 'GET'
-//    });
-//}
+
 
 
 

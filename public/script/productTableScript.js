@@ -150,6 +150,8 @@ $(document).ready(function () {
                 newProductFormDataArray
             },
             success: function(newAddedProduct){
+
+                // add new row to datatables
                 var row = newAddedProduct;
                 table.row.add(row).draw(false);
                 table.order([1, 'asc']).draw();

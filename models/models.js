@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const ProductSchema = new Schema({
     ipn: {
-        type: String,
+        type: Number,
         unique: true,
     },
     productName: String,

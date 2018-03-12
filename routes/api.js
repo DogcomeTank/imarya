@@ -3,7 +3,8 @@ const router = express.Router();
 const m = require('../models/models');
 const path = require('path');
 const multer = require('multer');
-
+const formidable = require('formidable');
+const fs = require('fs');
 
 
 
@@ -140,60 +141,14 @@ router.post('/updateProductInformation', (req, res) => {
 });
 
 router.get('/imgUpload', (req, res) => {
+
     res.render('products/imgUpload');
 });
 
 router.post('/imgUpload', (req, res) => {
 
-    // Set The Storage Engine
-    const storage = multer.diskStorage({
-        destination: './public/imgUpload/',
-        filename: function (req, file, cb) {
-            cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-        }
-    });
+    uploadImage(req, res);
 
-    // Init Upload
-    const upload = multer({
-        storage: storage,
-        limits: {
-            fileSize: 1000000
-        },
-        fileFilter: function (req, file, cb) {
-            checkFileType(file, cb);
-        }
-    }).single('myImage');
-
-    //upload
-    upload(req, res, (err) => {
-        if(err){
-          throw err;
-        } else {
-          if(req.file == undefined){
-            res.send('undefine');
-          } else {
-            let msg = "uploads" + req.file.filename;
-
-            res.send(msg);
-          }
-        }
-      });
-
-    // Check File Type
-    function checkFileType(file, cb) {
-        // Allowed ext
-        const filetypes = /jpeg|jpg|png|gif/;
-        // Check ext
-        const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-        // Check mime
-        const mimetype = filetypes.test(file.mimetype);
-
-        if (mimetype && extname) {
-            return cb(null, true);
-        } else {
-            cb('Error: Images Only!');
-        }
-    }
 
 
 });
@@ -242,9 +197,9 @@ router.get('/location', (req, res) => {
     )
 });
 router.post('/location', (req, res) => {
-    var l = req.body.location;
+    var newLoc = req.body.location;
     var newLocation = new m.Location({
-        location: l
+        location: newLoc
     });
     newLocation.save((err, doc) => {
         res.json(doc);
@@ -269,20 +224,138 @@ router.post('/category', (req, res) => {
 });
 
 
+router.get('/addNewProduct', (req, res) => {
+    let doc = false;
+    res.render('products/addNewProduct', {doc});
+});
+
 router.post('/addNewProduct', (req, res) => {
-    let newProduct = JSON.parse(req.body.newProductFormDataArray);
-    const product = new m.Products(newProduct);
-    product.save((err, doc) => {
-        if (err) {
-            console.log("err:  " + err);
-            return next(err);
-        }
-        res.json(doc);
+    var form = new formidable.IncomingForm();
+    let theImgName = '';
+    form.uploadDir = "./public/img/";
+    form.keepExtensions = true;
+    form.maxFieldsSize = 2 * 1024 * 1024;
+    form.multiples = false;
+    /* this is where the renaming happens */
+    form.on('fileBegin', function (name, file) {
+        theImgName =  Date.now() + '_' + file.name;
+        //rename the incoming file to the file's name
+        file.path = form.uploadDir + "/" + theImgName;
+    })
+
+    form.parse(req, function (err, fields, files) {
+        // ...
+        fields.img = theImgName;
+        insertToProducts(theImgName, fields);
     });
+
+    function insertToProducts(pinfo, fieldsInfo){
+        const product = new m.Products(fieldsInfo);
+        product.save((err, doc)=>{
+            if(err) throw err;
+            res.render('products/addNewProduct', {doc});
+            
+        });
+
+
+
+
+
+    }
+    // let newProduct = JSON.parse(req.body.newProductFormDataArray);
+    // const product = new m.Products(newProduct);
+    // product.save((err, doc) => {
+    //     if (err) {
+    //         console.log("err:  " + err);
+    //         return next(err);
+    //     }
+    //     res.json(doc);
+    // });
+});
+
+
+// ????image upload working, continue here
+router.post('/formidable', (req, res) => {
+    var form = new formidable.IncomingForm();
+    var theImgName = '';
+    form.uploadDir = "./public/imgUpload/";
+    form.keepExtensions = true;
+    form.maxFieldsSize = 2 * 1024 * 1024;
+    form.multiples = false;
+    /* this is where the renaming happens */
+    form.on('fileBegin', function (name, file) {
+        theImgName = file.name;
+        //rename the incoming file to the file's name
+        file.path = form.uploadDir + "/" + file.name + '2';
+    })
+
+    form.parse(req, function (err, fields, files) {
+        // ...
+
+        console.log(fields);
+        console.log(theImgName);
+    });
+
 });
 
 
 
+function uploadImage(fileInReq, res) {
+    const storage = multer.diskStorage({
+        destination: './public/img/',
+        filename: function (fileInReq, file, cb) {
+            cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+        }
+    });
+
+    // Init Upload
+    const upload = multer({
+        storage: storage,
+        limits: {
+            fileSize: 1000000
+        },
+        fileFilter: function (fileInReq, file, cb) {
+            checkFileType(file, cb);
+        }
+    }).single('myImage');
+
+    //upload
+    upload(fileInReq, res, (err) => {
+        let msg = {};
+        if (err) {
+            res.send("Error!!")
+        } else {
+            if (fileInReq.file == undefined) {
+                msg = {
+                    "imgName": undefined
+                };
+                res.send(msg)
+            } else {
+                msg = {
+                    "imgName": fileInReq.file.filename
+                };
+
+                res.send(msg);
+            }
+        }
+    });
+}
+
+// Check File Type for img upload
+function checkFileType(file, cb) {
+    // Allowed ext
+    const filetypes = /jpeg|jpg|png|gif/;
+    // Check ext
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    // Check mime
+    const mimetype = filetypes.test(file.mimetype);
+
+    if (mimetype && extname) {
+        return cb(null, true);
+    } else {
+        cb('Error: Images Only!');
+    }
+}
 
 
 
