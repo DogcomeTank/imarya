@@ -25,6 +25,12 @@
 
 <body>
 
+    <div class="w3-bar productManagementNav">
+        <a href="/products/" class="w3-bar-item w3-button">Home</a>
+        <a href="/products/receiving" class="w3-bar-item w3-button">Receiving</a>
+        <a href="/api/addNewProduct" class="w3-bar-item w3-button">New Product</a>
+    </div>
+
     <div style="width: 800px; margin: auto;">
 
         <!-- add new product -->
@@ -54,14 +60,18 @@
             <br>
             <label>Category: </label>
 
-            <input class="w3-check" name="category[0]" type="checkbox">
-            <label>Milk</label>
+            <% if(pCateg){  
+                    for(var i = 0; i < pCateg.length; i++){    
+            %>
+                    <input class="w3-check" name="category<%= i %>" value="<%=pCateg[i]._id %>" type="checkbox">
+                    <label><%=pCateg[i].category %></label>
+            <%}}%>
 
-            <input class="w3-check" name="category[1]" type="checkbox">
+            <!-- <input class="w3-check" name="category[1]" type="checkbox">
             <label>Sugar</label>
             
             <input class="w3-check" name="category" type="checkbox">
-            <label>Salt</label>
+            <label>Salt</label>  -->
 
             <br>
             <input type="submit" class="w3-btn w3-margin-top w3-deep-orange" value="Submit" id="modalAddNewProductBtn">
@@ -73,7 +83,7 @@
                 <h3>New product added.</h3>
                 <p><%= doc %></p>
         <%}else{%>
-            <br><input type="button" value="Refresh Page" onClick="window.location.reload()">
+            <p>No product added.</p>
         <%}%>
     </div>
 </body>

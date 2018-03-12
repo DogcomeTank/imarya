@@ -293,20 +293,20 @@ function modalAddNewCategoryBtn() {
     }
 }
 
-function navNewProductBtn() {
-    document.getElementById('addNewProduct').style.display = 'block';
-    $('#addNewProductCategoryList').empty();
-    $.ajax({
-        type: "get",
-        dataType: "json",
-        url: "/api/category",
-        success: function (catList) {
-            for (var i in catList) {
-                $('<input class="w3-check" type="checkbox" name="' + catList[i].category + '" value="' + catList[i]._id + '"><label>' + catList[i].category + '</label>').appendTo('#addNewProductCategoryList');
-            }
-        }
-    });
-}
+// function navNewProductBtn() {
+//     document.getElementById('addNewProduct').style.display = 'block';
+//     $('#addNewProductCategoryList').empty();
+//     $.ajax({
+//         type: "get",
+//         dataType: "json",
+//         url: "/api/category",
+//         success: function (catList) {
+//             for (var i in catList) {
+//                 $('<input class="w3-check" type="checkbox" name="' + catList[i].category + '" value="' + catList[i]._id + '"><label>' + catList[i].category + '</label>').appendTo('#addNewProductCategoryList');
+//             }
+//         }
+//     });
+// }
 
 // function modalAddNewProductBtn() {
 //     event.preventDefault();

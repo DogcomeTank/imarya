@@ -225,8 +225,11 @@ router.post('/category', (req, res) => {
 
 
 router.get('/addNewProduct', (req, res) => {
-    let doc = false;
-    res.render('products/addNewProduct', {doc});
+
+    m.Category.find({}, (err, pCateg)=>{
+        let doc = false;
+        res.render('products/addNewProduct', {doc, pCateg});
+    })
 });
 
 router.post('/addNewProduct', (req, res) => {
@@ -250,27 +253,23 @@ router.post('/addNewProduct', (req, res) => {
     });
 
     function insertToProducts(pinfo, fieldsInfo){
+        
         const product = new m.Products(fieldsInfo);
         product.save((err, doc)=>{
             if(err) throw err;
-            res.render('products/addNewProduct', {doc});
-            
+
+            let subString = 'category';
+            for(let key in fieldsInfo){
+                if(key.indexOf(subString) !== -1){
+                    let productCate = new m.ProductCategory({productId: doc._id, categoryId: fieldsInfo[key]});
+                    productCate.save();
+                }
+            }
+            m.Category.find({}, (err, pCateg)=>{
+                res.render('products/addNewProduct', {doc, pCateg});
+            });
         });
-
-
-
-
-
     }
-    // let newProduct = JSON.parse(req.body.newProductFormDataArray);
-    // const product = new m.Products(newProduct);
-    // product.save((err, doc) => {
-    //     if (err) {
-    //         console.log("err:  " + err);
-    //         return next(err);
-    //     }
-    //     res.json(doc);
-    // });
 });
 
 
