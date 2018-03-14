@@ -297,43 +297,79 @@
                     </div>
 
                     <div class="w3-col l6 m6 s6" style="text-align:right;">
-                        <!-- <h4 class="logoPink w3-margin-right" id="cartModalPrice">Price</h4> -->
-                        <p>
+                        <h5>
                             <span class="w3-large logoPink" id="cartModalPrice0">
                                 price 0
 
                             </span>
                             <span class="w3-small logoPink" id="cartModalPrice1">. price 1
                             </span>
-                        </p>
+                        </h5>
                     </div>
                 </div>
 
                 <p id="cartModalDescription">Product description</p>
 
-                <ul class="w3-ul w3-margin-top productDetailUl w3-margin-bottom">
+                <form class="w3-container">
+                    
+                    <select class="w3-select" name="option" id="modalProductColorOption" required>
+                        <option value="" disabled selected>Color</option>
+                        <option value="1">S</option>
+                        <option value="2">M</option>
+                        <option value="3">L</option>
+                    </select>
+
+                    <select class="w3-select" name="option" id="modalProductSizeOption" required>
+                        <option value="" disabled selected>Size</option>
+                        <option value="1">S</option>
+                        <option value="2">M</option>
+                        <option value="3">L</option>
+                    </select>
+
+                    <select class="w3-select" name="option" id="modalProductQuantityOption" disabled>
+                        <option value="" disabled selected>Quantity</option>
+                        <option value="2">1</option>
+                        <option value="3">2</option>
+                    </select>
+
+                    <button class="w3-btn w3-margin-top productDetailBtn logoPinkBG" id="modalAddToCart">Add To Cart</button>
+                </form>
+                <div class="w3-padding">
+                    <button class="w3-btn productDetailBtn logoPinkBG">Check Out</button>
+                </div>
+
+
+
+                <!-- <ul class="w3-ul w3-margin-top productDetailUl w3-margin-bottom">
                     <li>
-                        <select class="w3-select" name="option">
-                            <option value="" disabled selected>Quantity</option>
+                        <select class="w3-select" name="option" id="modalProductSizeOption">
+                            <option value="" disabled selected>Size</option>
                             <option value="2">1</option>
                             <option value="3">2</option>
                         </select>
                     </li>
                     <li>
-                        <select class="w3-select" name="option">
-                            <option value="" disabled selected>Size</option>
+                        <select class="w3-select" name="option" id="modalProductColorOption">
+                            <option value="" disabled selected>Color</option>
                             <option value="1">S</option>
                             <option value="2">M</option>
                             <option value="3">L</option>
                         </select>
                     </li>
                     <li>
-                        <button class="w3-btn productDetailBtn logoPinkBG">Add To Cart</button>
+                        <select class="w3-select" name="option" disabled>
+                            <option value="" disabled selected>Quantity</option>
+                            <option value="2">1</option>
+                            <option value="3">2</option>
+                        </select>
+                    </li>
+                    <li>
+                        <button class="w3-btn productDetailBtn logoPinkBG" id="modalAddToCart">Add To Cart</button>
                     </li>
                     <li>
                         <button class="w3-btn productDetailBtn logoPinkBG">Check Out</button>
                     </li>
-                </ul>
+                </ul> -->
 
             </div>
 
@@ -372,7 +408,7 @@
                             <div class="scListQtyNum">8</div>
                             <button class="w3-btn w3-circle">+</button>
                         </div>
-                    </div> 
+                    </div>
 
                     <div class="w3-card-4 scCard whiteBG">
                         <div class="scImgDiv">

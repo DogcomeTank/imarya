@@ -273,88 +273,87 @@ router.post('/addNewProduct', (req, res) => {
 });
 
 
-// ????image upload working, continue here
-router.post('/formidable', (req, res) => {
-    var form = new formidable.IncomingForm();
-    var theImgName = '';
-    form.uploadDir = "./public/imgUpload/";
-    form.keepExtensions = true;
-    form.maxFieldsSize = 2 * 1024 * 1024;
-    form.multiples = false;
-    /* this is where the renaming happens */
-    form.on('fileBegin', function (name, file) {
-        theImgName = file.name;
-        //rename the incoming file to the file's name
-        file.path = form.uploadDir + "/" + file.name + '2';
-    })
+// router.post('/formidable', (req, res) => {
+//     var form = new formidable.IncomingForm();
+//     var theImgName = '';
+//     form.uploadDir = "./public/imgUpload/";
+//     form.keepExtensions = true;
+//     form.maxFieldsSize = 2 * 1024 * 1024;
+//     form.multiples = false;
+//     /* this is where the renaming happens */
+//     form.on('fileBegin', function (name, file) {
+//         theImgName = file.name;
+//         //rename the incoming file to the file's name
+//         file.path = form.uploadDir + "/" + file.name + '2';
+//     })
 
-    form.parse(req, function (err, fields, files) {
-        // ...
+//     form.parse(req, function (err, fields, files) {
+//         // ...
 
-        console.log(fields);
-        console.log(theImgName);
-    });
+//         console.log(fields);
+//         console.log(theImgName);
+//     });
 
-});
-
+// });
 
 
-function uploadImage(fileInReq, res) {
-    const storage = multer.diskStorage({
-        destination: './public/img/',
-        filename: function (fileInReq, file, cb) {
-            cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-        }
-    });
 
-    // Init Upload
-    const upload = multer({
-        storage: storage,
-        limits: {
-            fileSize: 1000000
-        },
-        fileFilter: function (fileInReq, file, cb) {
-            checkFileType(file, cb);
-        }
-    }).single('myImage');
+// function uploadImage(fileInReq, res) {
+//     const storage = multer.diskStorage({
+//         destination: './public/img/',
+//         filename: function (fileInReq, file, cb) {
+//             cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+//         }
+//     });
 
-    //upload
-    upload(fileInReq, res, (err) => {
-        let msg = {};
-        if (err) {
-            res.send("Error!!")
-        } else {
-            if (fileInReq.file == undefined) {
-                msg = {
-                    "imgName": undefined
-                };
-                res.send(msg)
-            } else {
-                msg = {
-                    "imgName": fileInReq.file.filename
-                };
+//     // Init Upload
+//     const upload = multer({
+//         storage: storage,
+//         limits: {
+//             fileSize: 1000000
+//         },
+//         fileFilter: function (fileInReq, file, cb) {
+//             checkFileType(file, cb);
+//         }
+//     }).single('myImage');
 
-                res.send(msg);
-            }
-        }
-    });
-}
+//     //upload
+//     upload(fileInReq, res, (err) => {
+//         let msg = {};
+//         if (err) {
+//             res.send("Error!!")
+//         } else {
+//             if (fileInReq.file == undefined) {
+//                 msg = {
+//                     "imgName": undefined
+//                 };
+//                 res.send(msg)
+//             } else {
+//                 msg = {
+//                     "imgName": fileInReq.file.filename
+//                 };
 
-// Check File Type for img upload
-function checkFileType(file, cb) {
-    // Allowed ext
-    const filetypes = /jpeg|jpg|png|gif/;
-    // Check ext
-    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-    // Check mime
-    const mimetype = filetypes.test(file.mimetype);
+//                 res.send(msg);
+//             }
+//         }
+//     });
+// }
 
-    if (mimetype && extname) {
-        return cb(null, true);
-    } else {
-        cb('Error: Images Only!');
-    }
-}
+// // Check File Type for img upload
+// function checkFileType(file, cb) {
+//     // Allowed ext
+//     const filetypes = /jpeg|jpg|png|gif/;
+//     // Check ext
+//     const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+//     // Check mime
+//     const mimetype = filetypes.test(file.mimetype);
+
+//     if (mimetype && extname) {
+//         return cb(null, true);
+//     } else {
+//         cb('Error: Images Only!');
+//     }
+// }
 
 
 
