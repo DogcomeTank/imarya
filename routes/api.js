@@ -96,6 +96,20 @@ router.post('/showProductQty', (req, res) => {
     });;
 });
 
+// product Info modal size and color on change
+router.post('/colorSizeOnChange', (req, res) => {
+    
+    let dataToFind = req.body;
+    dataToFind = JSON.parse(dataToFind.selectedData);
+    m.ProductQty.find(dataToFind.findData).select([dataToFind.selection,'qty']).sort([
+        [dataToFind.selection, 1]
+    ]).exec(
+        (err, doc) => {
+            res.json(doc);
+        }
+    );
+});
+
 router.post('/qtyUpdate', (req, res) => {
     let qtyToUpdate = JSON.parse((req.body.jsonQtyToUpdateArry));
     m.ProductQty.findById(qtyToUpdate.pQtyId, 'qty', (err, doc) => {
@@ -226,9 +240,12 @@ router.post('/category', (req, res) => {
 
 router.get('/addNewProduct', (req, res) => {
 
-    m.Category.find({}, (err, pCateg)=>{
+    m.Category.find({}, (err, pCateg) => {
         let doc = false;
-        res.render('products/addNewProduct', {doc, pCateg});
+        res.render('products/addNewProduct', {
+            doc,
+            pCateg
+        });
     })
 });
 
@@ -241,7 +258,7 @@ router.post('/addNewProduct', (req, res) => {
     form.multiples = false;
     /* this is where the renaming happens */
     form.on('fileBegin', function (name, file) {
-        theImgName =  Date.now() + '_' + file.name;
+        theImgName = Date.now() + '_' + file.name;
         //rename the incoming file to the file's name
         file.path = form.uploadDir + "/" + theImgName;
     })
@@ -252,21 +269,27 @@ router.post('/addNewProduct', (req, res) => {
         insertToProducts(theImgName, fields);
     });
 
-    function insertToProducts(pinfo, fieldsInfo){
-        
+    function insertToProducts(pinfo, fieldsInfo) {
+
         const product = new m.Products(fieldsInfo);
-        product.save((err, doc)=>{
-            if(err) throw err;
+        product.save((err, doc) => {
+            if (err) throw err;
 
             let subString = 'category';
-            for(let key in fieldsInfo){
-                if(key.indexOf(subString) !== -1){
-                    let productCate = new m.ProductCategory({productId: doc._id, categoryId: fieldsInfo[key]});
+            for (let key in fieldsInfo) {
+                if (key.indexOf(subString) !== -1) {
+                    let productCate = new m.ProductCategory({
+                        productId: doc._id,
+                        categoryId: fieldsInfo[key]
+                    });
                     productCate.save();
                 }
             }
-            m.Category.find({}, (err, pCateg)=>{
-                res.render('products/addNewProduct', {doc, pCateg});
+            m.Category.find({}, (err, pCateg) => {
+                res.render('products/addNewProduct', {
+                    doc,
+                    pCateg
+                });
             });
         });
     }
