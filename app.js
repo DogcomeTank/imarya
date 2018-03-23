@@ -44,6 +44,7 @@ const index = require('./routes/index');
 const login = require('./config/loginConfig');
 const products = require('./routes/products');
 const api = require('./routes/api');
+const braintree = require('./routes/braintree');
 
 //
 app.use(bodyParser.urlencoded({
@@ -62,6 +63,7 @@ app.use('/', index);
 app.use('/login', login);
 app.use('/products', products);
 app.use('/api', api);
+app.use('/payment', braintree);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

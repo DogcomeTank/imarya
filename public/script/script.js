@@ -199,7 +199,14 @@ function productOnClick(pId) {
                         $('#modalProductColorOption').prop('disabled', false);
                         $('#modalProductColorOption').append('<option value="" disabled selected>Color</option>');
                     }
-                    $('#modalProductColorOption').append(' <option value="' + productQty[i].color + '">' + productQty[i].color + '</option>');
+
+                    // remove duplicate color option
+                    if (!$('select#modalProductColorOption option[value="'+ productQty[i].color +'"]').length) {
+                        // add new color option
+                        $('#modalProductColorOption').append(' <option value="' + productQty[i].color + '">' + productQty[i].color + '</option>');
+                     }
+
+                    
                 }
 
                 // add option of size
@@ -211,7 +218,11 @@ function productOnClick(pId) {
                         $('#modalProductSizeOption').prop('disabled', false);
                         $('#modalProductSizeOption').append('<option value="" disabled selected>Size</option>');
                     }
-                    $('#modalProductSizeOption').append(' <option value="' + productQty[i].size + '">' + productQty[i].size + '</option>');
+                    if (!$('select#modalProductSizeOption option[value="'+ productQty[i].size +'"]').length) {
+                        //add new size option
+                        $('#modalProductSizeOption').append(' <option value="' + productQty[i].size + '">' + productQty[i].size + '</option>');
+                     }
+                    
                 }
             }
 
@@ -250,8 +261,8 @@ function productOnClick(pId) {
 
 }
 
-function addOptionToModalProductInfo(addToId, optionValue, OptionDescription) {
-    $('#' + addToId).append('<option value="" disabled selected>' + OptionDescription + '</option>');
-    for (var oi = 0; oi < optionValue.length;)
-        $('#' + addToId).append(' <option value="' + optionValue + '">' + optionValue + '</option>');
-}
+// function addOptionToModalProductInfo(addToId, optionValue, OptionDescription) {
+//     $('#' + addToId).append('<option value="" disabled selected>' + OptionDescription + '</option>');
+//     for (var oi = 0; oi < optionValue.length;)
+//         $('#' + addToId).append(' <option value="' + optionValue + '">' + optionValue + '</option>');
+// }
