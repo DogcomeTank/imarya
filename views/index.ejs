@@ -42,17 +42,17 @@
 
             </a>
         </div>
-        <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
+        <div id="navCategoryLink" class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
             <a href="#" class="w3-bar-item w3-button  w3-block logoBlueBG">
                 <i class="fa fa-caret-right w3-margin-right"></i>All</a>
             <a href="#" class="w3-bar-item w3-button">New Arrivals</a>
             <a href="#" class="w3-bar-item w3-button">Snacks</a>
-            <a onclick="myAccFunc()" href="javascript:void(0)" class="w3-button w3-left-align" id="myBtn">
+            <a onclick="navAccDisplay()" href="javascript:void(0)" class="w3-button w3-left-align" id="myBtn">
                 Clothing
-                <i class="fa fa-caret-down"></i>
+                <div style="display: inline-block"><i class="fa fa-caret-down"></i></div>
             </a>
-            <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-                <a href="http://fontawesome.io/icons/" class="w3-bar-item w3-button ">Hot</a>
+            <div id="navAccList" class="w3-bar-block w3-hide w3-padding-large w3-medium">
+                <a href="#" class="w3-bar-item w3-button ">Hot</a>
                 <a href="#" class="w3-bar-item w3-button">Boy</a>
                 <a href="#" class="w3-bar-item w3-button">Girl</a>
             </div>
@@ -297,7 +297,7 @@
                     </div>
 
                     <div class="w3-col l6 m6 s6" style="text-align:right;">
-                        <h5>
+                        <h5 class="w3-margin-right">
                             <span class="w3-large logoPink" id="cartModalPrice0">
                                 price 0
 
@@ -312,24 +312,17 @@
 
                 <form class="w3-container">
                     
-                    <select class="w3-select" name="option" id="modalProductColorOption" required>
+                    <select class="w3-select" name="color" id="modalProductColorOption" required>
                         <option value="" disabled selected>Color</option>
-                        <option value="1">S</option>
-                        <option value="2">M</option>
-                        <option value="3">L</option>
+                        
                     </select>
 
                     <select class="w3-select" name="option" id="modalProductSizeOption" required>
                         <option value="" disabled selected>Size</option>
-                        <option value="1">S</option>
-                        <option value="2">M</option>
-                        <option value="3">L</option>
                     </select>
 
                     <select class="w3-select" name="option" id="modalProductQuantityOption" required disabled>
                         <option value="" disabled selected>Quantity</option>
-                        <option value="2">1</option>
-                        <option value="3">2</option>
                     </select>
 
                     <button class="w3-btn w3-margin-top productDetailBtn logoPinkBG" id="modalAddToCart">Add To Cart</button>
@@ -484,8 +477,8 @@
 
     <script>
         // Accordion in menu
-        function myAccFunc() {
-            var x = document.getElementById("demoAcc");
+        function navAccDisplay() {
+            var x = document.getElementById("navAccList");
             if (x.className.indexOf("w3-show") == -1) {
                 x.className += " w3-show";
             } else {

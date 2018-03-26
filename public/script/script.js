@@ -17,7 +17,7 @@ $(document).ready(function () {
         }
         // if size option available and selected
         var findQtyFromColor = 0;
-        if (sizeOptionStatus && theSizeSelected != null && theSizeSelected !='') {
+        if (sizeOptionStatus && theSizeSelected != null && theSizeSelected != '') {
             selectedData.findData.size = theSizeSelected;
             findQtyFromColor = 1
         }
@@ -111,9 +111,15 @@ $(document).ready(function () {
         }
     });
 
+    $("#navCategoryLink > a").click(function () {
+        // remove highlight nav link
+        $("#navCategoryLink > a").removeClass('logoBlueBG');
+        $("#navCategoryLink > a > i").remove();
+        var categoryText = $(this).text();
+        
+    });
 
-
-});
+}); //document ready
 
 
 function plusDivs(n) {
