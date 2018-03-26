@@ -113,9 +113,7 @@ router.post('/colorSizeOnChange', (req, res) => {
     
     let dataToFind = req.body;
     dataToFind = JSON.parse(dataToFind.selectedData);
-    m.ProductQty.find(dataToFind.findData).select([dataToFind.selection,'qty']).sort([
-        [dataToFind.selection, 1]
-    ]).exec(
+    m.ProductQty.find(dataToFind.findData).select(['qty']).exec(
         (err, doc) => {
             res.json(doc);
         }
@@ -156,7 +154,8 @@ router.post('/updateProductInformation', (req, res) => {
             description: formDataForUpdate.description,
             by: formDataForUpdate.by,
             price: formDataForUpdate.price,
-            img: formDataForUpdate.img
+            img: formDataForUpdate.img,
+            availability: formDataForUpdate.availability,
         });
         updatedItem.save(function (err, updatedupdatedItem) {
             if (err) return handleError(err);
@@ -306,8 +305,6 @@ router.post('/addNewProduct', (req, res) => {
         });
     }
 });
-
-
 
 
 

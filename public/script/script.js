@@ -1,77 +1,117 @@
 //slideshow
 $(document).ready(function () {
+
+    // color on change
     $('#modalProductColorOption').change(function () {
+        // if size option is available
+        var sizeOptionStatus = $('#modalProductSizeOption').is(':enabled');
+        var theSizeSelected = $('#modalProductSizeOption').val();
+
         var theColorSelected = $(this).val();
         var theColorSelectedId = $('#modalAddToCart').val();
         var selectedData = {
-            findData:{
+            findData: {
                 productId: theColorSelectedId,
-                
                 color: theColorSelected,
-            },
-            selection: "size",
+            }
         }
-        selectedData = JSON.stringify(selectedData);
-        $.ajax({
-            type: "post",
-            datatype: "json",
-            data: {
-                selectedData
-            },
-            url: '/api/colorSizeOnChange',
-            success: function (doc) {
-                // // update size option
-                console.log(doc);
-                var sizeOptionStatus = $('#modalProductSizeOption').is(':enabled');
-                if(sizeOptionStatus){ 
-                    if(doc.length == 0){
-                        //if size out of stock
+        // if size option available and selected
+        var findQtyFromColor = 0;
+        if (sizeOptionStatus && theSizeSelected != null && theSizeSelected !='') {
+            selectedData.findData.size = theSizeSelected;
+            findQtyFromColor = 1
+        }
+        if (findQtyFromColor || !sizeOptionStatus) {
+            selectedData = JSON.stringify(selectedData);
+            $.ajax({
+                type: "post",
+                datatype: "json",
+                data: {
+                    selectedData
+                },
+                url: '/api/colorSizeOnChange',
+                success: function (doc) {
+                    // // update size option
+                    if (doc.length == 0 || doc[0].qty == 0) {
+                        //if size and color out of stock
+                        // disable qty select
+                        $('#modalProductQuantityOption').prop('disabled', true);
+                        $('#modalProductQuantityOption').empty();
+                        $('#modalProductQuantityOption').css('display', 'none');
+                        // disable Add To Cart Button
                         $('#modalAddToCart').text('Out of Stock');
                         $('#modalAddToCart').prop('disabled', true);
-                    }else{
-                        //if size in stock
-                        var sizeValue = $("#modalProductSizeOption").val();
-                        // console.log(sizeValue);
+                    } else {
+                        //if size and color available in stock
+                        $('#modalProductQuantityOption').css('display', 'block');
+                        $('#modalProductQuantityOption').prop('disabled', false);
+                        $('#modalProductQuantityOption').empty();
+                        $('#modalProductQuantityOption').append('<option value="" disabled selected>Quantity</option>');
+                        for (var i = 0; i < doc[0].qty; i++) {
+                            var qtySelection = i + 1;
+                            $('#modalProductQuantityOption').append('<option value="' + qtySelection + '">' + qtySelection + '</option>');
+                        }
                     }
-                    
                 }
-            }
-        });
+            });
+        }
     });
 
 
     $('#modalProductSizeOption').change(function () {
+        // if color option is available
+        var colorOptionStatus = $('#modalProductColorOption').is(':enabled');
+        var theColorSelected = $('#modalProductColorOption').val();
+
         var theSizeSelected = $(this).val();
         var theSizeSelectedId = $('#modalAddToCart').val();
         var selectedData = {
-            findData:{
+            findData: {
                 productId: theSizeSelectedId,
                 size: theSizeSelected,
-            },
-            selection: "color",
-        };
-        selectedData = JSON.stringify(selectedData);
-        $.ajax({
-            type: "post",
-            datatype: "json",
-            data: {
-                selectedData
-            },
-            url: '/api/colorSizeOnChange',
-            success: function (doc) {
-                // // update color option
-                console.log(doc);
-                var sizeOptionStatus = $('#modalProductColorOption').is(':enabled');
-                if(sizeOptionStatus){
-                    var colorValue = $("#modalProductColorOption").val();
-                    console.log(colorValue);
-                }
             }
-        });
+        }
+
+        // if size option available and selected
+        var findQtyFromSize = 0;
+        if (colorOptionStatus && theColorSelected != null && theColorSelected != '') {
+            selectedData.findData.color = theColorSelected;
+            findQtyFromSize = 1;
+        }
+
+        if (findQtyFromSize || !colorOptionStatus) {
+
+            selectedData = JSON.stringify(selectedData);
+            $.ajax({
+                type: "post",
+                datatype: "json",
+                data: {
+                    selectedData
+                },
+                url: '/api/colorSizeOnChange',
+                success: function (doc) {
+                    // // update size option
+                    if (doc.length == 0 || doc[0].qty == 0) {
+                        //if size and color out of stock
+                        $('#modalAddToCart').text('Out of Stock');
+                        $('#modalAddToCart').prop('disabled', true);
+                    } else {
+                        //if size and color available in stock
+                        $('#modalProductQuantityOption').css('display', 'block');
+                        $('#modalProductQuantityOption').prop('disabled', false);
+                        $('#modalProductQuantityOption').empty();
+                        $('#modalProductQuantityOption').append('<option value="" disabled selected>Quantity</option>');
+                        for (var i = 0; i < doc[0].qty; i++) {
+                            var qtySelection = i + 1;
+                            $('#modalProductQuantityOption').append('<option value="' + qtySelection + '">' + qtySelection + '</option>');
+                        }
+                    }
+                }
+            });
+        }
     });
-    $('#modalProductQuantityOption').change(function () {
-        // alert($(this).val());
-    });
+
+
 
 });
 
@@ -201,12 +241,12 @@ function productOnClick(pId) {
                     }
 
                     // remove duplicate color option
-                    if (!$('select#modalProductColorOption option[value="'+ productQty[i].color +'"]').length) {
+                    if (!$('select#modalProductColorOption option[value="' + productQty[i].color + '"]').length) {
                         // add new color option
                         $('#modalProductColorOption').append(' <option value="' + productQty[i].color + '">' + productQty[i].color + '</option>');
-                     }
+                    }
 
-                    
+
                 }
 
                 // add option of size
@@ -218,11 +258,11 @@ function productOnClick(pId) {
                         $('#modalProductSizeOption').prop('disabled', false);
                         $('#modalProductSizeOption').append('<option value="" disabled selected>Size</option>');
                     }
-                    if (!$('select#modalProductSizeOption option[value="'+ productQty[i].size +'"]').length) {
+                    if (!$('select#modalProductSizeOption option[value="' + productQty[i].size + '"]').length) {
                         //add new size option
                         $('#modalProductSizeOption').append(' <option value="' + productQty[i].size + '">' + productQty[i].size + '</option>');
-                     }
-                    
+                    }
+
                 }
             }
 

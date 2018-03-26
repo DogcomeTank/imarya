@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
         userLoginInfo = req.user;
     }
 
-    m.Products.find({}, (err, products) => {
+    m.Products.find({availability: 1}, (err, products) => {
         if (err) {
             return next(err);
         }
