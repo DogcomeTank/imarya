@@ -112,10 +112,14 @@ $(document).ready(function () {
     });
 
     $("#navCategoryLink > a").click(function () {
-        // remove highlight nav link
+        // remove highlight nav link and <i>
         $("#navCategoryLink > a").removeClass('logoBlueBG');
-        $("#navCategoryLink > a > i").remove();
-        var categoryText = $(this).text();
+        $("#navCategoryLink > a > i").removeClass('fa fa-caret-right w3-margin-right');
+
+        // add highlight to nav link and add <i>
+        $(this).addClass('logoBlueBG');
+        jQuery(this).children("i").addClass('fa fa-caret-right w3-margin-right');
+
         
     });
 
