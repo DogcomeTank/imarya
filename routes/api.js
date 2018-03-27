@@ -8,7 +8,11 @@ const fs = require('fs');
 
 
 
-
+router.post('/displayProductByCategory', (req, res)=>{
+    m.ProductCategory.find(req.body).populate('productId').exec((err, doc)=>{
+        res.json(doc);
+    });
+});
 
 router.get('/', (req, res) => {
     let login = {

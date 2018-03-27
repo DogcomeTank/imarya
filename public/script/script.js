@@ -92,6 +92,10 @@ $(document).ready(function () {
                 success: function (doc) {
                     // // update size option
                     if (doc.length == 0 || doc[0].qty == 0) {
+                        // disable qty select
+                        $('#modalProductQuantityOption').prop('disabled', true);
+                        $('#modalProductQuantityOption').empty();
+                        $('#modalProductQuantityOption').css('display', 'none');
                         //if size and color out of stock
                         $('#modalAddToCart').text('Out of Stock');
                         $('#modalAddToCart').prop('disabled', true);
@@ -111,19 +115,34 @@ $(document).ready(function () {
         }
     });
 
-    $("#navCategoryLink > a").click(function () {
-        // remove highlight nav link and <i>
-        $("#navCategoryLink > a").removeClass('logoBlueBG');
-        $("#navCategoryLink > a > i").removeClass('fa fa-caret-right w3-margin-right');
+    // $("#navCategoryLink > a").click(function () {
+    //     // remove highlight nav link and <i>
+    //     $("#navCategoryLink > a").removeClass('logoBlueBG');
+    //     $("#navCategoryLink > a > i").removeClass('fa fa-caret-right w3-margin-right');
 
-        // add highlight to nav link and add <i>
-        $(this).addClass('logoBlueBG');
-        jQuery(this).children("i").addClass('fa fa-caret-right w3-margin-right');
+    //     // add highlight to nav link and add <i>
+    //     $(this).addClass('logoBlueBG');
+    //     jQuery(this).children("i").addClass('fa fa-caret-right w3-margin-right');
+    //     jQuery(this).children("div > i").addClass('fa fa-caret-right w3-margin-right');
 
         
-    });
+    // });
 
 }); //document ready
+
+// nav onClick
+function navOnClick(id){
+    $.ajax({
+        type: 'post',
+        datatype: 'json',
+        url:'/api/displayProductByCategory',
+        data:{
+            categoryId: id,
+        },success: function(doc){
+            
+        }
+    });
+}
 
 
 function plusDivs(n) {
