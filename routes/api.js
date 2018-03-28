@@ -9,7 +9,8 @@ const fs = require('fs');
 
 
 router.post('/displayProductByCategory', (req, res)=>{
-    m.ProductCategory.find(req.body).populate('productId').exec((err, doc)=>{
+    let myData = JSON.parse(req.body.myData);
+    m.ProductCategory.find(myData).populate('productId').exec((err, doc)=>{
         res.json(doc);
     });
 });
@@ -47,17 +48,6 @@ router.post('/addToCartModal', (req, res) => {
         if (err) {
             return next(err);
         } else {
-            // m.ProductQty.find({productId: p._id}).distinct('color size').exec(
-            //     (err, pQty) => {
-            //         if (err) return next(err);
-            //         console.log(pQty);
-            //         let fullProductInfo = {};
-    
-            //         fullProductInfo['productInfo'] = p;
-            //         fullProductInfo['productQty'] = pQty;
-            //         res.send(JSON.stringify(fullProductInfo));
-            //     }
-            // );
 
             m.ProductQty.find({
                 productId: p._id
@@ -88,6 +78,34 @@ router.get('/allProducts', (req, res) => {
     });
 
 });
+
+//delete prodroduct
+router.get('/deleteProduct', (req, res)=>{
+    res.send('<form method="post" action="/api/deleteProduct"><input autofocus type="text" name="productId"><br><br><input type="submit" value="Submit"></form>');
+});
+
+router.post('/deleteProduct', (req, res)=>{
+    let productToDelete = req.body.productId;
+    m.Products.remove(({'_id': productToDelete}), (err, doc)=>{
+        console.log('Remove from Products.');
+    });
+    m.ProductCategory.remove(req.body, (err, doc)=>{
+        console.log('Remove from ProductCategory.');
+    });
+    m.ProductHistory.remove(req.body, (err, doc)=>{
+        console.log('Remove from ProductHistory.');
+    });
+    m.ProductQty.remove(req.body, (err, doc)=>{
+        console.log('Remove from ProductQty.');
+    });
+
+    res.send('<form method="post" action="/api/deleteProduct"><input autofocus type="text" name="productId"><br><br><input type="submit" value="Submit"></form>');
+});
+
+
+
+
+
 // get one product by ID
 router.post('/getProductById', (req, res) => {
     m.Products.findById(req.body.productId, (err, item) => {

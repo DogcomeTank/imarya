@@ -45,6 +45,7 @@ const login = require('./config/loginConfig');
 const products = require('./routes/products');
 const api = require('./routes/api');
 const braintree = require('./routes/braintree');
+const emailService = require('./routes/email/registration');
 
 //
 app.use(bodyParser.urlencoded({
@@ -57,13 +58,19 @@ const separator = function (req, res, next) {
     next();
 }
 
+const checkLogin = function(req, res, next){
+    console.log(req.user);
+    next();
+}
+
 app.use(separator);
 
 app.use('/', index);
 app.use('/login', login);
 app.use('/products', products);
-app.use('/api', api);
+app.use('/api', checkLogin, api);
 app.use('/payment', braintree);
+app.use('/email', emailService);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

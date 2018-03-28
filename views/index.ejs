@@ -43,17 +43,29 @@
             </a>
         </div>
         <div id="navCategoryLink" class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
-            <a href="#" class="w3-bar-item w3-button  w3-block logoBlueBG">
+            <a id="navAllItems" onclick="navOnClick(this.id)" href="#" class="w3-bar-item w3-button  w3-block logoBlueBG">
                 <i class="fa fa-caret-right w3-margin-right"></i>All</a>
-            <a href="#" class="w3-bar-item w3-button"><i></i>New Arrivals</a>
-            <a href="#" class="w3-bar-item w3-button"><i></i>Snacks</a>
-            <a onclick="navAccDisplay()" href="javascript:void(0)" class="w3-button w3-left-align" id="myBtn"><i></i>Clothing<div class="w3-margin-left" style="display: inline-block;"><i class="fa fa-caret-down"></i></div>
+            <a href="#" class="w3-bar-item w3-button">
+                <i></i>New Arrivals</a>
+            <a href="#" class="w3-bar-item w3-button">
+                <i></i>Snacks</a>
+
+            <!-- acc -->
+            <a onclick="navAccDisplay()" href="javascript:void(0)" class="w3-button w3-left-align" id="myBtn">
+                <i></i>Clothing
+                <div class="w3-margin-left" style="display: inline-block;">
+                    <i class="fa fa-caret-down"></i>
+                </div>
             </a>
             <div id="navAccList" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-                <a href="#" id="5a9c65ddb5d096142c8d4df0" class="w3-bar-item w3-button" onclick="navOnClick(this.id)"><i></i>Hot</a>
-                <a href="#" class="w3-bar-item w3-button"><i></i>Boy</a>
-                <a href="#" class="w3-bar-item w3-button">Girl</a>
+                <a href="#" id="5a9c65ddb5d096142c8d4df0" class="w3-bar-item w3-button" onclick="navOnClick(this.id)">
+                    <i></i>Hot</a>
+                <a href="#" class="w3-bar-item w3-button">
+                    <i></i>Boy</a>
+                <a href="#" class="w3-bar-item w3-button"><i></i>Girl</a>
             </div>
+
+
             <a href="#" class="w3-bar-item w3-button">Baby Skin Care</a>
             <a href="#" class="w3-bar-item w3-button">Accessory</a>
             <a href="#" class="w3-bar-item w3-button">Shoes</a>
@@ -309,10 +321,10 @@
                 <p id="cartModalDescription">Product description</p>
 
                 <form class="w3-container">
-                    
+
                     <select class="w3-select" name="color" id="modalProductColorOption" required>
                         <option value="" disabled selected>Color</option>
-                        
+
                     </select>
 
                     <select class="w3-select" name="option" id="modalProductSizeOption" required>

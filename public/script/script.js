@@ -115,31 +115,48 @@ $(document).ready(function () {
         }
     });
 
-    // $("#navCategoryLink > a").click(function () {
-    //     // remove highlight nav link and <i>
-    //     $("#navCategoryLink > a").removeClass('logoBlueBG');
-    //     $("#navCategoryLink > a > i").removeClass('fa fa-caret-right w3-margin-right');
-
-    //     // add highlight to nav link and add <i>
-    //     $(this).addClass('logoBlueBG');
-    //     jQuery(this).children("i").addClass('fa fa-caret-right w3-margin-right');
-    //     jQuery(this).children("div > i").addClass('fa fa-caret-right w3-margin-right');
-
-        
-    // });
 
 }); //document ready
 
 // nav onClick
-function navOnClick(id){
+function navOnClick(id) {
+    var myData = '';
+    if(id != 'navAllItems'){
+        myData = {
+            categoryId: id,
+        }
+    }
+    myData = JSON.stringify(myData);
+
     $.ajax({
         type: 'post',
         datatype: 'json',
-        url:'/api/displayProductByCategory',
-        data:{
-            categoryId: id,
-        },success: function(doc){
-            
+        url: '/api/displayProductByCategory',
+        data: {
+            myData
+        },
+        success: function (doc) {
+            // remove highlight nav link and <i>
+            $("#navCategoryLink > a").removeClass('logoBlueBG');
+            $("#navCategoryLink > a > i").removeClass('fa fa-caret-right w3-margin-right');
+            // remove highlight in acc link
+            $("#navAccList > a").removeClass('logoBlueBG');
+            $("#navAccList > a > i").removeClass('fa fa-caret-right w3-margin-right');
+
+            // add highlight to nav link
+            $("#"+id).addClass('logoBlueBG');
+            $("#"+id+ "> i").addClass('fa fa-caret-right w3-margin-right');
+
+            console.log(doc); 
+            // display products to product grid
+            $("#productGrid").empty();
+            for(var i = 0; i < doc.length; i++){
+                var price = doc[i].productId.price.split(".");
+
+
+               $("#productGrid").append('<div class="w3-card-4"><div class="w3-display-container w3-text-white"><a id="'+ doc[i].productId._id +'" onclick="productOnClick(this.id)"><img src="img/'+ doc[i].productId.img +'" style="width: 100%"></a></div><div class="productRowInfo"><div class="w3-padding-small"><p class="productPrice"><span class="w3-xlarge">'+ price[0] +'<span class="w3-small">.'+ price[1] +'</span></span></p><p class="productNameOnHomePage">'+ doc[i].productId.productName +'</p></div></div></div>');
+
+            }
         }
     });
 }
