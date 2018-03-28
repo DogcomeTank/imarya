@@ -59,7 +59,7 @@ const separator = function (req, res, next) {
 }
 
 const checkLogin = function(req, res, next){
-    console.log(req.user);
+    console.log('login middleware');
     next();
 }
 

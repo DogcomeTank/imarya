@@ -9,10 +9,19 @@ const fs = require('fs');
 
 
 router.post('/displayProductByCategory', (req, res)=>{
-    let myData = JSON.parse(req.body.myData);
-    m.ProductCategory.find(myData).populate('productId').exec((err, doc)=>{
-        res.json(doc);
-    });
+    let myData = req.body;
+    if(myData.categoryId == 'navAllItems'){
+        m.ProductCategory.find({}).populate('productId').exec((err, doc)=>{
+            res.json(doc);
+        });
+    }else{
+        m.ProductCategory.find(myData).populate('productId').exec((err, doc)=>{
+            res.json(doc);
+        });
+    }
+    // m.ProductCategory.find(myData).populate('productId').exec((err, doc)=>{
+    //     res.json(doc);
+    // });
 });
 
 router.get('/', (req, res) => {
