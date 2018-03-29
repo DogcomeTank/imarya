@@ -13,7 +13,7 @@ const m = require('../models/models');
 //define passport usage
 passport.use(new RememberMeStrategy(
   function (token, done) {
-    m.Token.consume(token, function (err, user) {
+    m.Token.find(token, (err, user)=>{
       if (err) {
         return done(err);
       }
@@ -22,17 +22,36 @@ passport.use(new RememberMeStrategy(
       }
       return done(null, user);
     });
+
+    // m.Token.consume(token, function (err, user) {
+    //   if (err) {
+    //     return done(err);
+    //   }
+    //   if (!user) {
+    //     return done(null, false);
+    //   }
+    //   return done(null, user);
+    // });
   },
   function (user, done) {
-    var token = utils.randomString(64);
-    m.Token.save(token, {
-      userId: user.id
-    }, function (err) {
-      if (err) {
-        return done(err);
-      }
+    let tokenRandom = utils.randomString(64);
+    let token = new m.Token({
+      token: tokenRandom,
+      userId: user.id,
+    });
+    token.save((err, done)=>{
+      if(err) return err;
       return done(null, token);
     });
+
+    // m.Token.save(token, {
+    //   userId: user.id
+    // }, function (err) {
+    //   if (err) {
+    //     return done(err);
+    //   }
+    //   return done(null, token);
+    // });
   }
 ));
 
@@ -81,7 +100,6 @@ passport.use(new GoogleStractege({
         });
 
       } else {
-        
         return cb(err, user);
       }
     });
@@ -159,20 +177,34 @@ router.get('/google-token', passport.authenticate('google', {
   }),
   function (req, res) {
     // remember me
-    var token = utils.randomString(64);
-        m.Token.save(token, {
-          userId: req.user.id
-        }, function (err) {
-          if (err) {
-            return done(err);
-          }
-          res.cookie('remember_me', token, {
-            path: '/',
-            httpOnly: true,
-            maxAge: 604800000
-          }); // 7 days
-          // return next();
-        });
+    let tokenRandom = utils.randomString(64);
+    let token = new m.Token({
+      token: tokenRandom,
+      userId: user.id,
+    });
+    token.save((err, done)=>{
+      if(err) return err;
+      res.cookie('remember_me', done, {
+        path: '/',
+        httpOnly: true,
+        maxAge: 604800000
+      }); // 7 days
+
+    });
+
+        // m.Token.save(token, {
+        //   userId: req.user.id
+        // }, function (err) {
+        //   if (err) {
+        //     return done(err);
+        //   }
+        //   res.cookie('remember_me', token, {
+        //     path: '/',
+        //     httpOnly: true,
+        //     maxAge: 604800000
+        //   }); // 7 days
+        //   // return next();
+        // });
 
     res.redirect('/');
   });

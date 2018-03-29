@@ -90,6 +90,9 @@ const TokenSchema = new Schema({
     token: {
         type: String,
     },
+    userId: {
+        type: String,
+    },
 });
 
 const ProductQty = mongoose.model('ProductQty',ProductQtySchema);
