@@ -178,9 +178,6 @@ router.get('/google-token', passport.authenticate('google', {
   function (req, res) {
     // remember me
     let tokenRandom = utils.randomString(64);
-    console.log(req.user._id);
-    console.log(req.user);
-    
     let token = new m.Token({
       token: tokenRandom,
       userId: req.user._id,
@@ -195,7 +192,7 @@ router.get('/google-token', passport.authenticate('google', {
       // }); // 7 days
     });
     // remember me
-    console.log(document.cookie);
+    console.log('Cookies: ', req.cookies);
 
 
     res.redirect('/');
