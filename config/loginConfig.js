@@ -8,6 +8,31 @@ const passport = require('passport'),
   FacebookStrategy = require('passport-facebook').Strategy;
 
 //define passport usage
+passport.use(new RememberMeStrategy(
+  function (token, done) {
+    Token.consume(token, function (err, user) {
+      if (err) {
+        return done(err);
+      }
+      if (!user) {
+        return done(null, false);
+      }
+      return done(null, user);
+    });
+  },
+  function (user, done) {
+    var token = utils.generateToken(64);
+    Token.save(token, {
+      userId: user.id
+    }, function (err) {
+      if (err) {
+        return done(err);
+      }
+      return done(null, token);
+    });
+  }
+));
+
 passport.use(new LocalStrategy(
   function (username, password, done) {
     myUser.findOne({
@@ -53,6 +78,20 @@ passport.use(new GoogleStractege({
         });
 
       } else {
+        var token = utils.generateToken(64);
+        Token.save(token, {
+          userId: req.user.id
+        }, function (err) {
+          if (err) {
+            return done(err);
+          }
+          res.cookie('remember_me', token, {
+            path: '/',
+            httpOnly: true,
+            maxAge: 604800000
+          }); // 7 days
+          // return next();
+        });
         return cb(err, user);
       }
     });
@@ -150,14 +189,16 @@ router.get('/editContactInfo', (req, res) => {
     res.render('./users/userInfoEdit', {
       userInfo
     });
-  }else{
+  } else {
     res.redirect('/');
   }
 
 });
 router.post('/editContactInfo', (req, res) => {
   if (req.user) {
-    myUser.findByIdAndUpdate(req.user._id, {$set: req.body}, (err, userInfo) => {
+    myUser.findByIdAndUpdate(req.user._id, {
+      $set: req.body
+    }, (err, userInfo) => {
       if (err) return handleError(err);
       res.render('./users/userInfoEdit', {
         userInfo
