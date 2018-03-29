@@ -9,12 +9,11 @@ const passport = require('passport'),
   GoogleStractege = require('passport-google-oauth20').Strategy,
   FacebookStrategy = require('passport-facebook').Strategy;
 const m = require('../models/models');
-const Token = m.Token;
 
 //define passport usage
 passport.use(new RememberMeStrategy(
   function (token, done) {
-    Token.consume(token, function (err, user) {
+    m.Token.consume(token, function (err, user) {
       if (err) {
         return done(err);
       }
@@ -26,7 +25,7 @@ passport.use(new RememberMeStrategy(
   },
   function (user, done) {
     var token = utils.randomString(64);
-    Token.save(token, {
+    m.Token.save(token, {
       userId: user.id
     }, function (err) {
       if (err) {
@@ -161,7 +160,7 @@ router.get('/google-token', passport.authenticate('google', {
   function (req, res) {
     // remember me
     var token = utils.randomString(64);
-        Token.save(token, {
+        m.Token.save(token, {
           userId: req.user.id
         }, function (err) {
           if (err) {
@@ -174,7 +173,7 @@ router.get('/google-token', passport.authenticate('google', {
           }); // 7 days
           // return next();
         });
-        
+
     res.redirect('/');
   });
 
