@@ -184,7 +184,7 @@ router.get('/google-token', passport.authenticate('google', {
     });
     token.save((err, doc) => {
       if (err) return err;
-      res.cookie('name', 'express').send('cookie set');
+      res.cookie('name', 'express');
       // res.cookie('remember_me', doc, {
       //   path: '/',
       //   httpOnly: true,
