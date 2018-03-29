@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const keys = require('../models/keys');
 const myUser = require('../models/user');
+const utils = require('./utils');
 const passport = require('passport'),
   RememberMeStrategy = require('passport-remember-me').Strategy,
   LocalStrategy = require('passport-local').Strategy,
