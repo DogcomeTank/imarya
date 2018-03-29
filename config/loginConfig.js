@@ -23,7 +23,7 @@ passport.use(new RememberMeStrategy(
     });
   },
   function (user, done) {
-    var token = utils.generateToken(64);
+    var token = utils.randomString(64);
     Token.save(token, {
       userId: user.id
     }, function (err) {
@@ -80,7 +80,7 @@ passport.use(new GoogleStractege({
         });
 
       } else {
-        var token = utils.generateToken(64);
+        var token = utils.randomString(64);
         Token.save(token, {
           userId: req.user.id
         }, function (err) {
