@@ -13,7 +13,7 @@ const m = require('../models/models');
 //define passport usage
 passport.use(new RememberMeStrategy(
   function (token, done) {
-    m.Token.find(token, (err, user)=>{
+    m.Token.find(token, (err, user) => {
       if (err) {
         return done(err);
       }
@@ -39,8 +39,8 @@ passport.use(new RememberMeStrategy(
       token: tokenRandom,
       userId: user.id,
     });
-    token.save((err, done)=>{
-      if(err) return err;
+    token.save((err, done) => {
+      if (err) return err;
       return done(null, token);
     });
 
@@ -178,33 +178,24 @@ router.get('/google-token', passport.authenticate('google', {
   function (req, res) {
     // remember me
     let tokenRandom = utils.randomString(64);
+    console.log(req.user._id);
+    console.log(req.user);
+    
     let token = new m.Token({
       token: tokenRandom,
       userId: req.user._id,
     });
-    token.save((err, done)=>{
-      if(err) return err;
-      res.cookie('remember_me', done, {
+    token.save((err, doc) => {
+      if (err) return err;
+      res.cookie('remember_me', doc, {
         path: '/',
         httpOnly: true,
         maxAge: 604800000
       }); // 7 days
 
     });
+    // remember me
 
-        // m.Token.save(token, {
-        //   userId: req.user.id
-        // }, function (err) {
-        //   if (err) {
-        //     return done(err);
-        //   }
-        //   res.cookie('remember_me', token, {
-        //     path: '/',
-        //     httpOnly: true,
-        //     maxAge: 604800000
-        //   }); // 7 days
-        //   // return next();
-        // });
 
     res.redirect('/');
   });
