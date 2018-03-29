@@ -197,7 +197,7 @@ router.get('/google-token', passport.authenticate('google', {
     // remember me
 
 
-    res.redirect('/');
+    // res.redirect('/');
   });
 
 router.get('/facebook-login', passport.authenticate('facebook', {
