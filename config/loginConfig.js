@@ -180,7 +180,7 @@ router.get('/google-token', passport.authenticate('google', {
     let tokenRandom = utils.randomString(64);
     let token = new m.Token({
       token: tokenRandom,
-      userId: user.id,
+      userId: req.user._id,
     });
     token.save((err, done)=>{
       if(err) return err;
