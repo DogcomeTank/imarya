@@ -82,20 +82,7 @@ passport.use(new GoogleStractege({
         });
 
       } else {
-        var token = utils.randomString(64);
-        Token.save(token, {
-          userId: req.user.id
-        }, function (err) {
-          if (err) {
-            return done(err);
-          }
-          res.cookie('remember_me', token, {
-            path: '/',
-            httpOnly: true,
-            maxAge: 604800000
-          }); // 7 days
-          // return next();
-        });
+        
         return cb(err, user);
       }
     });
@@ -172,6 +159,22 @@ router.get('/google-token', passport.authenticate('google', {
     failureRedirect: '/login/error'
   }),
   function (req, res) {
+    // remember me
+    var token = utils.randomString(64);
+        Token.save(token, {
+          userId: req.user.id
+        }, function (err) {
+          if (err) {
+            return done(err);
+          }
+          res.cookie('remember_me', token, {
+            path: '/',
+            httpOnly: true,
+            maxAge: 604800000
+          }); // 7 days
+          // return next();
+        });
+        
     res.redirect('/');
   });
 
