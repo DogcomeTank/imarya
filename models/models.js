@@ -85,12 +85,20 @@ const ProductQtySchema = new Schema({
         default: Date.now,
     }
 });
+
+const TokenSchema = new Schema({
+    token: {
+        type: String,
+    },
+});
+
 const ProductQty = mongoose.model('ProductQty',ProductQtySchema);
 const ProductHistory = mongoose.model('ProductHistory',ProductHistorySchema);
 const ProductCategory = mongoose.model('ProductCategory',ProductCategorySchema);
 const Location = mongoose.model('Location',LocationSchema);
 const Category = mongoose.model('Category',CategorySchema);
 const Products = mongoose.model('Products', ProductSchema);
+const Token = mongoose.model('Token', TokenSchema);
 
 module.exports = {
     Products: Products,
@@ -99,4 +107,5 @@ module.exports = {
     ProductCategory: ProductCategory,
     ProductHistory: ProductHistory,
     ProductQty: ProductQty,
+    Token: Token,
 };

@@ -8,6 +8,8 @@ const passport = require('passport'),
   LocalStrategy = require('passport-local').Strategy,
   GoogleStractege = require('passport-google-oauth20').Strategy,
   FacebookStrategy = require('passport-facebook').Strategy;
+const m = require('../models/models');
+const Token = m.Token;
 
 //define passport usage
 passport.use(new RememberMeStrategy(
