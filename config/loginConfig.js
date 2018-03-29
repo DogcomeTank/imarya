@@ -192,12 +192,12 @@ router.get('/google-token', passport.authenticate('google', {
         httpOnly: true,
         maxAge: 604800000
       }); // 7 days
-
+      res.redirect('/');
     });
     // remember me
 
 
-    // res.redirect('/');
+    res.redirect('/');
   });
 
 router.get('/facebook-login', passport.authenticate('facebook', {
