@@ -3,6 +3,7 @@ const router = express.Router();
 const keys = require('../models/keys');
 const myUser = require('../models/user');
 const passport = require('passport'),
+  RememberMeStrategy = require('passport-remember-me').Strategy,
   LocalStrategy = require('passport-local').Strategy,
   GoogleStractege = require('passport-google-oauth20').Strategy,
   FacebookStrategy = require('passport-facebook').Strategy;
