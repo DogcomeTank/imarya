@@ -12,52 +12,29 @@ const m = require('../models/models');
 
 //define passport usage
 passport.use(new RememberMeStrategy(
-  // function (token, done) {
-  //   m.Token.find(token, (err, user) => {
-  //     if (err) {
-  //       return done(err);
-  //     }
-  //     if (!user) {
-  //       return done(null, false);
-  //     }
-  //     return done(null, user);
-  //   });
-  // },
-  // function (user, done) {
-  //   let tokenRandom = utils.randomString(64);
-  //   let token = new m.Token({
-  //     token: tokenRandom,
-  //     userId: user.id,
-  //   });
-  //   token.save((err, done) => {
-  //     if (err) return err;
-  //     return done(null, token);
-  //   });
-
-  //   // m.Token.save(token, {
-  //   //   userId: user.id
-  //   // }, function (err) {
-  //   //   if (err) {
-  //   //     return done(err);
-  //   //   }
-  //   //   return done(null, token);
-  //   // });
-  // }
-
-  function(token, done) {
-    Token.consume(token, function (err, user) {
-      if (err) { return done(err); }
-      if (!user) { return done(null, false); }
+  function (token, done) {
+    m.Token.find(token, (err, user) => {
+      if (err) {
+        return done(err);
+      }
+      if (!user) {
+        return done(null, false);
+      }
       return done(null, user);
     });
   },
-  function(user, done) {
-    var token = utils.generateToken(64);
-    Token.save(token, { userId: user.id }, function(err) {
-      if (err) { return done(err); }
-      return done(null, token);
+  function (user, done) {
+    let tokenRandom = utils.randomString(64);
+    let token = new m.Token({
+      token: tokenRandom,
+      userId: user.id,
+    });
+    token.save((err, doc) => {
+      if (err) return err;
+      return done(null, doc);
     });
   }
+
 ));
 
 passport.use(new LocalStrategy(
