@@ -13,6 +13,7 @@ const m = require('../models/models');
 //define passport usage
 passport.use(new RememberMeStrategy(
   function (token, done) {
+    console.log(token);
     m.Token.find(token, (err, user) => {
       if (err) {
         return done(err);
@@ -30,6 +31,7 @@ passport.use(new RememberMeStrategy(
       userId: user.id,
     });
     token.save((err, doc) => {
+      console.log('doc: ' +doc);
       if (err) return err;
       return done(null, doc);
     });
