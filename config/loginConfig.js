@@ -182,14 +182,14 @@ router.get('/google-token', passport.authenticate('google', {
       token: tokenRandom,
       userId: req.user._id,
     });
-    token.save((err, doc) => {
+    token.save((err, doc, next) => {
       if (err) return err;
-      res.cookie('name', 'express');
-      // res.cookie('remember_me', doc, {
-      //   path: '/',
-      //   httpOnly: true,
-      //   maxAge: 604800000
-      // }); // 7 days
+      res.cookie('remember_me', doc, {
+        path: '/',
+        httpOnly: true,
+        maxAge: 604800000
+      }); // 7 days
+      next();
     });
     // remember me
     console.log('Cookies: ', req.cookies);
