@@ -13,7 +13,7 @@ const m = require('../models/models');
 //define passport usage
 passport.use(new RememberMeStrategy(
   function (token, done) {
-    console.log(token);
+    console.log('top: ======='+token);
     m.Token.find(token, (err, user) => {
       if (err) {
         return done(err);
@@ -166,10 +166,11 @@ router.get('/google-token', passport.authenticate('google', {
     let token = new m.Token({
       token: tokenRandom,
       userId: req.user._id,
+      displayName: req.user.displayName,
     });
     token.save((err, doc) => {
       if (err) return err;
-      console.log(doc);
+      console.log('remember_me'+doc);
       res.cookie('remember_me', doc, {
         path: '/',
         httpOnly: true,
