@@ -171,6 +171,7 @@ router.get('/google-token', passport.authenticate('google', {
     token.save((err, doc) => {
       if (err) return err;
       console.log('remember_me'+doc);
+      console.log('req.user.displayName'+req.user.displayName,)
       res.cookie('remember_me', doc, {
         path: '/',
         httpOnly: true,
