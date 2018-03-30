@@ -24,6 +24,7 @@ router.post('/displayProductByCategory', (req, res)=>{
     // });
 });
 
+//login
 router.get('/', (req, res) => {
     let login = {
         "login": false

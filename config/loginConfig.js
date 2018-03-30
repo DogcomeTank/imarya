@@ -29,6 +29,7 @@ passport.use(new RememberMeStrategy(
     let token = new m.Token({
       token: tokenRandom,
       userId: user.id,
+      userName: 'scott',
     });
     token.save((err, doc) => {
       console.log('doc: ' +doc);
@@ -220,6 +221,7 @@ router.post('/editContactInfo', (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
+  res.clearCookie('remember_me');
   req.logout();
   res.redirect('/');
 });
