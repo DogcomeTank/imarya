@@ -182,7 +182,7 @@ router.get('/google-token', passport.authenticate('google', {
       token: tokenRandom,
       userId: req.user._id,
     });
-    token.save((err, doc, next) => {
+    token.save((err, doc) => {
       if (err) return err;
       console.log(doc);
       res.cookie('remember_me', doc, {
@@ -190,11 +190,11 @@ router.get('/google-token', passport.authenticate('google', {
         httpOnly: true,
         maxAge: 604800000
       }); // 7 days
+      console.log('Cookies: ', req.cookies);
       res.redirect('/');
-      next();
     });
     // remember me
-    console.log('Cookies: ', req.cookies);
+    
 
 
     // res.redirect('/');
