@@ -184,18 +184,20 @@ router.get('/google-token', passport.authenticate('google', {
     });
     token.save((err, doc, next) => {
       if (err) return err;
+      console.log(doc);
       res.cookie('remember_me', doc, {
         path: '/',
         httpOnly: true,
         maxAge: 604800000
       }); // 7 days
+      res.redirect('/');
       next();
     });
     // remember me
     console.log('Cookies: ', req.cookies);
 
 
-    res.redirect('/');
+    // res.redirect('/');
   });
 
 router.get('/facebook-login', passport.authenticate('facebook', {
