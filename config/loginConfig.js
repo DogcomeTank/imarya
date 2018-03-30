@@ -13,17 +13,7 @@ const m = require('../models/models');
 //define passport usage
 passport.use(new RememberMeStrategy(
   function (token, done) {
-    m.Token.find(token, (err, user) => {
-      if (err) {
-        return done(err);
-      }
-      if (!user) {
-        return done(null, false);
-      }
-      return done(null, user);
-    });
-
-    // m.Token.consume(token, function (err, user) {
+    // m.Token.find(token, (err, user) => {
     //   if (err) {
     //     return done(err);
     //   }
@@ -32,6 +22,16 @@ passport.use(new RememberMeStrategy(
     //   }
     //   return done(null, user);
     // });
+
+    m.Token.consume(token, function (err, user) {
+      if (err) {
+        return done(err);
+      }
+      if (!user) {
+        return done(null, false);
+      }
+      return done(null, user);
+    });
   },
   function (user, done) {
     let tokenRandom = utils.randomString(64);
@@ -190,7 +190,6 @@ router.get('/google-token', passport.authenticate('google', {
         httpOnly: true,
         maxAge: 604800000
       }); // 7 days
-      console.log('Cookies: ', req.cookies);
       res.redirect('/');
     });
     // remember me
