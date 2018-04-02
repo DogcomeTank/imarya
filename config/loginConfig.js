@@ -35,7 +35,7 @@ passport.use(new RememberMeStrategy(
         return done(null, false);
       }
 
-      userInfo.findById(tempCookies.userId, (err, user)=>{
+      userInfo.findById(tempCookies[0].userId, (err, user)=>{
         console.log(user);
         return done(null, user);
       })
