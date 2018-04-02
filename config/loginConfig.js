@@ -29,10 +29,10 @@ passport.use(new RememberMeStrategy(
     let token = new m.Token({
       token: tokenRandom,
       userId: user.id,
-      userName: 'scott',
+      displayName: 'scott',
     });
     token.save((err, doc) => {
-      console.log('doc: ' +doc);
+      console.log('doc:==== ' +doc);
       if (err) return err;
       return done(null, doc);
     });
