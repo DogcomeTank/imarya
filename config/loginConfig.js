@@ -24,11 +24,11 @@ passport.use(new RememberMeStrategy(
         return done(null, false);
       }
       // find user info if tempCookies
-      userInfo.findById(tempCookies[0].userId, (err, user)=>{
+      userInfo.findById(tempCookies[0].userId, (err, user) => {
         console.log(user);
         return done(null, user);
       })
-      
+
     });
   },
   function (user, done) {
@@ -40,7 +40,7 @@ passport.use(new RememberMeStrategy(
       displayName: 'scott',
     });
     token.save((err, doc) => {
-      console.log('doc:==== ' +doc);
+      console.log('doc:==== ' + doc);
       if (err) return err;
       return done(null, doc);
     });
@@ -186,10 +186,6 @@ router.get('/google-token', passport.authenticate('google', {
       res.redirect('/');
     });
     // remember me
-    
-
-
-    // res.redirect('/');
   });
 
 router.get('/facebook-login', passport.authenticate('facebook', {
@@ -201,7 +197,23 @@ router.get('/facebook-token', passport.authenticate('facebook', {
     failureRedirect: '/login/error'
   }),
   function (req, res) {
-    res.redirect('/');
+    // remember me
+    let tokenRandom = utils.randomString(64);
+    let token = new m.Token({
+      token: tokenRandom,
+      userId: req.user._id,
+      displayName: req.user.displayName,
+    });
+    token.save((err, doc) => {
+      if (err) return err;
+      res.cookie('remember_me', doc, {
+        path: '/',
+        httpOnly: true,
+        maxAge: 604800000
+      }); // 7 days
+      res.redirect('/');
+    });
+    // remember me
   });
 
 router.get('/editContactInfo', (req, res) => {
