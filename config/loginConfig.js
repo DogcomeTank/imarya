@@ -16,7 +16,6 @@ passport.use(new RememberMeStrategy(
   function (token, done) {
     //Find Token cookies
     m.Token.find(token, (err, tempCookies) => {
-      console.log(tempCookies);
       if (err) {
         return done(err);
       }
@@ -25,7 +24,6 @@ passport.use(new RememberMeStrategy(
       }
       // find user info if tempCookies
       userInfo.findById(tempCookies[0].userId, (err, user) => {
-        console.log(user);
         return done(null, user);
       })
 
@@ -40,7 +38,6 @@ passport.use(new RememberMeStrategy(
       displayName: 'scott',
     });
     token.save((err, doc) => {
-      console.log('doc:==== ' + doc);
       if (err) return err;
       return done(null, doc);
     });
