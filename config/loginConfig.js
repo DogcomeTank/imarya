@@ -27,6 +27,7 @@ passport.use(new RememberMeStrategy(
     // });
 
     m.Token.find(token, (err, tempCookies) => {
+      console.log(tempCookies);
       if (err) {
         return done(err);
       }
