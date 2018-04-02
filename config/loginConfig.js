@@ -13,8 +13,22 @@ const m = require('../models/models');
 //define passport usage
 passport.use(new RememberMeStrategy(
   function (token, done) {
-    console.log('top: ======='+token);
-    m.Token.find(token, (err, user) => {
+    //Find Token cookies
+    console.log('Find token: '+token);
+    // m.Token.find(token, (err, user) => {
+    //   if (err) {
+    //     return done(err);
+    //   }
+    //   if (!user) {
+    //     return done(null, false);
+    //   }
+    //   return done(null, user);
+    // });
+
+    m.Token.find(token).populate({
+      path: 'UserId',
+    }).exec((err, user)=>{
+      console.log('Find user: '+ user);
       if (err) {
         return done(err);
       }
@@ -23,8 +37,13 @@ passport.use(new RememberMeStrategy(
       }
       return done(null, user);
     });
+
+
+
+
   },
   function (user, done) {
+    //issue new Remember me Token cookies
     let tokenRandom = utils.randomString(64);
     let token = new m.Token({
       token: tokenRandom,
@@ -170,8 +189,6 @@ router.get('/google-token', passport.authenticate('google', {
     });
     token.save((err, doc) => {
       if (err) return err;
-      console.log('remember_me'+doc);
-      console.log('req.user.displayName'+req.user.displayName,)
       res.cookie('remember_me', doc, {
         path: '/',
         httpOnly: true,

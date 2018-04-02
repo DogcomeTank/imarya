@@ -91,7 +91,8 @@ const TokenSchema = new Schema({
         type: String,
     },
     userId: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'Users'
     },
 });
 
