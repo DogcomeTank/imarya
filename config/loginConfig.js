@@ -15,17 +15,6 @@ const userInfo = require('../models/user');
 passport.use(new RememberMeStrategy(
   function (token, done) {
     //Find Token cookies
-    console.log('Find token: '+token);
-    // m.Token.find(token, (err, user) => {
-    //   if (err) {
-    //     return done(err);
-    //   }
-    //   if (!user) {
-    //     return done(null, false);
-    //   }
-    //   return done(null, user);
-    // });
-
     m.Token.find(token, (err, tempCookies) => {
       console.log(tempCookies);
       if (err) {
@@ -34,30 +23,13 @@ passport.use(new RememberMeStrategy(
       if (!tempCookies) {
         return done(null, false);
       }
-
+      // find user info if tempCookies
       userInfo.findById(tempCookies[0].userId, (err, user)=>{
         console.log(user);
         return done(null, user);
       })
       
     });
-
-    // m.Token.find(token).populate({
-    //   path: 'UserId',
-    // }).exec((err, user)=>{
-    //   console.log('Find user: '+ user);
-    //   if (err) {
-    //     return done(err);
-    //   }
-    //   if (!user) {
-    //     return done(null, false);
-    //   }
-    //   return done(null, user);
-    // });
-
-
-
-
   },
   function (user, done) {
     //issue new Remember me Token cookies
