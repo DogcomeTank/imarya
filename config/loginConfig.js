@@ -9,6 +9,7 @@ const passport = require('passport'),
   GoogleStractege = require('passport-google-oauth20').Strategy,
   FacebookStrategy = require('passport-facebook').Strategy;
 const m = require('../models/models');
+const userInfo = require('../models/user');
 
 //define passport usage
 passport.use(new RememberMeStrategy(
@@ -25,18 +26,33 @@ passport.use(new RememberMeStrategy(
     //   return done(null, user);
     // });
 
-    m.Token.find(token).populate({
-      path: 'UserId',
-    }).exec((err, user)=>{
-      console.log('Find user: '+ user);
+    m.Token.find(token, (err, tempCookies) => {
       if (err) {
         return done(err);
       }
-      if (!user) {
+      if (!tempCookies) {
         return done(null, false);
       }
-      return done(null, user);
+
+      userInfo.findById(tempCookies.userId, (err, user)=>{
+        console.log(user);
+        return done(null, user);
+      })
+      
     });
+
+    // m.Token.find(token).populate({
+    //   path: 'UserId',
+    // }).exec((err, user)=>{
+    //   console.log('Find user: '+ user);
+    //   if (err) {
+    //     return done(err);
+    //   }
+    //   if (!user) {
+    //     return done(null, false);
+    //   }
+    //   return done(null, user);
+    // });
 
 
 
