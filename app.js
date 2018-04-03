@@ -45,7 +45,7 @@ const index = require('./routes/index');
 const login = require('./config/loginConfig');
 const products = require('./routes/products');
 const api = require('./routes/api');
-const braintree = require('./routes/braintree');
+const payment = require('./routes/payment/paypal');
 const emailService = require('./routes/email/registration');
 
 //
@@ -70,12 +70,13 @@ app.use('/', index);
 app.use('/login', login);
 app.use('/products', products);
 app.use('/api', checkLogin, api);
-app.use('/payment', braintree);
+app.use('/payment', payment);
 app.use('/email', emailService);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
     const err = new Error('Page Not Found!!');
+    console.log(err);
     err.status = 404;
     next(err);
 });

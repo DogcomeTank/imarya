@@ -155,13 +155,13 @@ function navOnClick(id) {
                 $("#productGrid").append('<h3>0 result.</h3>');
             }else{
                 for(var i = 0; i < doc.length; i++){
-                    var price = doc[i].productId.price.split(".");
+                //     var price = doc[i].productId.price.split(".");
 
-                    var grid = document.querySelector('#productGrid');
-                    var item = document.createElement('article');
+                //     var grid = document.querySelector('#productGrid');
+                //     var item = document.createElement('article');
 
-                salvattore.appendElements(grid, [item]);
-                item.outerHTML = 'I’ve been appended!';
+                // salvattore.appendElements(grid, [item]);
+                // item.outerHTML = 'I’ve been appended!';
     
                 //    $("#productGrid").append('<div class="w3-card-4"><div class="w3-display-container w3-text-white"><a id="'+ doc[i].productId._id +'" onclick="productOnClick(this.id)"><img src="img/'+ doc[i].productId.img +'" style="width: 100%"></a></div><div class="productRowInfo"><div class="w3-padding-small"><p class="productPrice"><span class="w3-xlarge">'+ price[0] +'<span class="w3-small">.'+ price[1] +'</span></span></p><p class="productNameOnHomePage">'+ doc[i].productId.productName +'</p></div></div></div>');
                    
