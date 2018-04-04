@@ -68,14 +68,12 @@
                     <b>Province/Territory</b>
                 </label>
                 <!-- <input class="w3-input w3-border" type="text" name="province" value="<%= userInfo.province %>"> -->
-                <select class="w3-input w3-border">
+                <select class="w3-input w3-border" name="province" value="<%= userInfo.province %>">
                     <option value="AB"
                         <%if(userInfo.province == 'AB'){ %> selected <%}%> 
                     >Alberta</option>
 
-                    <option value="BC"
-                        <%if(userInfo.province == 'BC'){ %> selected <%}%> 
-                    >British Columbia</option>
+                    <option value="BC">British Columbia</option>
                     <option value="MB"
                         <%if(userInfo.province == 'MB'){ %> selected <%}%> 
                     >Manitoba</option>
