@@ -125,6 +125,7 @@ $(document).ready(function () {
         function(e){
             e.preventDefault();
             
+            alert('Add To Cart');
         }
         
     );
