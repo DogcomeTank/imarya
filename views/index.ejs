@@ -315,17 +315,18 @@
                 <p id="cartModalDescription">Product description</p>
 
                 <form class="w3-container" id="addToCartForm">
+                    <input type="text" name="productId" id="addToCartFormProductId" value="" style="display: none">
 
                     <select class="w3-select" name="color" id="modalProductColorOption" required>
                         <option value="" disabled selected>Color</option>
 
                     </select>
 
-                    <select class="w3-select" name="option" id="modalProductSizeOption" required>
+                    <select class="w3-select" name="size" id="modalProductSizeOption" required>
                         <option value="" disabled selected>Size</option>
                     </select>
 
-                    <select class="w3-select" name="option" id="modalProductQuantityOption" required disabled>
+                    <select class="w3-select" name="qty" id="modalProductQuantityOption" required disabled>
                         <option value="" disabled selected>Quantity</option>
                     </select>
 

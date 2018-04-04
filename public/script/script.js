@@ -121,17 +121,24 @@ $(document).ready(function () {
         }
     });
 
-    $('#addToCartForm').submit(
-        function(e){
-            e.preventDefault();
-            
-            alert('Add To Cart');
-        }
-        
-    );
+    $("#addToCartForm").on("submit", function (event) {
+        event.preventDefault();
+        //check login status
+        // if not logged in, display login modal
+
+        // if logged in, add items to database
+        var addToCartFormData = $(this).serializeArray();
+        addToCartFormData = JSON.stringify(addToCartFormData);
+        console.log(addToCartFormData);
+        // $('.fa-shopping-cart').css("color", "red");
+        // alert('Add To Cart');
+    });
 
 
 }); //document ready
+
+
+
 
 // nav onClick
 function navOnClick(id) {
@@ -270,6 +277,7 @@ function productOnClick(pId) {
             $('#cartModalPrice0').text('$' + price[0]);
             $('#cartModalPrice1').text('.' + price[1]);
             $('#modalAddToCart').val(dataJson['productInfo']._id);
+            $('#addToCartFormProductId').val(dataJson['productInfo']._id);
             var productQty = dataJson['productQty'];
 
             // initial: disable and empty all option
