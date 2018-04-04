@@ -231,6 +231,7 @@ router.post('/editContactInfo', (req, res) => {
       $set: req.body
     }, (err, userInfo) => {
       if (err) return handleError(err);
+      console.log(userInfo);
       res.render('./users/userInfoEdit', {
         userInfo
       });
