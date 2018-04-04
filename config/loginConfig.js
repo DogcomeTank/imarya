@@ -216,9 +216,12 @@ router.get('/facebook-token', passport.authenticate('facebook', {
 router.get('/editContactInfo', (req, res) => {
   if (req.user) {
     const userInfo = req.user;
-    res.render('./users/userInfoEdit', {
-      userInfo
+    myUser.findById(req.user._id, (err, userInfo)=>{
+      res.render('./users/userInfoEdit', {
+        userInfo
+      });
     });
+    
   } else {
     res.redirect('/');
   }
@@ -230,9 +233,6 @@ router.post('/editContactInfo', (req, res) => {
       $set: req.body
     }, (err, userInfo) => {
       if (err) console.log(err);
-      // res.render('./users/userInfoEdit', {
-      //   userInfo
-      // });
       res.redirect('/');
     });
   }
