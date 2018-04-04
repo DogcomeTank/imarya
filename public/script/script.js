@@ -42,7 +42,10 @@ $(document).ready(function () {
                         $('#modalAddToCart').text('Out of Stock');
                         $('#modalAddToCart').prop('disabled', true);
                     } else {
-                        //if size and color available in stock
+                        //if size and color available, enable Add to cart btn
+                        $('#modalAddToCart').text('Add To Cart');
+                        $('#modalAddToCart').prop('disabled', false);
+                        //if size and color available, enable Add to Cart btn
                         $('#modalProductQuantityOption').css('display', 'block');
                         $('#modalProductQuantityOption').prop('disabled', false);
                         $('#modalProductQuantityOption').empty();
@@ -100,7 +103,10 @@ $(document).ready(function () {
                         $('#modalAddToCart').text('Out of Stock');
                         $('#modalAddToCart').prop('disabled', true);
                     } else {
-                        //if size and color available in stock
+                        //if size and color available, enable Add to cart btn
+                        $('#modalAddToCart').text('Add To Cart');
+                        $('#modalAddToCart').prop('disabled', false);
+                        //if size and color available, enable qty option
                         $('#modalProductQuantityOption').css('display', 'block');
                         $('#modalProductQuantityOption').prop('disabled', false);
                         $('#modalProductQuantityOption').empty();
@@ -115,19 +121,19 @@ $(document).ready(function () {
         }
     });
 
+    $('#addToCartForm').submit(
+        function(e){
+            e.preventDefault();
+            
+        }
+        
+    );
+
 
 }); //document ready
 
 // nav onClick
 function navOnClick(id) {
-    // var myData = '';
-    // if(id != 'navAllItems'){
-    //     myData = {
-    //         categoryId: id,
-    //     }
-    // }
-    // myData = JSON.stringify(myData);
-
     $.ajax({
         type: 'post',
         datatype: 'json',
@@ -144,31 +150,31 @@ function navOnClick(id) {
             $("#navAccList > a > i").removeClass('fa fa-caret-right w3-margin-right');
 
             // add highlight to nav link
-            $("#"+id).addClass('logoBlueBG');
-            $("#"+id+ "> i").addClass('fa fa-caret-right w3-margin-right');
+            $("#" + id).addClass('logoBlueBG');
+            $("#" + id + "> i").addClass('fa fa-caret-right w3-margin-right');
 
-            console.log(doc); 
+            console.log(doc);
             // display products to product grid
             $("#productGrid").empty();
-            if(doc == null){
+            if (doc == null) {
                 $("#totalItemFound >p").empty().text('0 item');
                 $("#productGrid").append('<h3>0 result.</h3>');
-            }else{
-                for(var i = 0; i < doc.length; i++){
-                //     var price = doc[i].productId.price.split(".");
+            } else {
+                for (var i = 0; i < doc.length; i++) {
+                    //     var price = doc[i].productId.price.split(".");
 
-                //     var grid = document.querySelector('#productGrid');
-                //     var item = document.createElement('article');
+                    //     var grid = document.querySelector('#productGrid');
+                    //     var item = document.createElement('article');
 
-                // salvattore.appendElements(grid, [item]);
-                // item.outerHTML = 'I’ve been appended!';
-    
-                //    $("#productGrid").append('<div class="w3-card-4"><div class="w3-display-container w3-text-white"><a id="'+ doc[i].productId._id +'" onclick="productOnClick(this.id)"><img src="img/'+ doc[i].productId.img +'" style="width: 100%"></a></div><div class="productRowInfo"><div class="w3-padding-small"><p class="productPrice"><span class="w3-xlarge">'+ price[0] +'<span class="w3-small">.'+ price[1] +'</span></span></p><p class="productNameOnHomePage">'+ doc[i].productId.productName +'</p></div></div></div>');
-                   
-    
+                    // salvattore.appendElements(grid, [item]);
+                    // item.outerHTML = 'I’ve been appended!';
+
+                    //    $("#productGrid").append('<div class="w3-card-4"><div class="w3-display-container w3-text-white"><a id="'+ doc[i].productId._id +'" onclick="productOnClick(this.id)"><img src="img/'+ doc[i].productId.img +'" style="width: 100%"></a></div><div class="productRowInfo"><div class="w3-padding-small"><p class="productPrice"><span class="w3-xlarge">'+ price[0] +'<span class="w3-small">.'+ price[1] +'</span></span></p><p class="productNameOnHomePage">'+ doc[i].productId.productName +'</p></div></div></div>');
+
+
                 }
             }
-            
+
         }
     });
 }
@@ -358,9 +364,3 @@ function productOnClick(pId) {
     });
 
 }
-
-// function addOptionToModalProductInfo(addToId, optionValue, OptionDescription) {
-//     $('#' + addToId).append('<option value="" disabled selected>' + OptionDescription + '</option>');
-//     for (var oi = 0; oi < optionValue.length;)
-//         $('#' + addToId).append(' <option value="' + optionValue + '">' + optionValue + '</option>');
-// }
