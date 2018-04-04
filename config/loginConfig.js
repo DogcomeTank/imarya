@@ -236,6 +236,7 @@ router.post('/editContactInfo', (req, res) => {
       res.render('./users/userInfoEdit', {
         userInfo
       });
+      res.redirect('/');
     });
   }
 });
