@@ -227,6 +227,7 @@ router.get('/editContactInfo', (req, res) => {
 router.post('/editContactInfo', (req, res) => {
   if (req.body) {
     console.log(req.body);
+    console.log('id  '+req.user._id);
     myUser.findByIdAndUpdate(req.user._id, {
       $set: req.body
     }, (err, userInfo) => {
