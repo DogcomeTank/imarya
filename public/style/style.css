@@ -359,9 +359,8 @@ div.productGridClass>div {
 
 /**************/
 
-#grid[data-columns]::before {
-    content: '3 .column.size-1of3';
-}
+
+/* salvattore */
 
 /* These are the classes that are going to be applied: */
 
@@ -385,10 +384,6 @@ div.productGridClass>div {
 
 .size-1of2 {
     width: 50%;
-}
-
-.size-1of1 {
-    width: 100%;
 }
 
 /* Configurate salvattore with media queries */
