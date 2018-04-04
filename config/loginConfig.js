@@ -233,10 +233,10 @@ router.post('/editContactInfo', (req, res) => {
     }, (err, userInfo) => {
       if (err) return handleError(err);
       console.log(userInfo);
-      res.render('./users/userInfoEdit', {
-        userInfo
-      });
-      res.redirect('./');
+      // res.render('./users/userInfoEdit', {
+      //   userInfo
+      // });
+      res.redirect('/');
     });
   }
 });
