@@ -135,7 +135,7 @@ const Location = mongoose.model('Location', LocationSchema);
 const Category = mongoose.model('Category', CategorySchema);
 const Products = mongoose.model('Products', ProductSchema);
 const Token = mongoose.model('Token', TokenSchema);
-const UserCart = mongoose.model('UserOrder', UserCartSchema);
+const UserCart = mongoose.model('UserCart', UserCartSchema);
 
 module.exports = {
     Products: Products,
