@@ -5,6 +5,9 @@ const path = require('path');
 
 
 // user add to cart function
+router.get('/',(req, res)=>{
+    res.send('good');
+});
 router.post('/addToCart', (req,res)=>{
     var addToCartItem = new m.UserOrder(req.body);
     m.UserOrder.save((err, doc)=>{
