@@ -45,6 +45,7 @@ const index = require('./routes/index');
 const login = require('./config/loginConfig');
 const products = require('./routes/products');
 const api = require('./routes/api');
+const openApi = require('./routes/openApi');
 const payment = require('./routes/payment/paypal');
 const emailService = require('./routes/email/registration');
 
@@ -70,6 +71,7 @@ app.use('/', index);
 app.use('/login', login);
 app.use('/products', products);
 app.use('/api', checkLogin, api);
+app.use('/openApi', checkLogin, openApi);
 app.use('/payment', payment);
 app.use('/email', emailService);
 

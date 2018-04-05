@@ -37,8 +37,11 @@ const LocationSchema = new Schema({
     }
 });
 const ProductCategorySchema = new Schema({
-    productId:{ type: Schema.Types.ObjectId, ref: 'Products' },
-    categoryId:{
+    productId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Products'
+    },
+    categoryId: {
         type: Schema.Types.ObjectId,
         ref: 'Category'
     },
@@ -48,7 +51,7 @@ const ProductCategorySchema = new Schema({
     }
 });
 const ProductHistorySchema = new Schema({
-    productId:{
+    productId: {
         type: Schema.Types.ObjectId,
         ref: 'Products'
     },
@@ -60,23 +63,23 @@ const ProductHistorySchema = new Schema({
 });
 
 const ProductQtySchema = new Schema({
-    productId:{
+    productId: {
         type: Schema.Types.ObjectId,
         ref: 'Products'
     },
-    locationId:{
+    locationId: {
         type: Schema.Types.ObjectId,
         ref: 'Location'
     },
     qty: {
         type: Number,
         default: '0',
-    }, 
-    size:{
+    },
+    size: {
         type: String,
         default: null,
     },
-    color:{
+    color: {
         type: String,
         default: null
     },
@@ -96,13 +99,42 @@ const TokenSchema = new Schema({
     },
 });
 
-const ProductQty = mongoose.model('ProductQty',ProductQtySchema);
-const ProductHistory = mongoose.model('ProductHistory',ProductHistorySchema);
-const ProductCategory = mongoose.model('ProductCategory',ProductCategorySchema);
-const Location = mongoose.model('Location',LocationSchema);
-const Category = mongoose.model('Category',CategorySchema);
+const UserOrderSchema = new Schema({
+    userId:{
+        type: String,
+        required: true,  
+    },
+    productId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Products',
+        required: true,
+    },
+    qty: {
+        type: Number,
+        required: true,
+    },
+    size: {
+        type: String,
+        default: null,
+    },
+    color: {
+        type: String,
+        default: null,
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    }
+});
+
+const ProductQty = mongoose.model('ProductQty', ProductQtySchema);
+const ProductHistory = mongoose.model('ProductHistory', ProductHistorySchema);
+const ProductCategory = mongoose.model('ProductCategory', ProductCategorySchema);
+const Location = mongoose.model('Location', LocationSchema);
+const Category = mongoose.model('Category', CategorySchema);
 const Products = mongoose.model('Products', ProductSchema);
 const Token = mongoose.model('Token', TokenSchema);
+const UserOrder = mongoose.model('UserOrder', UserOrderSchema);
 
 module.exports = {
     Products: Products,
@@ -112,4 +144,5 @@ module.exports = {
     ProductHistory: ProductHistory,
     ProductQty: ProductQty,
     Token: Token,
+    UserOrder: UserOrder,
 };

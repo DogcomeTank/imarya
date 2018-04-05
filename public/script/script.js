@@ -128,8 +128,9 @@ $(document).ready(function () {
 
         // if logged in, add items to database
         var addToCartFormData = $(this).serializeArray();
-        addToCartFormData = JSON.stringify(addToCartFormData);
-        console.log(addToCartFormData);
+        // addToCartFormData = JSON.stringify(addToCartFormData);
+        var convertFormData = objectifyForm(addToCartFormData);
+        console.log(convertFormData);
         // $('.fa-shopping-cart').css("color", "red");
         // alert('Add To Cart');
     });
@@ -372,4 +373,13 @@ function productOnClick(pId) {
         }
     });
 
+}
+
+function objectifyForm(formArray) {//serialize data function
+
+    var returnArray = {};
+    for (var i = 0; i < formArray.length; i++){
+      returnArray[formArray[i]['name']] = formArray[i]['value'];
+    }
+    return returnArray;
 }

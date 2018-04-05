@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const m = require('../models/models');
 const path = require('path');
-const multer = require('multer');
 const formidable = require('formidable');
 const fs = require('fs');
 
@@ -89,7 +88,7 @@ router.get('/allProducts', (req, res) => {
 
 });
 
-//delete prodroduct
+//delete product
 router.get('/deleteProduct', (req, res)=>{
     res.send('<form method="post" action="/api/deleteProduct"><input autofocus type="text" name="productId"><br><br><input type="submit" value="Submit"></form>');
 });
