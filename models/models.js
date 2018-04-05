@@ -99,7 +99,7 @@ const TokenSchema = new Schema({
     },
 });
 
-const UserCartSchema = new Schema({
+const UserOrderSchema = new Schema({
     userId:{
         type: Schema.Types.ObjectId,
         ref: 'Users',
@@ -135,7 +135,7 @@ const Location = mongoose.model('Location', LocationSchema);
 const Category = mongoose.model('Category', CategorySchema);
 const Products = mongoose.model('Products', ProductSchema);
 const Token = mongoose.model('Token', TokenSchema);
-const UserCart = mongoose.model('UserCart', UserCartSchema);
+const UserOrder = mongoose.model('UserOrder', UserOrderSchema);
 
 module.exports = {
     Products: Products,
@@ -145,5 +145,5 @@ module.exports = {
     ProductHistory: ProductHistory,
     ProductQty: ProductQty,
     Token: Token,
-    UserCart: UserCart,
+    UserOrder: UserOrder,
 };

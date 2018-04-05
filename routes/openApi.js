@@ -15,7 +15,7 @@ router.post('/addToCart', (req,res)=>{
     }else{
         let objConvertFormData = JSON.parse(req.body.convertFormData);
         objConvertFormData.userId = req.user._id;
-        let addToCartItem = new m.UserCart(objConvertFormData);
+        let addToCartItem = new m.UserOrder(objConvertFormData);
         addToCartItem.save((err, doc)=>{
             res.json(doc);
         });
