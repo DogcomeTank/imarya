@@ -131,8 +131,6 @@ $(document).ready(function () {
         // addToCartFormData = JSON.stringify(addToCartFormData);
         var convertFormData = objectifyForm(addToCartFormData);
         convertFormData = JSON.stringify(convertFormData);
-
-        console.log(convertFormData);
         $.ajax({
             type: "POST",
             datatype: "JSON",
@@ -140,12 +138,17 @@ $(document).ready(function () {
                 convertFormData
             },
             url: "/openApi/addToCart",
-            success: function(doc){
-                console.log(doc);
+            success: function (doc) {
+                // shopping cart animation
+                $('.fa-shopping-cart').addClass('logoPink');
+                $('.fa-shopping-cart').removeClass('runShoppingCartAnimation');
+                setTimeout(" $('.fa-shopping-cart').addClass('runShoppingCartAnimation');",100)
+               
+                // close modal 
+                document.getElementById('ProductDetail').style.display='none';
             }
         });
-        // $('.fa-shopping-cart').css("color", "red");
-        // alert('Add To Cart');
+
     });
 
 
@@ -388,11 +391,11 @@ function productOnClick(pId) {
 
 }
 
-function objectifyForm(formArray) {//serialize data function
+function objectifyForm(formArray) { //serialize data function
 
     var returnArray = {};
-    for (var i = 0; i < formArray.length; i++){
-      returnArray[formArray[i]['name']] = formArray[i]['value'];
+    for (var i = 0; i < formArray.length; i++) {
+        returnArray[formArray[i]['name']] = formArray[i]['value'];
     }
     return returnArray;
 }

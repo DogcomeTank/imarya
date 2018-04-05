@@ -101,7 +101,8 @@ const TokenSchema = new Schema({
 
 const UserOrderSchema = new Schema({
     userId:{
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'Users',
         required: true,  
     },
     productId: {

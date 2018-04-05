@@ -22,13 +22,15 @@ nav a:hover {
     color: white !important;
     background-color: rgba(90, 200, 200, 0.6) !important;
 }
-.cartModalLoading{
+
+.cartModalLoading {
     position: absolute;
     margin: auto;
     width: 100%;
     height: 100%;
     background-color: #fcfcfc;
 }
+
 .loader {
     position: relative;
     top: 100px;
@@ -39,21 +41,30 @@ nav a:hover {
     border-top: 16px solid #3498db;
     width: 120px;
     height: 120px;
-    -webkit-animation: spin 2s linear infinite; /* Safari */
+    -webkit-animation: spin 2s linear infinite;
+    /* Safari */
     animation: spin 2s linear infinite;
-  }
-  
-  /* Safari */
-  @-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
+}
 
+/* Safari */
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
 
 .cursorPointer {
     cursor: pointer;
@@ -93,90 +104,108 @@ div.productGridClass>div {
     padding: 12px;
     margin-bottom: 20px;
 }
-.productGridClass{
+
+.productGridClass {
     padding-left: 2px !important;
     padding-right: 2px !important;
 }
-.productRowInfo{
+
+.productRowInfo {
     width: 100%;
 }
-.productPrice{
+
+.productPrice {
     margin-bottom: 0px !important;
 }
-.productNameOnHomePage{
+
+.productNameOnHomePage {
     margin-top: 0px !important;
     font-size: 80%;
 }
 
-
 /* Product Detail modal */
-.productDetailContent{
+
+.productDetailContent {
     margin-bottom: 36px;
     max-width: 414px;
 }
-.productInfoDiv{
+
+.productInfoDiv {
     width: 100%;
 }
-.productInfoHeader{
+
+.productInfoHeader {
     padding-top: 16px;
     padding-bottom: 6px;
 }
-.productInfoName{
+
+.productInfoName {
     overflow: hidden;
     padding-left: 10px;
     height: 36px;
     text-overflow: ellipsis;
 }
-.productInfoDiv p,h6{
+
+.productInfoDiv p,
+h6 {
     color: #bebebe;
     margin: px 16px 2px 16px;
     padding: 0px 16px 0px 16px;
 }
-.productInfoDiv img{
+
+.productInfoDiv img {
     width: 100%;
     padding: 6px;
 }
 
-
-.productX{
+.productX {
     text-align: center;
 }
-.productDetailUl{
+
+.productDetailUl {
     padding-bottom: 16px;
 }
-.productDetailUl li{
+
+.productDetailUl li {
     border-bottom: 0px !important;
 }
-.productDetailBtn{
+
+.productDetailBtn {
     text-align: center;
     width: 100%;
 }
 
-
-.userInfo{
+.userInfo {
     height: 600px;
 }
-.userInfo h3{
+
+.userInfo h3 {
     padding: 16px;
 }
-.userInfoCard{
+
+.userInfoCard {
     margin: 8px;
 }
-.userInfoEdit{
-    display:grid;
+
+.userInfoEdit {
+    display: grid;
     grid-template-columns: 50% 50%;
 }
-.userInfoDisplay h5{
+
+.userInfoDisplay h5 {
     margin-bottom: 0px;
 }
-.userInfoDisplay p{
+
+.userInfoDisplay p {
     margin-top: 0px;
 }
-.userInfoEditBtn{
+
+.userInfoEditBtn {
     position: absolute;
     right: 32px;
 }
-.logoutBtn{
+
+.logoutBtn {
     position: absolute;
     margin: 16px;
     bottom: 0px;
@@ -193,17 +222,19 @@ div.productGridClass>div {
     padding-bottom: 60px;
     /* height: 520px; */
 }
-.loginForm{
+
+.loginForm {
     margin: auto;
     max-width: 500px;
     padding-bottom: 16px;
 }
 
-.loginFormBtn{
+.loginFormBtn {
     margin-top: 16px;
     width: 100%;
     border-radius: 50px;
 }
+
 .roundedImg {
     border-radius: 50% !important;
     width: 25px;
@@ -216,14 +247,17 @@ div.productGridClass>div {
     cursor: pointer;
     margin: 0 auto;
 }
-.scContent{
+
+.scContent {
     max-width: 500px;
 }
-.scContainer{
+
+.scContainer {
     height: 85vh;
     position: relative;
 }
-.scHeader{
+
+.scHeader {
     height: 60px;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -231,55 +265,65 @@ div.productGridClass>div {
     width: 100%;
 }
 
-.scList{
+.scList {
     overflow: scroll;
     height: 100%;
     padding-top: 56px;
     padding-bottom: 120px;
 }
-.scImgDiv{
+
+.scImgDiv {
     float: left;
 }
-.scCard{
-    margin:10px;
+
+.scCard {
+    margin: 10px;
     border-radius: 10px;
 }
-.scCard::after{
+
+.scCard::after {
     display: block;
     content: "";
     clear: both;
 }
-.scImg{
+
+.scImg {
     border-radius: 10px;
     float: left;
     display: block;
     width: 88px;
     height: 88px;
 }
-.scListDescription{
+
+.scListDescription {
     overflow: hidden;
     width: 33%;
     float: left;
     height: 80px;
     margin-bottom: 8px;
 }
-.scListDescription h5{
+
+.scListDescription h5 {
     margin-bottom: 0px;
 }
-.scListDescription p{
+
+.scListDescription p {
     margin-top: 0px;
     font-size: 60%;
 }
-.scListQty{
+
+.scListQty {
     float: right;
     margin: 25px 16px 25px 0px;
 }
-.scListQtyNum{
+
+.scListQtyNum {
     display: inline-block;
     padding-right: 8px;
     padding-left: 8px;
 }
-.scCheckoutFooter{
+
+.scCheckoutFooter {
     height: 70px;
     padding: 0px 16px 8px 16px;
     width: 100%;
@@ -287,23 +331,25 @@ div.productGridClass>div {
     position: absolute;
     bottom: 0px;
 }
-.scCheckoutPrice{
+
+.scCheckoutPrice {
     float: left;
     height: 100%;
 }
-.scCheckoutPriceContent{
+
+.scCheckoutPriceContent {
     display: inline-block;
     vertical-align: middle;
 }
-.scCheckoutBtn{
+
+.scCheckoutBtn {
     height: 60px;
     float: right;
 }
-.scCheckoutBtnC{
+
+.scCheckoutBtnC {
     margin-top: 15px;
 }
-
-
 
 .logoBlueBG,
 .logoBlueHoverBG:hover {
@@ -350,23 +396,79 @@ div.productGridClass>div {
 .whiteBG {
     background-color: white !important;
 }
+
 .greyBG {
-    background-color:rgb(226, 226, 226) !important;
+    background-color: rgb(226, 226, 226) !important;
 }
-.textLigthGrey{
+
+.textLigthGrey {
     color: #c4c4c4;
 }
 
-.fa-shopping-cart{
-    /* color: red; */
+/* Shopping cart animation */
+.runShoppingCartAnimation{
+    -webkit-animation: shoppingCartAnimation 1s;
+    -moz-animation: shoppingCartAnimation 1s;
+    -webkit-animation-iteration-count: 1;
+    -moz-animation-iteration-count: 1;
+}
+/* Safari 4.0 - 8.0 */
+
+@-webkit-keyframes shoppingCartAnimation {
+    0% {
+        -ms-transform: rotate(35deg);
+        /* IE 9 */
+        -webkit-transform: rotate(35deg);
+        /* Safari */
+        transform: rotate(35deg);
+    }
+    25% {
+        -ms-transform: rotate(-30deg);
+        /* IE 9 */
+        -webkit-transform: rotate(-30deg);
+        /* Safari */
+        transform: rotate(-30deg);
+    }
+    50% {
+        -ms-transform: rotate(20deg);
+        /* IE 9 */
+        -webkit-transform: rotate(20deg);
+        /* Safari */
+        transform: rotate(20deg);
+    }
+
+}
+
+/* Standard syntax */
+
+@keyframes shoppingCartAnimation {
+    0% {
+        -ms-transform: rotate(35deg);
+        /* IE 9 */
+        -webkit-transform: rotate(35deg);
+        /* Safari */
+        transform: rotate(35deg);
+    }
+    25% {
+        -ms-transform: rotate(-30deg);
+        /* IE 9 */
+        -webkit-transform: rotate(-30deg);
+        /* Safari */
+        transform: rotate(-30deg);
+    }
+    50% {
+        -ms-transform: rotate(20deg);
+        /* IE 9 */
+        -webkit-transform: rotate(20deg);
+        /* Safari */
+        transform: rotate(20deg);
+    }
+
 }
 
 /**************/
 
-
 /* salvattore */
-
-/* These are the classes that are going to be applied: */
 
 /* Base styles */
 
@@ -404,7 +506,6 @@ div.productGridClass>div {
         padding: 4px;
         margin-bottom: 15px;
     }
-
 }
 
 @media screen and (min-width: 451px) and (max-width: 700px) {
@@ -415,8 +516,6 @@ div.productGridClass>div {
         padding: 4px;
         margin-bottom: 15px;
     }
-    
-
 }
 
 @media screen and (min-width: 701px) and (max-width: 800px) {
@@ -428,20 +527,21 @@ div.productGridClass>div {
 @media screen and (min-width: 801px) and (max-width: 1400px) {
     #productGrid[data-columns]::before {
         content: '4 .column.size-1of4';
-    } 
- } 
+    }
+}
 
 @media screen and (min-width: 1401px) {
     #productGrid[data-columns]::before {
         content: '5 .column.size-1of5';
     }
-} 
+}
 
 /* @media screen and (min-width: 801px) {
     #productGrid[data-columns]::before {
         content: '4 .column.size-1of4';
     }
 } */
+
 /**************/
 
 @media (max-width:993px) {
