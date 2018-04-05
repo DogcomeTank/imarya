@@ -5,7 +5,7 @@ const path = require('path');
 
 
 // user add to cart function
-router.get('/',(req, res)=>{
+router.get('/addToCart',(req, res)=>{
     res.send('good');
 });
 router.post('/addToCart', (req,res)=>{
