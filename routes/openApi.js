@@ -10,7 +10,7 @@ router.get('/addToCart',(req, res)=>{
 });
 router.post('/addToCart', (req,res)=>{
     var addToCartItem = new m.UserOrder(req.body);
-    m.UserOrder.save((err, doc)=>{
+    addToCartItem.save((err, doc)=>{
         console.log(doc);
     });
 });
