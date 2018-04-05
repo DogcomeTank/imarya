@@ -131,6 +131,8 @@ $(document).ready(function () {
         // addToCartFormData = JSON.stringify(addToCartFormData);
         var convertFormData = objectifyForm(addToCartFormData);
         convertFormData = JSON.stringify(convertFormData);
+
+        console.log(convertFormData);
         $.ajax({
             type: "POST",
             datatype: "JSON",
