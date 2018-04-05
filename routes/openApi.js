@@ -13,6 +13,7 @@ router.post('/addToCart', (req,res)=>{
     var addToCartItem = new m.UserOrder(req.body.convertFormData);
     addToCartItem.save((err, doc)=>{
         console.log(doc);
+        res.json(doc);
     });
 });
 
