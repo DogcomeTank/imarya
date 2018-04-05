@@ -10,7 +10,9 @@ router.get('/addToCart',(req, res)=>{
     res.send('good');
 });
 router.post('/addToCart', (req,res)=>{
-
+    if(!req.user){
+        res.send('Please login.');
+    }
     let objConvertFormData = JSON.parse(req.body.convertFormData);
     objConvertFormData.userId = req.user._id;
     let addToCartItem = new m.UserOrder(objConvertFormData);
