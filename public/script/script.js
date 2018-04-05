@@ -130,7 +130,18 @@ $(document).ready(function () {
         var addToCartFormData = $(this).serializeArray();
         // addToCartFormData = JSON.stringify(addToCartFormData);
         var convertFormData = objectifyForm(addToCartFormData);
-        console.log(convertFormData);
+        convertFormData = JSON.stringify(convertFormData);
+        $.ajax({
+            type: "POST",
+            datatype: "JSON",
+            data: {
+                convertFormData
+            },
+            url: "/openApi/addToCart",
+            success: function(doc){
+                console.log(doc);
+            }
+        });
         // $('.fa-shopping-cart').css("color", "red");
         // alert('Add To Cart');
     });
