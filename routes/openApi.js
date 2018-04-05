@@ -12,13 +12,15 @@ router.get('/addToCart',(req, res)=>{
 router.post('/addToCart', (req,res)=>{
     if(!req.user){
         res.send('Please login.');
+    }else{
+        let objConvertFormData = JSON.parse(req.body.convertFormData);
+        objConvertFormData.userId = req.user._id;
+        let addToCartItem = new m.UserOrder(objConvertFormData);
+        addToCartItem.save((err, doc)=>{
+            res.json(doc);
+        });
     }
-    let objConvertFormData = JSON.parse(req.body.convertFormData);
-    objConvertFormData.userId = req.user._id;
-    let addToCartItem = new m.UserOrder(objConvertFormData);
-    addToCartItem.save((err, doc)=>{
-        res.json(doc);
-    });
+    
 });
 
 
