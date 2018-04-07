@@ -30,7 +30,7 @@ router.post('/userCartItems', (req, res)=>{
         m.UserCart.find({'userId': req.user._id}).
         populate({
             path: 'productId',
-            select: 'productName description',
+            select: 'productName description img price',
         }).exec((err, doc)=>{
             res.json(doc);
         });

@@ -121,6 +121,9 @@ $(document).ready(function () {
         }
     });
 
+    
+
+
     $("#addToCartForm").on("submit", function (event) {
         event.preventDefault();
         //check login status
@@ -282,16 +285,29 @@ function shoppingCartItemDisplay() {
         type: "POST",
         datatype: "json",
         url: "/openApi/userCartItems",
-        success: function (data) {
+        success: function (doc) {
             // if not item in shopping cart
-            if(data.length == 0){
-
-            }else{
+            if (doc.length == 0) {
+                $('.scList').empty();
+            } else {
                 // if item found on database
+                $('.scList').empty();
+                var totalInShoppingCart = 0;
+                for (var i = 0; i < doc.length; i++) {
+                    totalInShoppingCart = doc[i].qty * Number(doc[i].productId.price) + totalInShoppingCart;
+                    $('.scList').append('<div class="w3-card-4 scCard w3-row whiteBG"><div class="w3-col s4"><img src="/img/'+ doc[i].productId.img +'" class="scImg w3-padding-left w3-padding-right w3-margin-top"></div><div class="w3-padding-small scInfoRight w3-col s8"><h5 id="shoppingCartProductName">' + doc[i].productId.productName + '</h5><button class="removeBtnStyle removeItemInShoppingCart"><i class="fa fa-remove"></i></button><p id="shoppingCartProductDescription">' + doc[i].productId.description + '</p><p><div class="w3-col s5 logoPink">$' + doc[i].productId.price + '</div><form onsubmit="event.preventDefault()" id="updateShoppingCartQtyForm" class="w3-col s5"><input type="text" name="productId" value="' + doc[i].productId._id + '" style="display:none"><input type="text" name="color" value="' + doc[i].color + '" style="display:none"><input type="text" name="size" value="' + doc[i].size+'" style="display:none"><span><button class="removeBtnStyle">-</button></span><span id="shoppingCartItemQty">' + doc[i].qty + '</span><span><button class="removeBtnStyle">+</button></span></form></p></div></div>');
+                }
+                $('#shoppingCartTotal').text('$'+totalInShoppingCart);
             }
-            console.log(data);
+            console.log(doc);
+
+
         }
     });
+}
+
+function cartItemAdd(a){
+    console.log(a);
 }
 
 function productOnClick(pId) {
