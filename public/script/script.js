@@ -142,10 +142,10 @@ $(document).ready(function () {
                 // shopping cart animation
                 $('.fa-shopping-cart').addClass('logoPink');
                 $('.fa-shopping-cart').removeClass('runShoppingCartAnimation');
-                setTimeout(" $('.fa-shopping-cart').addClass('runShoppingCartAnimation');",100)
-               
+                setTimeout(" $('.fa-shopping-cart').addClass('runShoppingCartAnimation');", 100)
+
                 // close modal 
-                document.getElementById('ProductDetail').style.display='none';
+                document.getElementById('ProductDetail').style.display = 'none';
             }
         });
 
@@ -262,14 +262,29 @@ function checkLoginForBtn(n) {
         success: function (data) {
             dataJson = JSON.parse(data);
             if (dataJson.login) {
+                // display shopping cart madal
                 $('#' + n).css('display', 'block');
+                // display items
+                shoppingCartItemDisplay();
             } else {
+                // if not login, display user login modal
                 document.getElementById('userLogin').style.display = 'block';
                 $('.userInfo').css('display', 'none');
                 $('.loginPage').css('display', 'none');
                 $('.loginPage').css('display', 'block');
             }
         },
+    });
+}
+
+function shoppingCartItemDisplay() {
+    $.ajax({
+        type: "POST",
+        datatype: "json",
+        url: "/openApi/userCartItems",
+        success: function (data) {
+            console.log(data);
+        }
     });
 }
 

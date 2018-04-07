@@ -23,6 +23,20 @@ router.post('/addToCart', (req,res)=>{
     
 });
 
+router.post('/userCartItems', (req, res)=>{
+    if(!req.user){
+        res.send('Please login.');
+    }else{
+        m.UserCart.find({'userId': req.user._id}).
+        populate({
+            path: 'productId',
+            select: 'productName description',
+        }).exec((err, doc)=>{
+            res.json(doc);
+        });
+    }
+});
+
 
 
 
