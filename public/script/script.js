@@ -283,6 +283,12 @@ function shoppingCartItemDisplay() {
         datatype: "json",
         url: "/openApi/userCartItems",
         success: function (data) {
+            // if not item in shopping cart
+            if(data.length == 0){
+
+            }else{
+                // if item found on database
+            }
             console.log(data);
         }
     });
