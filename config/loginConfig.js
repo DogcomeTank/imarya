@@ -180,7 +180,7 @@ router.get('/google-token', passport.authenticate('google', {
         httpOnly: true,
         maxAge: 604800000
       }); // 7 days
-      res.redirect('/');
+      res.redirect('http://www.imarya.com/');
     });
     // remember me
   });
