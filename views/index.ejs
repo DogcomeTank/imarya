@@ -315,8 +315,8 @@
                 <p id="cartModalDescription">Product description</p>
 
                 <form class="w3-container" id="addToCartForm">
-                    <input type="text" name="productId" id="addToCartFormProductId" value="" style="display: none">
-                    <input type="text" name="productQtyId" id="addToCartFormProductQtyId" value="" style="display:none">
+                    <input type="text" name="productId" id="addToCartFormProductId" value="" style="">
+                    <input type="text" name="productQtyId" id="addToCartFormProductQtyId" style="">
 
                     <select class="w3-select" name="color" id="modalProductColorOption" required>
                         <option value="" disabled selected>Color</option>
@@ -376,19 +376,20 @@
                         <button class="w3-btn scCheckoutBtnC w3-round-xlarge logoPinkBG">Checkout</button>
                     </div>
                 </div>
-
             </div>
-            <!--    Modal ******************-->
+        </div>
+    </div>
+    <!--    Modal ******************-->
 
-            <!--   User Modal ******************-->
-            <div id="userLogin" class="w3-modal">
+    <!--   User Modal ******************-->
+    <div id="userLogin" class="w3-modal" style="z-index: 1;">
 
-                <div class="w3-modal-content loginPageContent">
-                    <div class="userInfo">
-                        <span onclick="document.getElementById('userLogin').style.display='none'" class="w3-button w3-display-topright fa fa-remove w3-xlarge"></span>
-                        <h3>Login and Security</h3>
-                        <div class="w3-card userInfoCard">
-                            <% if(userLoginInfo){ 
+        <div class="w3-modal-content loginPageContent">
+            <div class="userInfo">
+                <span onclick="document.getElementById('userLogin').style.display='none'" class="w3-button w3-display-topright fa fa-remove w3-xlarge"></span>
+                <h3>Login and Security</h3>
+                <div class="w3-card userInfoCard">
+                    <% if(userLoginInfo){ 
                             let email = 'n/a';
                             let phoneNumber = "n/a";
                             if(userLoginInfo.email){
@@ -398,96 +399,97 @@
                                 phoneNumber = userLoginInfo.phoneNumber;
                             }    
                     %>
-                                <ul class="w3-ul">
-                                    <li class="userInfoEdit">
-                                        <div class="userInfoDisplay">
-                                            <h5>Name</h5>
-                                            <p>
-                                                <%= userLoginInfo.displayName; %>
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li class="userInfoEdit">
-                                        <div class="userInfoDisplay">
-                                            <h5>Email</h5>
-                                            <p>
-                                                <%= email; %>
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li class="userInfoEdit">
-                                        <div class="userInfoDisplay">
-                                            <h5>Address</h5>
-                                            <p></p>
-                                        </div>
-                                        <div>
-                                            <a class="w3-btn scCheckoutBtnC w3-round-xlarge logoPinkBG userInfoEditBtn" href="./login/editContactInfo">Edit</a>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <% } %>
-                        </div>
-                        <br>
-                        <a class="w3-btn logoPinkBG logoutBtn" href="./login/logout">Logout</a>
-                    </div>
-                    <div class="w3-container loginPage">
-                        <span onclick="document.getElementById('userLogin').style.display='none'" class="w3-button w3-display-topright fa fa-times"></span>
+                        <ul class="w3-ul">
+                            <li class="userInfoEdit">
+                                <div class="userInfoDisplay">
+                                    <h5>Name</h5>
+                                    <p>
+                                        <%= userLoginInfo.displayName; %>
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="userInfoEdit">
+                                <div class="userInfoDisplay">
+                                    <h5>Email</h5>
+                                    <p>
+                                        <%= email; %>
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="userInfoEdit">
+                                <div class="userInfoDisplay">
+                                    <h5>Address</h5>
+                                    <p></p>
+                                </div>
+                                <div>
+                                    <a class="w3-btn scCheckoutBtnC w3-round-xlarge logoPinkBG userInfoEditBtn" href="./login/editContactInfo">Edit</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <% } %>
+                </div>
+                <br>
+                <a class="w3-btn logoPinkBG logoutBtn" href="./login/logout">Logout</a>
+            </div>
+            <div class="w3-container loginPage">
+                <span onclick="document.getElementById('userLogin').style.display='none'" class="w3-button w3-display-topright fa fa-times"></span>
 
-                        <h3>Sign Up With</h3>
-                        <div class="w3-row" style="width: 80%; margin: auto;">
-                            <a class="w3-col s4 w3-center" href="/login/google-login">
-                                <img style="width: 60%;" class="w3-circle" src="icon/Google-plus-circle-icon-png.png">
-                            </a>
-                            <a class="w3-col s4 w3-center">
-                                <img style="width: 60%" class="w3-circle" src="icon/wechatLogo.svg">
-                            </a>
-                            <a class="w3-col s4 w3-center" href="/login/facebook-login">
-                                <img style="width: 60%;" class="w3-circle" src="icon/Facebook-Home-Logo.png">
-                            </a>
-                        </div>
-                    </div>
-
+                <h3>Sign Up With</h3>
+                <div class="w3-row" style="width: 80%; margin: auto;">
+                    <a class="w3-col s4 w3-center" href="/login/google-login">
+                        <img style="width: 60%;" class="w3-circle" src="icon/Google-plus-circle-icon-png.png">
+                    </a>
+                    <a class="w3-col s4 w3-center">
+                        <img style="width: 60%" class="w3-circle" src="icon/wechatLogo.svg">
+                    </a>
+                    <a class="w3-col s4 w3-center" href="/login/facebook-login">
+                        <img style="width: 60%;" class="w3-circle" src="icon/Facebook-Home-Logo.png">
+                    </a>
                 </div>
             </div>
-            <!--    Modal ******************-->
 
-            <script>
-                // Accordion in menu
-                function navAccDisplay() {
-                    var x = document.getElementById("navAccList");
-                    if (x.className.indexOf("w3-show") == -1) {
-                        x.className += " w3-show";
-                    } else {
-                        x.className = x.className.replace(" w3-show", "");
-                    }
-                }
+        </div>
+    </div>
 
-                // Click on the link on page load to open the accordion for
-                document.getElementById("myBtn").click();
+    <!--    Modal ******************-->
 
+    <script>
+        // Accordion in menu
+        function navAccDisplay() {
+            var x = document.getElementById("navAccList");
+            if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+            } else {
+                x.className = x.className.replace(" w3-show", "");
+            }
+        }
 
-                // Script to open and close sidebar
-                function w3_open() {
-                    document.getElementById("mySidebar").style.display = "block";
-                    document.getElementById("myOverlay").style.display = "block";
-                }
-
-                function w3_close() {
-                    document.getElementById("mySidebar").style.display = "none";
-                    document.getElementById("myOverlay").style.display = "none";
-                }
-
-                //        slideShow
-                var slideIndex = 1;
-                showDivs(slideIndex);
-                setInterval(function () {
-                    plusDivs(1);
-                }, 5000);
-            </script>
+        // Click on the link on page load to open the accordion for
+        document.getElementById("myBtn").click();
 
 
-            <!-- Salvattore.js must place at the end -->
-            <script src="script/Salvattore.js" type="text/javascript"></script>
+        // Script to open and close sidebar
+        function w3_open() {
+            document.getElementById("mySidebar").style.display = "block";
+            document.getElementById("myOverlay").style.display = "block";
+        }
+
+        function w3_close() {
+            document.getElementById("mySidebar").style.display = "none";
+            document.getElementById("myOverlay").style.display = "none";
+        }
+
+        //        slideShow
+        var slideIndex = 1;
+        showDivs(slideIndex);
+        setInterval(function () {
+            plusDivs(1);
+        }, 5000);
+    </script>
+
+
+    <!-- Salvattore.js must place at the end -->
+    <script src="script/Salvattore.js" type="text/javascript"></script>
 </body>
 
 </html>

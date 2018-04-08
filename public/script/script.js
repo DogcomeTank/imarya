@@ -21,6 +21,8 @@ $(document).ready(function () {
             selectedData.findData.size = theSizeSelected;
             findQtyFromColor = 1
         }
+
+        // find item in productQty
         if (findQtyFromColor || !sizeOptionStatus) {
             selectedData = JSON.stringify(selectedData);
             $.ajax({
@@ -43,6 +45,7 @@ $(document).ready(function () {
                         $('#modalAddToCart').text('Out of Stock');
                         $('#modalAddToCart').prop('disabled', true);
                     } else {
+                        $('#addToCartFormProductId').attr('value', '#000000')
                         //if size and color available, enable Add to cart btn
                         $('#modalAddToCart').text('Add To Cart');
                         $('#modalAddToCart').prop('disabled', false);
@@ -83,8 +86,8 @@ $(document).ready(function () {
             findQtyFromSize = 1;
         }
 
+        // find item in productQty
         if (findQtyFromSize || !colorOptionStatus) {
-
             selectedData = JSON.stringify(selectedData);
             $.ajax({
                 type: "post",
@@ -104,9 +107,8 @@ $(document).ready(function () {
                         $('#modalAddToCart').text('Out of Stock');
                         $('#modalAddToCart').prop('disabled', true);
                     } else {
-                        
-                        console.log(JSON.stringify(doc));
-                        console.log('size on change:  '+ doc[0].qty);
+                        //if size and color available, change value of addToCartFormProductQtyId
+                        $('#addToCartFormProductQtyId').val('asdf');
                         //if size and color available, enable Add to cart btn
                         $('#modalAddToCart').text('Add To Cart');
                         $('#modalAddToCart').prop('disabled', false);
