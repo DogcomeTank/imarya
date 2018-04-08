@@ -31,6 +31,7 @@ $(document).ready(function () {
                 },
                 url: '/api/colorSizeOnChange',
                 success: function (doc) {
+                    console.log('color on change:  '+ doc);
                     // // update size option
                     if (doc.length == 0 || doc[0].qty == 0) {
                         //if size and color out of stock
@@ -103,6 +104,9 @@ $(document).ready(function () {
                         $('#modalAddToCart').text('Out of Stock');
                         $('#modalAddToCart').prop('disabled', true);
                     } else {
+                        
+                        console.log(JSON.stringify(doc));
+                        console.log('size on change:  '+ doc[0].qty);
                         //if size and color available, enable Add to cart btn
                         $('#modalAddToCart').text('Add To Cart');
                         $('#modalAddToCart').prop('disabled', false);
@@ -131,7 +135,6 @@ $(document).ready(function () {
 
         // if logged in, add items to database
         var addToCartFormData = $(this).serializeArray();
-        // addToCartFormData = JSON.stringify(addToCartFormData);
         var convertFormData = objectifyForm(addToCartFormData);
         convertFormData = JSON.stringify(convertFormData);
         $.ajax({
@@ -295,19 +298,29 @@ function shoppingCartItemDisplay() {
                 var totalInShoppingCart = 0;
                 for (var i = 0; i < doc.length; i++) {
                     totalInShoppingCart = doc[i].qty * Number(doc[i].productId.price) + totalInShoppingCart;
-                    $('.scList').append('<div class="w3-card-4 scCard w3-row whiteBG"><div class="w3-col s4"><img src="/img/'+ doc[i].productId.img +'" class="scImg w3-padding-left w3-padding-right w3-margin-top"></div><div class="w3-padding-small scInfoRight w3-col s8"><h5 id="shoppingCartProductName">' + doc[i].productId.productName + '</h5><button class="removeBtnStyle removeItemInShoppingCart"><i class="fa fa-remove"></i></button><p id="shoppingCartProductDescription">' + doc[i].productId.description + '</p><p><div class="w3-col s5 logoPink">$' + doc[i].productId.price + '</div><form onsubmit="event.preventDefault()" id="updateShoppingCartQtyForm" class="w3-col s5"><input type="text" name="productId" value="' + doc[i].productId._id + '" style="display:none"><input type="text" name="color" value="' + doc[i].color + '" style="display:none"><input type="text" name="size" value="' + doc[i].size+'" style="display:none"><span><button class="removeBtnStyle">-</button></span><span id="shoppingCartItemQty">' + doc[i].qty + '</span><span><button class="removeBtnStyle">+</button></span></form></p></div></div>');
+                    $('.scList').append('<div class="w3-card-4 scCard w3-row whiteBG"><div class="w3-col s4"><img src="/img/'+ doc[i].productId.img +'" class="scImg w3-padding-left w3-padding-right w3-margin-top"></div><div class="w3-padding-small scInfoRight w3-col s8"><h5 id="shoppingCartProductName">' + doc[i].productId.productName + '</h5><button class="removeBtnStyle removeItemInShoppingCart"><i class="fa fa-remove"></i></button><p id="shoppingCartProductDescription">' + doc[i].productId.description + '</p><p><div class="w3-col s5 logoPink">$' + doc[i].productId.price + '</div><form onsubmit="event.preventDefault()" id="updateShoppingCartQtyForm" class="w3-col s5"><input type="text" name="productId" value="' + doc[i].productId._id + '" style="display:none"><input type="text" name="color" value="' + doc[i].color + '" style="display:none"><input type="text" name="size" value="' + doc[i].size +'" style="display:none"><span><button onclick="cartItemAdd(\'a\')" class="removeBtnStyle">-</button></span><span id="shoppingCartItemQty">' + doc[i].qty + '</span><span><button onclick="cartItemAdd(\'s\')" class="removeBtnStyle">+</button></span></form></p></div></div>');
                 }
+                totalInShoppingCart = Math.round(totalInShoppingCart * 100) / 100
                 $('#shoppingCartTotal').text('$'+totalInShoppingCart);
             }
             console.log(doc);
-
-
         }
     });
 }
 
 function cartItemAdd(a){
-    console.log(a);
+    var cartItemInfo = $('#updateShoppingCartQtyForm').serializeArray();
+    cartItemInfo =  objectifyForm(cartItemInfo);
+    cartItemInfo = JSON.stringify(cartItemInfo);
+    $.ajax({
+        type: 'post',
+        datatype: 'json',
+        data: {a,cartItemInfo},
+        url: '/openApi/addOrSubtractCartItem',
+        success: function(doc){
+            console.log(doc);
+        }
+    });
 }
 
 function productOnClick(pId) {

@@ -10,8 +10,10 @@ router.get('/addToCart',(req, res)=>{
     res.send('good');
 });
 router.post('/addToCart', (req,res)=>{
+
     if(!req.user){
         res.send('Please login.');
+
     }else{
         let objConvertFormData = JSON.parse(req.body.convertFormData);
         objConvertFormData.userId = req.user._id;
@@ -34,6 +36,16 @@ router.post('/userCartItems', (req, res)=>{
         }).exec((err, doc)=>{
             res.json(doc);
         });
+    }
+});
+
+router.post('/addOrSubtractCartItem', (req, res)=>{
+    if(!req.user){
+        res.send('Please login.');
+    }else{
+        m.ProductQty.findById
+
+        res.json(req.body);
     }
 });
 

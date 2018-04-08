@@ -110,6 +110,11 @@ const UserCartSchema = new Schema({
         ref: 'Products',
         required: true,
     },
+    productQtyId: {
+        type: Schema.Types.ObjectId,
+        ref: 'ProductQty',
+        // required: true,
+    },
     qty: {
         type: Number,
         required: true,
