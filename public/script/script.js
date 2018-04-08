@@ -33,7 +33,6 @@ $(document).ready(function () {
                 },
                 url: '/api/colorSizeOnChange',
                 success: function (doc) {
-                    console.log('color on change:  '+ doc);
                     // // update size option
                     if (doc.length == 0 || doc[0].qty == 0) {
                         //if size and color out of stock
@@ -45,7 +44,9 @@ $(document).ready(function () {
                         $('#modalAddToCart').text('Out of Stock');
                         $('#modalAddToCart').prop('disabled', true);
                     } else {
-                        $('#addToCartFormProductId').attr('value', '#000000')
+                        console.log('found on color');
+                        //if size and color available, change value of addToCartFormProductQtyId
+                        $('#addToCartFormProductQtyId').val(doc[0]._id);
                         //if size and color available, enable Add to cart btn
                         $('#modalAddToCart').text('Add To Cart');
                         $('#modalAddToCart').prop('disabled', false);
@@ -107,11 +108,13 @@ $(document).ready(function () {
                         $('#modalAddToCart').text('Out of Stock');
                         $('#modalAddToCart').prop('disabled', true);
                     } else {
+
+                        console.log('found on size');
                         //if size and color available, change value of addToCartFormProductQtyId
-                        $('#addToCartFormProductQtyId').val('asdf');
+                        $('#addToCartFormProductQtyId').val(doc[0]._id);
                         //if size and color available, enable Add to cart btn
                         $('#modalAddToCart').text('Add To Cart');
-                        $('#modalAddToCart').prop('disabled', false);
+                        $('#modalAddToCart').prop('disabled', false);``
                         //if size and color available, enable qty option
                         $('#modalProductQuantityOption').css('display', 'block');
                         $('#modalProductQuantityOption').prop('disabled', false);
@@ -127,9 +130,10 @@ $(document).ready(function () {
         }
     });
 
-    
-
-
+    $("#addToCartForm").on("change", function(e){
+        var an = $("#addToCartForm").serializeArray();
+        console.log(an);
+    })
     $("#addToCartForm").on("submit", function (event) {
         event.preventDefault();
         //check login status
