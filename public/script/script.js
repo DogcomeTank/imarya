@@ -44,7 +44,6 @@ $(document).ready(function () {
                         $('#modalAddToCart').text('Out of Stock');
                         $('#modalAddToCart').prop('disabled', true);
                     } else {
-                        console.log('found on color');
                         //if size and color available, change value of addToCartFormProductQtyId
                         $('#addToCartFormProductQtyId').val(doc[0]._id);
                         //if size and color available, enable Add to cart btn
@@ -108,8 +107,6 @@ $(document).ready(function () {
                         $('#modalAddToCart').text('Out of Stock');
                         $('#modalAddToCart').prop('disabled', true);
                     } else {
-
-                        console.log('found on size');
                         //if size and color available, change value of addToCartFormProductQtyId
                         $('#addToCartFormProductQtyId').val(doc[0]._id);
                         //if size and color available, enable Add to cart btn
@@ -130,10 +127,10 @@ $(document).ready(function () {
         }
     });
 
-    $("#addToCartForm").on("change", function(e){
-        var an = $("#addToCartForm").serializeArray();
-        console.log(an);
-    })
+    // $("#addToCartForm").on("change", function(e){
+    //     var an = $("#addToCartForm").serializeArray();
+    //     console.log(an);
+    // })
     $("#addToCartForm").on("submit", function (event) {
         event.preventDefault();
         //check login status
@@ -190,7 +187,6 @@ function navOnClick(id) {
             $("#" + id).addClass('logoBlueBG');
             $("#" + id + "> i").addClass('fa fa-caret-right w3-margin-right');
 
-            console.log(doc);
             // display products to product grid
             $("#productGrid").empty();
             if (doc == null) {
@@ -304,14 +300,32 @@ function shoppingCartItemDisplay() {
                 var totalInShoppingCart = 0;
                 for (var i = 0; i < doc.length; i++) {
                     totalInShoppingCart = doc[i].qty * Number(doc[i].productId.price) + totalInShoppingCart;
-                    $('.scList').append('<div class="w3-card-4 scCard w3-row whiteBG"><div class="w3-col s4"><img src="/img/'+ doc[i].productId.img +'" class="scImg w3-padding-left w3-padding-right w3-margin-top"></div><div class="w3-padding-small scInfoRight w3-col s8"><h5 id="shoppingCartProductName">' + doc[i].productId.productName + '</h5><button class="removeBtnStyle removeItemInShoppingCart"><i class="fa fa-remove"></i></button><p id="shoppingCartProductDescription">' + doc[i].productId.description + '</p><p><div class="w3-col s5 logoPink">$' + doc[i].productId.price + '</div><form onsubmit="event.preventDefault()" id="updateShoppingCartQtyForm" class="w3-col s5"><input type="text" name="productId" value="' + doc[i].productId._id + '" style="display:none"><input type="text" name="color" value="' + doc[i].color + '" style="display:none"><input type="text" name="size" value="' + doc[i].size +'" style="display:none"><span><button onclick="cartItemAdd(\'a\')" class="removeBtnStyle">-</button></span><span id="shoppingCartItemQty">' + doc[i].qty + '</span><span><button onclick="cartItemAdd(\'s\')" class="removeBtnStyle">+</button></span></form></p></div></div>');
+                    $('.scList').append('<div class="w3-card-4 scCard w3-row whiteBG" id="remove'+doc[i]._id+'"><div class="w3-col s4"><img src="/img/'+ doc[i].productId.img +'" class="scImg w3-padding-left w3-padding-right w3-margin-top"></div><div class="w3-padding-small scInfoRight w3-col s8"><h5 id="shoppingCartProductName">' + doc[i].productId.productName + '</h5><button class="removeBtnStyle removeItemInShoppingCart" onclick="removeItemInShoppingCart(this.value)" value="'+ doc[i]._id +'"><i class="fa fa-remove"></i></button><p id="shoppingCartProductDescription">' + doc[i].productId.description + '</p><p><div class="w3-col s5 logoPink">$' + doc[i].productId.price + '</div><form onsubmit="event.preventDefault()" id="updateShoppingCartQtyForm" class="w3-col s5"><input type="text" name="productId" value="' + doc[i].productId._id + '" style="display:none"><input type="text" name="color" value="' + doc[i].color + '" style="display:none"><input type="text" name="size" value="' + doc[i].size +'" style="display:none"><span><button onclick="cartItemAdd(\'a\')" class="removeBtnStyle">-</button></span><span id="shoppingCartItemQty">' + doc[i].qty + '</span><span><button onclick="cartItemAdd(\'s\')" class="removeBtnStyle">+</button></span></form></p></div></div>');
                 }
                 totalInShoppingCart = Math.round(totalInShoppingCart * 100) / 100
                 $('#shoppingCartTotal').text('$'+totalInShoppingCart);
             }
-            console.log(doc);
         }
     });
+}
+
+function removeItemInShoppingCart(a){
+
+    var deleteItemConform = confirm('Delete this item');
+
+    if(deleteItemConform){
+        $.ajax({
+            type:"post",
+            datatype:"json",
+            data:{a},
+            url:"/openApi/removeItemInShoppingCart",
+            success: function(doc){
+                if(doc.status){
+                    $("#remove"+ doc.userCartId).remove();
+                }
+            }
+        });
+    }
 }
 
 function cartItemAdd(a){
@@ -340,8 +354,6 @@ function productOnClick(pId) {
             id: pId
         },
         success: function (doc) {
-
-
             dataJson = JSON.parse(doc);
             var price = dataJson['productInfo'].price.split(".");
             $('#productInfoName').text(dataJson['productInfo'].productName)
@@ -420,7 +432,10 @@ function productOnClick(pId) {
                     $('#modalAddToCart').text('Out of Stock');
                     $('#modalAddToCart').prop('disabled', true);
                 } else {
+
+                    
                     $('#modalProductQuantityOption').css('display', 'block');
+                    $('#addToCartFormProductQtyId').val(productQty[0]._id);
                     appendDefaultSize = 0;
 
                     $('#modalProductQuantityOption').prop('disabled', false);

@@ -49,6 +49,17 @@ router.post('/addOrSubtractCartItem', (req, res)=>{
     }
 });
 
+router.post('/removeItemInShoppingCart', (req, res)=>{
+    let a = req.body;
+    m.UserCart.findById(a.a).remove().exec((err, doc)=>{
+        let returnDoc = {};
+        returnDoc.userCartId = a.a;
+        returnDoc.status = doc.result.n;
+        res.json(returnDoc);
+    });
+
+});
+
 
 
 
