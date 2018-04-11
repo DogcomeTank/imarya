@@ -299,8 +299,9 @@ function shoppingCartItemDisplay() {
                 $('.scList').empty();
                 var totalInShoppingCart = 0;
                 for (var i = 0; i < doc.length; i++) {
+                    // doc = userCart populate productId 
                     totalInShoppingCart = doc[i].qty * Number(doc[i].productId.price) + totalInShoppingCart;
-                    $('.scList').append('<div class="w3-card-4 scCard w3-row whiteBG" id="remove'+doc[i]._id+'"><div class="w3-col s4"><img src="/img/'+ doc[i].productId.img +'" class="scImg w3-padding-left w3-padding-right w3-margin-top"></div><div class="w3-padding-small scInfoRight w3-col s8"><h5 id="shoppingCartProductName">' + doc[i].productId.productName + '</h5><button class="removeBtnStyle removeItemInShoppingCart" onclick="removeItemInShoppingCart(this.value)" value="'+ doc[i]._id +'"><i class="fa fa-remove"></i></button><p id="shoppingCartProductDescription">' + doc[i].productId.description + '</p><p><div class="w3-col s5 logoPink">$' + doc[i].productId.price + '</div><form onsubmit="event.preventDefault()" id="updateShoppingCartQtyForm" class="w3-col s5"><input type="text" name="productId" value="' + doc[i].productId._id + '" style="display:none"><input type="text" name="color" value="' + doc[i].color + '" style="display:none"><input type="text" name="size" value="' + doc[i].size +'" style="display:none"><span><button onclick="cartItemAdd(\'a\')" class="removeBtnStyle">-</button></span><span id="shoppingCartItemQty">' + doc[i].qty + '</span><span><button onclick="cartItemAdd(\'s\')" class="removeBtnStyle">+</button></span></form></p></div></div>');
+                    $('.scList').append('<div class="w3-card-4 scCard w3-row whiteBG" id="remove'+doc[i]._id+'"><div class="w3-col s4"><img src="/img/'+ doc[i].productId.img +'" class="scImg w3-padding-left w3-padding-right w3-margin-top"></div><div class="w3-padding-small scInfoRight w3-col s8"><h5 id="shoppingCartProductName">' + doc[i].productId.productName + '</h5><button class="removeBtnStyle removeItemInShoppingCart" onclick="removeItemInShoppingCart(this.value)" value="'+ doc[i]._id +'"><i class="fa fa-remove"></i></button><p id="shoppingCartProductDescription">' + doc[i].productId.description + '</p><p><div class="w3-col s5 logoPink">$' + doc[i].productId.price + '</div><form onsubmit="event.preventDefault()" id="updateShoppingCartQtyForm" class="w3-col s5"><input type="text" name="productId" value="' + doc[i].productId._id + '" style="display:none"><input type="text" name="color" value="' + doc[i].color + '" style="display:none"><input type="text" name="size" value="' + doc[i].size +'" style="display:none"><span><button value="'+ doc[i]._id +'" onclick="cartItemAdd(this.value)" class="removeBtnStyle">-</button></span><span id="shoppingCartItemQty">' + doc[i].qty + '</span><span><button value="'+ doc[i]._id +'" onclick="cartItemSub(this.value)" class="removeBtnStyle">+</button></span></form></p></div></div>');
                 }
                 totalInShoppingCart = Math.round(totalInShoppingCart * 100) / 100
                 $('#shoppingCartTotal').text('$'+totalInShoppingCart);
@@ -317,7 +318,7 @@ function removeItemInShoppingCart(a){
         $.ajax({
             type:"post",
             datatype:"json",
-            data:{a},
+            data: a,
             url:"/openApi/removeItemInShoppingCart",
             success: function(doc){
                 if(doc.status){
@@ -329,13 +330,29 @@ function removeItemInShoppingCart(a){
 }
 
 function cartItemAdd(a){
-    var cartItemInfo = $('#updateShoppingCartQtyForm').serializeArray();
-    cartItemInfo =  objectifyForm(cartItemInfo);
-    cartItemInfo = JSON.stringify(cartItemInfo);
+    let data = {};
+    data.action = "s";
+    data.val = a;
     $.ajax({
         type: 'post',
         datatype: 'json',
-        data: {a,cartItemInfo},
+        data: data,
+        url: '/openApi/addOrSubtractCartItem',
+        success: function(doc){
+            console.log(doc);
+        }
+    });
+}
+
+function cartItemSub(a){
+    let data = {};
+    data.action = "a";
+    data.val = a;
+
+    $.ajax({
+        type: 'post',
+        datatype: 'json',
+        data: data,
         url: '/openApi/addOrSubtractCartItem',
         success: function(doc){
             console.log(doc);
