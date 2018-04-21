@@ -284,15 +284,13 @@ function shoppingCartItemDisplay() {
 function removeItemInShoppingCart(a) {
 
     var deleteItemConform = confirm('Delete this item');
-    console.log(a);
     if (deleteItemConform) {
         $.ajax({
             type: "post",
             datatype: "json",
-            data: a,
+            data: {a:a},
             url: "/openApi/removeItemInShoppingCart",
             success: function (doc) {
-                console.log(doc);
                 if (doc.status) {
                     $("#remove" + doc.userCartId).remove();
                 }
