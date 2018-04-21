@@ -1,6 +1,6 @@
-//slideshow
-$(document).ready(function () {
 
+
+$(document).ready(function () {
     // color on change
     $('#modalProductColorOption').change(function () {
         // if size option is available
@@ -214,37 +214,7 @@ function navOnClick(id) {
 }
 
 
-function plusDivs(n) {
-    showDivs(slideIndex += n);
-}
 
-function currentDiv(n) {
-    showDivs(slideIndex = n);
-
-}
-
-
-//slide show
-function showDivs(n) {
-    var i;
-    var x = document.getElementsByClassName("mySlides");
-    var dots = document.getElementsByClassName("demo");
-    if (n > x.length) {
-        slideIndex = 1
-    }
-    if (n < 1) {
-        slideIndex = x.length
-    }
-    for (i = 0; i < x.length; i++) {
-        x[i].style.display = "none";
-    }
-    for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" w3-red", "");
-    }
-    x[slideIndex - 1].style.display = "block";
-    dots[slideIndex - 1].className += " w3-red";
-
-}
 
 function userLoginBtn() {
     document.getElementById('userLogin').style.display = 'block';
@@ -314,7 +284,7 @@ function shoppingCartItemDisplay() {
 function removeItemInShoppingCart(a) {
 
     var deleteItemConform = confirm('Delete this item');
-
+    console.log(a);
     if (deleteItemConform) {
         $.ajax({
             type: "post",
@@ -322,6 +292,7 @@ function removeItemInShoppingCart(a) {
             data: a,
             url: "/openApi/removeItemInShoppingCart",
             success: function (doc) {
+                console.log(doc);
                 if (doc.status) {
                     $("#remove" + doc.userCartId).remove();
                 }

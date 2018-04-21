@@ -118,17 +118,49 @@
 
 
         <!--slideshow-->
-        <div class="w3-content w3-display-container" style="max-width:800px;">
-            <img class="mySlides centerItem" src="img/img_fjords_wide.jpg" style="">
-            <img class="mySlides centerItem" src="img/img_nature_wide.jpg" style="">
-            <img class="mySlides centerItem" src="img/jeans1.jpg" style="">
-            <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
-                <div class="w3-left logoPinkHoverBG" onclick="plusDivs(-1)">&#10094;</div>
-                <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
-                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
-                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
-                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
+        <div class="w3-content w3-display-container" style="position: relative;">
+            <div class="mainSlideDiv">
+                <div class="cd-slider">
+                    <ul>
+                        <li>
+                            <div class="image" style="background-image:url(https://images.unsplash.com/photo-1421809313281-48f03fa45e9f?crop=entropy&fit=crop&fm=jpg&h=675&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1000);"></div>
+                            <div class="content">
+                                <h2>Jackets Collection 2017</h2>
+                                <a href="#">View Gallery</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="image" style="background-image:url(https://images.unsplash.com/uploads/1411724908903377d4696/2e9b0cb2?crop=entropy&fit=crop&fm=jpg&h=675&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1000);"></div>
+                            <div class="content">
+                                <h2>Accessories</h2>
+                                <a href="#">View Gallery</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="image" style="background-image:url(https://images.unsplash.com/photo-1416838375725-e834a83f62b7?crop=entropy&fit=crop&fm=jpg&h=675&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1000);"></div>
+                            <div class="content">
+                                <h2>Winter Shoes</h2>
+                                <a href="#">View Gallery</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="image" style="background-image:url(https://images.unsplash.com/35/JOd4DPGLThifgf38Lpgj_IMG.jpg?crop=entropy&fit=crop&fm=jpg&h=675&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1000);"></div>
+                            <div class="content">
+                                <h2>Winter Collection 2017</h2>
+                                <a href="#">View Gallery</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="image" style="background-image:url(https://images.unsplash.com/photo-1453974336165-b5c58464f1ed?crop=entropy&fit=crop&fm=jpg&h=675&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1000);"></div>
+                            <div class="content">
+                                <h2>Summer Collection</h2>
+                                <a href="#">View Gallery</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
+
         </div>
 
 
@@ -479,12 +511,146 @@
             document.getElementById("myOverlay").style.display = "none";
         }
 
-        //        slideShow
-        var slideIndex = 1;
-        showDivs(slideIndex);
-        setInterval(function () {
-            plusDivs(1);
-        }, 5000);
+
+    </script>
+
+    <script>
+        //slide show
+
+        (function () {
+
+            function init(item) {
+                var items = item.querySelectorAll('li'),
+                    current = 0,
+                    autoUpdate = true,
+                    timeTrans = 4000;
+
+                //create slideShowNav
+                var slideShowNav = document.createElement('slideShowNav');
+                slideShowNav.className = 'slideShowNav_arrows';
+
+                //create button prev
+                var prevbtn = document.createElement('button');
+                prevbtn.className = 'prev';
+                prevbtn.setAttribute('aria-label', 'Prev');
+
+                //create button next
+                var nextbtn = document.createElement('button');
+                nextbtn.className = 'next';
+                nextbtn.setAttribute('aria-label', 'Next');
+
+                //create counter
+                var counter = document.createElement('div');
+                counter.className = 'counter';
+                counter.innerHTML = "<span>1</span><span>" + items.length + "</span>";
+
+                if (items.length > 1) {
+                    slideShowNav.appendChild(prevbtn);
+                    slideShowNav.appendChild(counter);
+                    slideShowNav.appendChild(nextbtn);
+                    item.appendChild(slideShowNav);
+                }
+
+                items[current].className = "current";
+                if (items.length > 1) items[items.length - 1].className = "prev_slide";
+
+                var slideShowNavigate = function (dir) {
+                    items[current].className = "";
+
+                    if (dir === 'right') {
+                        current = current < items.length - 1 ? current + 1 : 0;
+                    } else {
+                        current = current > 0 ? current - 1 : items.length - 1;
+                    }
+
+                    var nextCurrent = current < items.length - 1 ? current + 1 : 0,
+                        prevCurrent = current > 0 ? current - 1 : items.length - 1;
+
+                    items[current].className = "current";
+                    items[prevCurrent].className = "prev_slide";
+                    items[nextCurrent].className = "";
+
+                    //update counter
+                    counter.firstChild.textContent = current + 1;
+                }
+
+                item.addEventListener('mouseenter', function () {
+                    autoUpdate = false;
+                });
+
+                item.addEventListener('mouseleave', function () {
+                    autoUpdate = true;
+                });
+
+                setInterval(function () {
+                    if (autoUpdate) slideShowNavigate('right');
+                }, timeTrans);
+
+                prevbtn.addEventListener('click', function () {
+                    slideShowNavigate('left');
+                });
+
+                nextbtn.addEventListener('click', function () {
+                    slideShowNavigate('right');
+                });
+
+                //keyboard slideShowNavigation
+                document.addEventListener('keydown', function (ev) {
+                    var keyCode = ev.keyCode || ev.which;
+                    switch (keyCode) {
+                        case 37:
+                            slideShowNavigate('left');
+                            break;
+                        case 39:
+                            slideShowNavigate('right');
+                            break;
+                    }
+                });
+
+                // swipe slideShowNavigation
+                // from http://stackoverflow.com/a/23230280
+                item.addEventListener('touchstart', handleTouchStart, false);
+                item.addEventListener('touchmove', handleTouchMove, false);
+                var xDown = null;
+                var yDown = null;
+
+                function handleTouchStart(evt) {
+                    xDown = evt.touches[0].clientX;
+                    yDown = evt.touches[0].clientY;
+                };
+
+                function handleTouchMove(evt) {
+                    if (!xDown || !yDown) {
+                        return;
+                    }
+
+                    var xUp = evt.touches[0].clientX;
+                    var yUp = evt.touches[0].clientY;
+
+                    var xDiff = xDown - xUp;
+                    var yDiff = yDown - yUp;
+
+                    if (Math.abs(xDiff) > Math.abs(yDiff)) { /*most significant*/
+                        if (xDiff > 0) {
+                            /* left swipe */
+                            slideShowNavigate('right');
+                        } else {
+                            slideShowNavigate('left');
+                        }
+                    }
+                    /* reset values */
+                    xDown = null;
+                    yDown = null;
+                };
+
+
+            }
+
+            [].slice.call(document.querySelectorAll('.cd-slider')).forEach(function (item) {
+                init(item);
+            });
+
+        })();
     </script>
 
 
