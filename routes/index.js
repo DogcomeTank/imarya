@@ -23,6 +23,29 @@ router.get('/', (req, res) => {
 
 });
 
+router.get('/checkout', (req, res) => {
+    if(!req.user){
+        res.redirect('/');
+    }
+
+    let userLoginInfo = false;
+    if(req.user){
+        userLoginInfo = req.user;
+    }
+
+    m.Products.find({availability: 1}, (err, products) => {
+        if (err) {
+            return next(err);
+        }
+        res.render('payment/checkout', {
+            products,
+            userLoginInfo,
+        });
+    });
+
+});
+
+
 
 
 module.exports = router;

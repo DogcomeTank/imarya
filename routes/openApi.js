@@ -150,7 +150,6 @@ router.post('/getTotalInCart', (req, res)=>{
 
 router.post('/removeItemInShoppingCart', (req, res) => {
     let a = req.body;
-    console.log(a);
     m.UserCart.findById(a.a).remove().exec((err, doc) => {
         let returnDoc = {};
         returnDoc.userCartId = a.a;

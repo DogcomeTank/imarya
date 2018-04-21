@@ -1,244 +1,485 @@
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+<!DOCTYPE html>
+<html>
+<title>imarya - Vancouver kids Clothing</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style/w3.css">
+<link rel="stylesheet" href="style/style.css" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<div class="container wrapper">
-            <div class="row cart-head">
-                <div class="container">
-                <div class="row">
-                    <p></p>
+<link rel="icon" href="icon/linkLogo.png">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="script/script.js" type="text/javascript"></script>
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
+<body class="w3-content" style="max-width:2000px;min-width: 320px;">
+
+    <!-- Sidebar/menu -->
+    <nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
+        <div class="w3-container w3-display-container w3-padding-16">
+            <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
+            <h3 class="w3-wide w3-center">
+                <b>
+                    <a href="#">
+                        <img src="icon/GirraffeText.png" width="100">
+                    </a>
+                </b>
+            </h3>
+        </div>
+        <div class="w3-large w3-text-grey">
+            <a onclick="userLoginBtn()" class="w3-bar-item w3-button userLoginBtn">
+                <% if(userLoginInfo){ %>
+                    <span class="w3-center">Hello,
+                        <%= userLoginInfo.displayName; %>
+                    </span>
+
+                    <%    }else{ %>
+                        <i class="fa fa-user"></i>
+                        <span class="w3-margin-left">User Login</span>
+                        <% }  %>
+
+
+            </a>
+        </div>
+        <div id="navCategoryLink" class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
+            <a id="navAllItems" href="/" class="w3-bar-item w3-button w3-block">
+                <i></i>All</a>
+            <a href="#" class="w3-bar-item w3-button">
+                <i></i>New Arrivals</a>
+            <a href="#" class="w3-bar-item w3-button">
+                <i></i>Snacks</a>
+
+            <!-- acc -->
+            <a onclick="navAccDisplay()" href="javascript:void(0)" class="w3-button w3-left-align" id="myBtn">
+                <i></i>Clothing
+                <div class="w3-margin-left" style="display: inline-block;">
+                    <i class="fa fa-caret-down"></i>
                 </div>
-                <div class="row">
-                    <div style="display: table; margin: auto;">
-                        <span class="step step_complete"> <a href="#" class="check-bc">Cart</a> <span class="step_line step_complete"> </span> <span class="step_line backline"> </span> </span>
-                        <span class="step step_complete"> <a href="#" class="check-bc">Checkout</a> <span class="step_line "> </span> <span class="step_line step_complete"> </span> </span>
-                        <span class="step_thankyou check-bc step_complete">Thank you</span>
-                    </div>
-                </div>
-                <div class="row">
-                    <p></p>
-                </div>
-                </div>
-            </div>    
-            <div class="row cart-body">
-                <form class="form-horizontal" method="post" action="">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-push-6 col-sm-push-6">
-                    <!--REVIEW ORDER-->
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            Review Order <div class="pull-right"><small><a class="afix-1" href="#">Edit Cart</a></small></div>
-                        </div>
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <div class="col-sm-3 col-xs-3">
-                                    <img class="img-responsive" src="//c1.staticflickr.com/1/466/19681864394_c332ae87df_t.jpg" />
-                                </div>
-                                <div class="col-sm-6 col-xs-6">
-                                    <div class="col-xs-12">Product name</div>
-                                    <div class="col-xs-12"><small>Quantity:<span>1</span></small></div>
-                                </div>
-                                <div class="col-sm-3 col-xs-3 text-right">
-                                    <h6><span>$</span>25.00</h6>
-                                </div>
-                            </div>
-                            <div class="form-group"><hr /></div>
-                            <div class="form-group">
-                                <div class="col-sm-3 col-xs-3">
-                                    <img class="img-responsive" src="//c1.staticflickr.com/1/466/19681864394_c332ae87df_t.jpg" />
-                                </div>
-                                <div class="col-sm-6 col-xs-6">
-                                    <div class="col-xs-12">Product name</div>
-                                    <div class="col-xs-12"><small>Quantity:<span>1</span></small></div>
-                                </div>
-                                <div class="col-sm-3 col-xs-3 text-right">
-                                    <h6><span>$</span>25.00</h6>
-                                </div>
-                            </div>
-                            <div class="form-group"><hr /></div>
-                            <div class="form-group">
-                                <div class="col-sm-3 col-xs-3">
-                                    <img class="img-responsive" src="//c1.staticflickr.com/1/466/19681864394_c332ae87df_t.jpg" />
-                                </div>
-                                <div class="col-sm-6 col-xs-6">
-                                    <div class="col-xs-12">Product name</div>
-                                    <div class="col-xs-12"><small>Quantity:<span>2</span></small></div>
-                                </div>
-                                <div class="col-sm-3 col-xs-3 text-right">
-                                    <h6><span>$</span>50.00</h6>
-                                </div>
-                            </div>
-                            <div class="form-group"><hr /></div>
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <strong>Subtotal</strong>
-                                    <div class="pull-right"><span>$</span><span>200.00</span></div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <small>Shipping</small>
-                                    <div class="pull-right"><span>-</span></div>
-                                </div>
-                            </div>
-                            <div class="form-group"><hr /></div>
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <strong>Order Total</strong>
-                                    <div class="pull-right"><span>$</span><span>150.00</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--REVIEW ORDER END-->
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-pull-6 col-sm-pull-6">
-                    <!--SHIPPING METHOD-->
-                    <div class="panel panel-info">
-                        <div class="panel-heading">Address</div>
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <h4>Shipping Address</h4>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-12"><strong>Country:</strong></div>
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control" name="country" value="" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-6 col-xs-12">
-                                    <strong>First Name:</strong>
-                                    <input type="text" name="first_name" class="form-control" value="" />
-                                </div>
-                                <div class="span1"></div>
-                                <div class="col-md-6 col-xs-12">
-                                    <strong>Last Name:</strong>
-                                    <input type="text" name="last_name" class="form-control" value="" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-12"><strong>Address:</strong></div>
-                                <div class="col-md-12">
-                                    <input type="text" name="address" class="form-control" value="" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-12"><strong>City:</strong></div>
-                                <div class="col-md-12">
-                                    <input type="text" name="city" class="form-control" value="" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-12"><strong>State:</strong></div>
-                                <div class="col-md-12">
-                                    <input type="text" name="state" class="form-control" value="" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-12"><strong>Zip / Postal Code:</strong></div>
-                                <div class="col-md-12">
-                                    <input type="text" name="zip_code" class="form-control" value="" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-12"><strong>Phone Number:</strong></div>
-                                <div class="col-md-12"><input type="text" name="phone_number" class="form-control" value="" /></div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-12"><strong>Email Address:</strong></div>
-                                <div class="col-md-12"><input type="text" name="email_address" class="form-control" value="" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--SHIPPING METHOD END-->
-                    <!--CREDIT CART PAYMENT-->
-                    <div class="panel panel-info">
-                        <div class="panel-heading"><span><i class="glyphicon glyphicon-lock"></i></span> Secure Payment</div>
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <div class="col-md-12"><strong>Card Type:</strong></div>
-                                <div class="col-md-12">
-                                    <select id="CreditCardType" name="CreditCardType" class="form-control">
-                                        <option value="5">Visa</option>
-                                        <option value="6">MasterCard</option>
-                                        <option value="7">American Express</option>
-                                        <option value="8">Discover</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-12"><strong>Credit Card Number:</strong></div>
-                                <div class="col-md-12"><input type="text" class="form-control" name="car_number" value="" /></div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-12"><strong>Card CVV:</strong></div>
-                                <div class="col-md-12"><input type="text" class="form-control" name="car_code" value="" /></div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <strong>Expiration Date</strong>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <select class="form-control" name="">
-                                        <option value="">Month</option>
-                                        <option value="01">01</option>
-                                        <option value="02">02</option>
-                                        <option value="03">03</option>
-                                        <option value="04">04</option>
-                                        <option value="05">05</option>
-                                        <option value="06">06</option>
-                                        <option value="07">07</option>
-                                        <option value="08">08</option>
-                                        <option value="09">09</option>
-                                        <option value="10">10</option>
-                                        <option value="11">11</option>
-                                        <option value="12">12</option>
-                                </select>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <select class="form-control" name="">
-                                        <option value="">Year</option>
-                                        <option value="2015">2015</option>
-                                        <option value="2016">2016</option>
-                                        <option value="2017">2017</option>
-                                        <option value="2018">2018</option>
-                                        <option value="2019">2019</option>
-                                        <option value="2020">2020</option>
-                                        <option value="2021">2021</option>
-                                        <option value="2022">2022</option>
-                                        <option value="2023">2023</option>
-                                        <option value="2024">2024</option>
-                                        <option value="2025">2025</option>
-                                </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <span>Pay secure using your credit card.</span>
-                                </div>
-                                <div class="col-md-12">
-                                    <ul class="cards">
-                                        <li class="visa hand">Visa</li>
-                                        <li class="mastercard hand">MasterCard</li>
-                                        <li class="amex hand">Amex</li>
-                                    </ul>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <button type="submit" class="btn btn-primary btn-submit-fix">Place Order</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--CREDIT CART PAYMENT END-->
-                </div>
-                
-                </form>
+            </a>
+            <div id="navAccList" class="w3-bar-block w3-hide w3-padding-large w3-medium">
+                <a href="#" id="5a9c65ddb5d096142c8d4df0" class="w3-bar-item w3-button" onclick="navOnClick(this.id)">
+                    <i></i>Hot</a>
+                <a href="#" class="w3-bar-item w3-button">
+                    <i></i>Boy</a>
+                <a href="#" class="w3-bar-item w3-button">
+                    <i></i>Girl</a>
             </div>
-            <div class="row cart-footer">
-        
+
+
+            <a href="#" class="w3-bar-item w3-button">Baby Skin Care</a>
+            <a href="#" class="w3-bar-item w3-button">Accessory</a>
+            <a href="#" class="w3-bar-item w3-button">Shoes</a>
+        </div>
+        <a href="#footer" class="w3-bar-item w3-button w3-padding">Contact</a>
+        <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding" onclick="document.getElementById('newsletter').style.display='block'">Newsletter</a>
+        <a href="#footer" class="w3-bar-item w3-button w3-padding">Subscribe</a>
+    </nav>
+
+    <!-- Top menu on small screens -->
+    <header class="w3-bar w3-top w3-hide-large w3-white w3-xlarge">
+        <div class="w3-bar-item w3-padding-24 w3-wide imaryaLogo">
+            <a href="/">
+                <img src="icon/GirraffeText.png" width="70px">
+            </a>
+        </div>
+        <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()">
+            <i class="fa fa-bars"></i>
+        </a>
+        <button onclick="checkLoginForBtn('shoppingCart')" class="w3-bar-item w3-button w3-padding-24 w3-right">
+            <i class="fa fa-shopping-cart"></i>
+        </button>
+        <!-- <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right">
+            <i class="fa fa-search"></i>
+        </a> -->
+
+    </header>
+
+    <!-- Overlay effect when opening sidebar on small screens -->
+    <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main" style="margin-left:250px">
+
+        <!-- Push down content on small screens -->
+        <div class="w3-hide-large" style="margin-top:83px"></div>
+
+        <!-- Top header -->
+
+        <header class="w3-container w3-xlarge headerText">
+            <p class="w3-left w3-text-grey">Check Out</p>
+            <button onclick="checkLoginForBtn('shoppingCart')" class="w3-bar-item w3-button w3-padding-24 w3-right hide-small">
+                <i class="fa fa-shopping-cart" id="shoppingCartIcon"></i>
+            </button>
+            <!-- <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right hide-small">
+                <i class="fa fa-search"></i>
+            </a> -->
+        </header>
+
+        <!-- checkout page -->
+        <div id="productGrid" class="productGridClass w3-container">
+            <div id="paypal-button-container"></div>
+        </div>
+
+
+        <!-- Subscribe section -->
+        <!--
+<div class="w3-container w3-black w3-padding-32">
+    <h1>Subscribe</h1>
+    <p>To get special offers and VIP treatment:</p>
+    <p><input class="w3-input w3-border" type="text" placeholder="Enter e-mail" style="width:100%"></p>
+    <button type="button" class="w3-button w3-red w3-margin-bottom">Subscribe</button>
+</div>
+-->
+
+        <!-- Footer -->
+        <footer class="w3-padding-64 w3-small w3-center .lightGreyBG" id="footer">
+            <div class="w3-row-padding">
+                <div class="w3-col s4">
+                    <h4>Contact</h4>
+                    <p>Questions? Go ahead.</p>
+                    <form action="/action_page.php" target="_blank">
+                        <p>
+                            <input class="w3-input w3-border" type="text" placeholder="Name" name="Name" required>
+                        </p>
+                        <p>
+                            <input class="w3-input w3-border" type="text" placeholder="Email" name="Email" required>
+                        </p>
+                        <p>
+                            <input class="w3-input w3-border" type="text" placeholder="Subject" name="Subject" required>
+                        </p>
+                        <p>
+                            <input class="w3-input w3-border" type="text" placeholder="Message" name="Message" required>
+                        </p>
+                        <button type="submit" class="w3-button w3-block w3-black">Send</button>
+                    </form>
+                </div>
+
+                <div class="w3-col s4">
+                    <h4>About</h4>
+                    <p>
+                        <a href="#">About us</a>
+                    </p>
+                    <p>
+                        <a href="#">We're hiring</a>
+                    </p>
+                    <p>
+                        <a href="#">Support</a>
+                    </p>
+                    <p>
+                        <a href="#">Find store</a>
+                    </p>
+                    <p>
+                        <a href="#">Shipment</a>
+                    </p>
+                    <p>
+                        <a href="#">Payment</a>
+                    </p>
+                    <p>
+                        <a href="#">Return</a>
+                    </p>
+                    <p>
+                        <a href="#">Help</a>
+                    </p>
+                </div>
+
+
+                <div class="w3-col s4 w3-justify">
+                    <h4>Store</h4>
+                    <p>
+                        <i class="fa fa-fw fa-map-marker"></i> Company Name</p>
+                    <p>
+                        <i class="fa fa-fw fa-phone"></i> 0044123123</p>
+                    <p>
+                        <i class="fa fa-fw fa-envelope"></i> ex@mail.com</p>
+                    <h4>We accept</h4>
+                    <p>
+                        <i class="fa fa-fw fa-paypal"></i> Paypal</p>
+                    <p>
+                        <i class="fa fa-fw fa-credit-card"></i> Credit Card</p>
+                    <br>
+                    <i class="fa fa-facebook-official w3-hover-opacity w3-large"></i>
+                    <i class="fa fa-instagram w3-hover-opacity w3-large"></i>
+                    <i class="fa fa-snapchat w3-hover-opacity w3-large"></i>
+                    <i class="fa fa-pinterest-p w3-hover-opacity w3-large"></i>
+                    <i class="fa fa-twitter w3-hover-opacity w3-large"></i>
+                    <i class="fa fa-linkedin w3-hover-opacity w3-large"></i>
+                </div>
             </div>
+        </footer>
+
+        <div class="w3-black w3-center w3-padding-24">Powered by
+            <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">Imarya</a>
+        </div>
+
+        <!-- End page content -->
     </div>
+
+    <!-- Newsletter Modal -->
+    <div id="newsletter" class="w3-modal">
+        <div class="w3-modal-content w3-animate-zoom" style="padding:32px">
+            <div class="w3-container w3-white w3-center">
+                <i onclick="document.getElementById('newsletter').style.display='none'" class="fa fa-remove w3-right w3-button w3-transparent w3-xxlarge"></i>
+                <h2 class="w3-wide">NEWSLETTER</h2>
+                <p>Join our mailing list to receive updates on new arrivals and special offers.</p>
+                <p>
+                    <input class="w3-input w3-border" type="text" placeholder="Enter e-mail">
+                </p>
+                <button type="button" class="w3-button w3-padding-large w3-red w3-margin-bottom" onclick="document.getElementById('newsletter').style.display='none'">Subscribe</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!--   Add to Cart Modal ******************-->
+    <div id="ProductDetail" class="w3-modal">
+        <div class="w3-modal-content productDetailContent">
+            <div class="cartModalLoading" id="cartModalLoading">
+                <div class="loader" id="loader"></div>
+            </div>
+            <div class="productInfoDiv">
+                <div class="w3-row productInfoHeader w3-xlarge">
+                    <div class="w3-col l11 m11 s10 productInfoName" id="productInfoName">Product Name</div>
+                    <a onclick="document.getElementById('ProductDetail').style.display='none'" class="w3-col l1 m1 s2 productX logoPink">
+                        <i class="fa fa-remove"></i>
+
+                    </a>
+                </div>
+                <img id="cartModalImg" src="/img/ng-55633.jpg">
+                <div class="w3-row">
+                    <div class="w3-col l6 m6 s6">
+                        <h6>Description</h6>
+                    </div>
+
+                    <div class="w3-col l6 m6 s6" style="text-align:right;">
+                        <h5 class="w3-margin-right">
+                            <span class="w3-large logoPink" id="cartModalPrice0">
+                                price 0
+
+                            </span>
+                            <span class="w3-small logoPink" id="cartModalPrice1">. price 1
+                            </span>
+                        </h5>
+                    </div>
+                </div>
+
+                <p id="cartModalDescription">Product description</p>
+
+                <form class="w3-container" id="addToCartForm">
+                    <input type="text" name="productId" id="addToCartFormProductId" value="" style="display: none">
+                    <input type="text" name="productQtyId" id="addToCartFormProductQtyId" style="display: none">
+
+                    <select class="w3-select" name="color" id="modalProductColorOption" required>
+                        <option value="" disabled selected>Color</option>
+
+                    </select>
+
+                    <select class="w3-select" name="size" id="modalProductSizeOption" required>
+                        <option value="" disabled selected>Size</option>
+                    </select>
+
+                    <select class="w3-select" name="qty" id="modalProductQuantityOption" required disabled>
+                        <option value="" disabled selected>Quantity</option>
+                    </select>
+
+                    <button class="w3-btn w3-margin-top productDetailBtn logoPinkBG" id="modalAddToCart">Add To Cart</button>
+                </form>
+                <div class="w3-padding">
+                    <button class="w3-btn productDetailBtn logoPinkBG">Check Out</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--   Shopping Cart Modal ******************-->
+    <div id="shoppingCart" class="w3-modal">
+        <div class="w3-modal-content scContent">
+            <div class="scContainer">
+                <div class="scHeader whiteBG">
+                    <span onclick="document.getElementById('shoppingCart').style.display='none'" class="w3-button w3-display-topright">
+                        <i class="fa fa-remove w3-xlarge"></i>
+                    </span>
+                    <div class="w3-bar" style="width: 100%;">
+                        <button class="w3-bar-item w3-button w3-border-top" onclick="openCity('London')">Cart</button>
+                        <button class="w3-bar-item w3-button w3-border-right  w3-grey" onclick="openCity('Paris')">History</button>
+                    </div>
+                </div>
+
+                <div class="scList greyBG">
+
+
+                </div>
+                <div class="scCheckoutFooter whiteBG">
+                    <div class="w3-col s6">
+                        <div class="scCheckoutPriceContent">
+                            <h6>Total</h6>
+                            <h3 class="logoPink" id="shoppingCartTotal">$</h3>
+                        </div>
+
+                    </div>
+                    <div class="w3-col s6">
+                        <a href="./openApi/Checkout" class="w3-btn scCheckoutBtnC w3-round-xlarge logoPinkBG">Checkout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    Modal ******************-->
+
+    <!--   User Modal ******************-->
+    <div id="userLogin" class="w3-modal">
+
+        <div class="w3-modal-content loginPageContent">
+            <div class="userInfo">
+                <span onclick="document.getElementById('userLogin').style.display='none'" class="w3-button w3-display-topright fa fa-remove w3-xlarge"></span>
+                <h3>Login and Security</h3>
+                <div class="w3-card userInfoCard">
+                    <% if(userLoginInfo){ 
+                            let email = 'n/a';
+                            let phoneNumber = "n/a";
+                            if(userLoginInfo.email){
+                                email = userLoginInfo.email;
+                            }  
+                            if(userLoginInfo.phoneNumber){
+                                phoneNumber = userLoginInfo.phoneNumber;
+                            }    
+                    %>
+                        <ul class="w3-ul">
+                            <li class="userInfoEdit">
+                                <div class="userInfoDisplay">
+                                    <h5>Name</h5>
+                                    <p>
+                                        <%= userLoginInfo.displayName; %>
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="userInfoEdit">
+                                <div class="userInfoDisplay">
+                                    <h5>Email</h5>
+                                    <p>
+                                        <%= email; %>
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="userInfoEdit">
+                                <div class="userInfoDisplay">
+                                    <h5>Address</h5>
+                                    <p></p>
+                                </div>
+                                <div>
+                                    <a class="w3-btn scCheckoutBtnC w3-round-xlarge logoPinkBG userInfoEditBtn" href="./login/editContactInfo">Edit</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <% } %>
+                </div>
+                <br>
+                <a class="w3-btn logoPinkBG logoutBtn" href="./login/logout">Logout</a>
+            </div>
+            <div class="w3-container loginPage">
+                <span onclick="document.getElementById('userLogin').style.display='none'" class="w3-button w3-display-topright fa fa-times"></span>
+
+                <h3>Sign Up With</h3>
+                <div class="w3-row" style="width: 80%; margin: auto;">
+                    <a class="w3-col s4 w3-center" href="/login/google-login">
+                        <img style="width: 60%;" class="w3-circle" src="icon/Google-plus-circle-icon-png.png">
+                    </a>
+                    <a class="w3-col s4 w3-center">
+                        <img style="width: 60%" class="w3-circle" src="icon/wechatLogo.svg">
+                    </a>
+                    <a class="w3-col s4 w3-center" href="/login/facebook-login">
+                        <img style="width: 60%;" class="w3-circle" src="icon/Facebook-Home-Logo.png">
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--    Modal ******************-->
+
+    <script>
+        // Accordion in menu
+        function navAccDisplay() {
+            var x = document.getElementById("navAccList");
+            if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+            } else {
+                x.className = x.className.replace(" w3-show", "");
+            }
+        }
+
+        // Click on the link on page load to open the accordion for
+        document.getElementById("myBtn").click();
+
+
+        // Script to open and close sidebar
+        function w3_open() {
+            document.getElementById("mySidebar").style.display = "block";
+            document.getElementById("myOverlay").style.display = "block";
+        }
+
+        function w3_close() {
+            document.getElementById("mySidebar").style.display = "none";
+            document.getElementById("myOverlay").style.display = "none";
+        }
+    </script>
+
+    <!-- PayPal -->
+<script>
+    // Render the PayPal button
+    paypal.Button.render({
+
+        // Set your environment
+
+        env: 'sandbox', // sandbox | production
+
+        // Specify the style of the button
+
+        style: {
+            label: 'paypal',
+            size:  'medium',    // small | medium | large | responsive
+            shape: 'rect',     // pill | rect
+            color: 'blue',     // gold | blue | silver | black
+            tagline: false    
+        },
+
+        // PayPal Client IDs - replace with your own
+        // Create a PayPal app: https://developer.paypal.com/developer/applications/create
+
+        client: {
+            sandbox:    'ARLxJDrjE_woKxxzil5eyPbqe66c8iR1US6s5bOYouTlAU3NHG77UZHJ4Lg90ONnlITQdZxFS635qmDO',
+            production: '<insert production client id>'
+        },
+
+        payment: function(data, actions) {
+            return actions.payment.create({
+                payment: {
+                    transactions: [
+                        {
+                            amount: { total: '10.01', currency: 'USD' }
+                        }
+                    ]
+                }
+            });
+        },
+
+        onAuthorize: function(data, actions) {
+            return actions.payment.execute().then(function() {
+                window.alert('Payment Complete!');
+            });
+        }
+
+    }, '#paypal-button-container');
+
+</script>
+    
+
+
+</body>
+
+</html>
