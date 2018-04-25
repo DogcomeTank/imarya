@@ -22,6 +22,9 @@ passport.use(new RememberMeStrategy(
       if (!tempCookies) {
         return done(null, false);
       }
+      if(tempCookies.length === 0){
+        return done(null, false);
+      }
       // find user info if tempCookies
       userInfo.findById(tempCookies[0].userId, (err, user) => {
         return done(null, user);

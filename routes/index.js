@@ -42,8 +42,25 @@ router.get('/checkout', (req, res) => {
             userLoginInfo,
         });
     });
-
 });
+
+router.get('/productDetail/id/:id', function (req, res) {
+    let userLoginInfo = false;
+    if(req.user){
+        userLoginInfo = req.user;
+    }
+    m.Products.findById(req.params.id,(err, doc)=>{
+        m.ProductQty.find({productId: req.params.id}, (err, pQty)=>{
+            console.log(pQty);
+            res.render('productDetail', {
+                doc,
+                pQty,
+                userLoginInfo,
+            });
+        })
+        
+    });
+  })
 
 
 

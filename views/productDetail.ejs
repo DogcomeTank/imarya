@@ -5,20 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/style/w3.css">
 <link rel="stylesheet" href="/style/style.css" type="text/css">
-<link rel="stylesheet" href="/style/checkout.css" type="text/css">
+<link rel="stylesheet" href="/style/productDetail.css" type="text/css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<link rel="icon" href="icon/linkLogo.png">
+<link rel="icon" href="/icon/linkLogo.png">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<script src="script/script.js" type="text/javascript"></script>
+<script src="/script/script.js" type="text/javascript"></script>
 
-<!-- paypal script -->
-<script src="https://www.paypalobjects.com/api/checkout.js"></script>
-<!-- includes the Braintree JS client SDK -->
-<script src="https://js.braintreegateway.com/web/dropin/1.10.0/js/dropin.min.js"></script>
 
 <body class="w3-content" style="max-width:1600px;min-width: 320px;">
 
@@ -28,8 +24,8 @@
             <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
             <h3 class="w3-wide w3-center">
                 <b>
-                    <a href="">
-                        <img src="icon/GirraffeText.png" width="100">
+                    <a href="/">
+                        <img src="/icon/GirraffeText.png" width="100">
                     </a>
                 </b>
             </h3>
@@ -50,8 +46,8 @@
             </a>
         </div>
         <div id="navCategoryLink" class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
-            <a id="navAllItems" href="/" class="w3-bar-item w3-button w3-block">
-                <i></i>All</a>
+            <a href="/" class="w3-bar-item w3-button  w3-block logoBlueBG">
+                <i class="fa fa-caret-right w3-margin-right"></i>Home</a>
             <a href="#" class="w3-bar-item w3-button">
                 <i></i>New Arrivals</a>
             <a href="#" class="w3-bar-item w3-button">
@@ -65,7 +61,7 @@
                 </div>
             </a>
             <div id="navAccList" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-                <a href="#" id="5a9c65ddb5d096142c8d4df0" class="w3-bar-item w3-button" onclick="navOnClick(this.id)">
+                <a href="#" id="5a9c65ddb5d096142c8d4df0" class="w3-bar-item w3-button">
                     <i></i>Hot</a>
                 <a href="#" class="w3-bar-item w3-button">
                     <i></i>Boy</a>
@@ -87,9 +83,9 @@
     <header class="w3-bar w3-top w3-hide-large w3-white w3-xlarge">
         <div class="w3-bar-item w3-padding-24 w3-wide imaryaLogo">
             <a href="/">
-                <img src="icon/GirraffeText.png" width="70px">
-            </a>
+                <img src="/icon/GirraffeText.png" width="70px">
         </div>
+        </a>
         <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()">
             <i class="fa fa-bars"></i>
         </a>
@@ -114,7 +110,7 @@
         <!-- Top header -->
 
         <header class="w3-container w3-xlarge headerText">
-            <p class="w3-left w3-text-grey">Check Out</p>
+            <p class="w3-left w3-text-grey">Home</p>
             <button onclick="checkLoginForBtn('shoppingCart')" class="w3-bar-item w3-button w3-padding-24 w3-right hide-small">
                 <i class="fa fa-shopping-cart" id="shoppingCartIcon"></i>
             </button>
@@ -123,28 +119,38 @@
             </a> -->
         </header>
 
-        <!-- checkout page -->
+
+        <!-- Product Detail -->
         <div id="productGrid" class="productGridClass w3-container">
+            <div class="w3-row productDetailContainer">
+                <div class="w3-col l7 s12">
+                    <img class="productImg" src="/img/<%= doc.img %>">
+                </div>
+                <div class="w3-col l5 s12 productInfoContent w3-padding-16">
+                    <h3 class="upperCase">
+                        <%= doc.productName %>
+                    </h3>
+                    <p class="stock">In Stock</p>
+                    <% 
+                        var price = doc.price.split(".");
+                    %>
 
-                <div class="w3-row">
-                        <div class="w3-col m4 l3">
-                          <p>12 columns on a small screen, 4 on a medium screen, and 3 on a large screen.</p>
-                        </div>
-                        <div class="w3-col m8 l9">
-                          <p>12 columns on a small screen, 8 on a medium screen, and 9 on a large screen.</p>
-                        </div>
-                      </div>
-            <div class="testClass"></div> 
-            <div id="dropin-wrapper">
-                <div id="checkout-message"></div>
-                <div id="dropin-container"></div>
-                <button id="submit-button">Submit payment</button>
+                        <h4 class="productDetailPrice">
+                            <span class="w3-xlarge logoPink">
+                                $
+                                <%= price[0] %>
+                                    <span class="w3-small logoPink">.
+                                        <%= price[1] %>
+                                    </span>
+                            </span>
+                        </h4>
+                        <p class="productDetailDescription">
+                            <%= doc.description %>
+                        </p>
+                </div>
             </div>
-            <div id="paypal-button-container" class="paypalBtnStyle"></div>
-
 
         </div>
-
 
         <!-- Subscribe section -->
         <!--
@@ -233,7 +239,7 @@
         </footer>
 
         <div class="w3-black w3-center w3-padding-24">Powered by
-            <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">Imarya</a>
+            <a href="/" title="imarya.com" target="_blank" class="w3-hover-opacity">Imarya</a>
         </div>
 
         <!-- End page content -->
@@ -312,7 +318,11 @@
                     <button class="w3-btn productDetailBtn logoPinkBG">Check Out</button>
                 </div>
             </div>
+
         </div>
+
+
+
     </div>
 
 
@@ -344,7 +354,7 @@
 
                     </div>
                     <div class="w3-col s6">
-                        <a href="./openApi/Checkout" class="w3-btn scCheckoutBtnC w3-round-xlarge logoPinkBG">Checkout</a>
+                        <a href="/Checkout" class="w3-btn scCheckoutBtnC w3-round-xlarge logoPinkBG">Checkout</a>
                     </div>
                 </div>
             </div>
@@ -393,14 +403,14 @@
                                     <p></p>
                                 </div>
                                 <div>
-                                    <a class="w3-btn scCheckoutBtnC w3-round-xlarge logoPinkBG userInfoEditBtn" href="./login/editContactInfo">Edit</a>
+                                    <a class="w3-btn scCheckoutBtnC w3-round-xlarge logoPinkBG userInfoEditBtn" href="/login/editContactInfo">Edit</a>
                                 </div>
                             </li>
                         </ul>
                         <% } %>
                 </div>
                 <br>
-                <a class="w3-btn logoPinkBG logoutBtn" href="./login/logout">Logout</a>
+                <a class="w3-btn logoPinkBG logoutBtn" href="/login/logout">Logout</a>
             </div>
             <div class="w3-container loginPage">
                 <span onclick="document.getElementById('userLogin').style.display='none'" class="w3-button w3-display-topright fa fa-times"></span>
@@ -408,13 +418,13 @@
                 <h3>Sign Up With</h3>
                 <div class="w3-row" style="width: 80%; margin: auto;">
                     <a class="w3-col s4 w3-center" href="/login/google-login">
-                        <img style="width: 60%;" class="w3-circle" src="icon/Google-plus-circle-icon-png.png">
+                        <img style="width: 60%;" class="w3-circle" src="/icon/Google-plus-circle-icon-png.png">
                     </a>
                     <a class="w3-col s4 w3-center">
-                        <img style="width: 60%" class="w3-circle" src="icon/wechatLogo.svg">
+                        <img style="width: 60%" class="w3-circle" src="/icon/wechatLogo.svg">
                     </a>
                     <a class="w3-col s4 w3-center" href="/login/facebook-login">
-                        <img style="width: 60%;" class="w3-circle" src="icon/Facebook-Home-Logo.png">
+                        <img style="width: 60%;" class="w3-circle" src="/icon/Facebook-Home-Logo.png">
                     </a>
                 </div>
             </div>
@@ -449,104 +459,6 @@
             document.getElementById("mySidebar").style.display = "none";
             document.getElementById("myOverlay").style.display = "none";
         }
-    </script>
-
-    <!-- PayPal -->
-    <script>
-        // Render the PayPal button
-        paypal.Button.render({
-
-            // Set your environment
-
-            env: 'sandbox', // sandbox | production
-
-            // Specify the style of the button
-
-            style: {
-                label: 'paypal',
-                size: 'medium', // small | medium | large | responsive
-                shape: 'rect', // pill | rect
-                color: 'blue', // gold | blue | silver | black
-                tagline: false
-            },
-
-            // PayPal Client IDs - replace with your own
-            // Create a PayPal app: https://developer.paypal.com/developer/applications/create
-
-            client: {
-                sandbox: 'ARLxJDrjE_woKxxzil5eyPbqe66c8iR1US6s5bOYouTlAU3NHG77UZHJ4Lg90ONnlITQdZxFS635qmDO',
-                production: '<insert production client id>'
-            },
-
-            payment: function (data, actions) {
-                return actions.payment.create({
-                    payment: {
-                        transactions: [{
-                            amount: {
-                                total: '10.01',
-                                currency: 'USD'
-                            }
-                        }]
-                    }
-                });
-            },
-
-            onAuthorize: function (data, actions) {
-                return actions.payment.execute().then(function () {
-                    window.alert('Payment Complete!');
-                });
-            }
-
-        }, '#paypal-button-container');
-    </script>
-
-    <!-- Braintree -->
-    <script>
-        var button = document.querySelector('#submit-button');
-
-        braintree.dropin.create({
-            // Insert your tokenization key here
-            authorization: 'sandbox_g37nqj9h_nr3xxjrc2qgtqbfm',
-            container: '#dropin-container',
-            card: {
-                cardholderName: true
-            }
-        }, function (createErr, instance) {
-            button.addEventListener('click', function () {
-                instance.requestPaymentMethod(function (requestPaymentMethodErr, payload) {
-                    // When the user clicks on the 'Submit payment' button this code will send the
-                    // encrypted payment information in a variable called a payment method nonce
-                    $.ajax({
-                        type: 'POST',
-                        url: './braintree',
-                        data: {
-                            'paymentMethodNonce': payload.nonce
-                        }
-                    }).done(function (result) {
-                        console.log(result);
-                        // Tear down the Drop-in UI
-                        instance.teardown(function (teardownErr) {
-                            if (teardownErr) {
-                                console.error('Could not tear down Drop-in UI!');
-                            } else {
-                                console.info('Drop-in UI has been torn down!');
-                                // Remove the 'Submit payment' button
-                                $('#submit-button').remove();
-                            }
-                        });
-
-                        if (result.success) {
-                            $('#checkout-message').html(
-                                '<h1>Success</h1><p>Your Drop-in UI is working! Check your <a href="https://sandbox.braintreegateway.com/login">sandbox Control Panel</a> for your test transactions.</p><p>Refresh to try another transaction.</p>'
-                            );
-                        } else {
-                            $('#checkout-message').html(
-                                '<h1>Error</h1><p>Check your console.</p>');
-                        }
-                    });
-                });
-            });
-        });
     </script>
 
 </body>

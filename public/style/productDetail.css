@@ -1,0 +1,42 @@
+body{
+    max-width: 1800px;
+}
+
+.upperCase{
+    text-transform: uppercase;
+}
+
+.productDetailContainer * {
+    color: #4a4a4a;
+    max-width: 600px;
+}
+
+.productImg {
+    display: block;
+    width: 80%;
+    margin: auto;
+}
+
+.productInfoContent * {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.productDetailPrice{
+    padding-top: 14px;
+}
+.productDetailDescription{
+    padding-top: 14px;
+}
+
+/* small screen */
+
+@media only screen and (max-width: 600px) {
+    .productInfoContent {
+        font-size: .8rem;
+        padding: 0 8px 0 8px;
+    }
+    .productInfoContent h3 {
+        font-size: 18px;
+    }
+}

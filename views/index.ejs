@@ -15,7 +15,7 @@
 <script src="script/script.js" type="text/javascript"></script>
 
 
-<body class="w3-content" style="max-width:2000px;min-width: 320px;">
+<body class="w3-content" style="max-width:1600px;min-width: 320px;">
 
     <!-- Sidebar/menu -->
     <nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
@@ -60,7 +60,7 @@
                 </div>
             </a>
             <div id="navAccList" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-                <a href="#" id="5a9c65ddb5d096142c8d4df0" class="w3-bar-item w3-button" onclick="navOnClick(this.id)">
+                <a href="#" id="5a9c65ddb5d096142c8d4df0" class="w3-bar-item w3-button">
                     <i></i>Hot</a>
                 <a href="#" class="w3-bar-item w3-button">
                     <i></i>Boy</a>
@@ -163,10 +163,10 @@
 
         </div>
 
-
+<!-- 
         <div class="w3-container w3-text-grey" id="totalItemFound">
             <p>8 items</p>
-        </div>
+        </div> -->
 
         <!-- Product grid -->
 
@@ -179,7 +179,7 @@
         %>
                 <div class="w3-card-4">
                     <div class="w3-display-container w3-text-white">
-                        <a id="<%= products[i]._id %>" onclick="productOnClick(this.id)">
+                        <a id="<%= products[i]._id %>" href="./productDetail/id/<%= products[i]._id %>">
                             <img src="img/<%= products[i].img %>" style="width: 100%">
                         </a>
                     </div>
