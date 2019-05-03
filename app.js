@@ -44,6 +44,8 @@ const index = require('./routes/index');
 const login = require('./config/loginConfig');
 const products = require('./routes/products');
 const api = require('./routes/api');
+const braintree = require('./routes/braintree');
+const emailService = require('./routes/email/registration');
 
 //
 app.use(bodyParser.urlencoded({
@@ -56,12 +58,19 @@ const separator = function (req, res, next) {
     next();
 }
 
+const checkLogin = function(req, res, next){
+    console.log('login middleware');
+    next();
+}
+
 app.use(separator);
 
 app.use('/', index);
 app.use('/login', login);
 app.use('/products', products);
-app.use('/api', api);
+app.use('/api', checkLogin, api);
+app.use('/payment', braintree);
+app.use('/email', emailService);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -82,7 +91,7 @@ app.use((err, req, res, next) => {
 /**
  * Get port from environment and store in Express.
  */
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 app.set('port', port);
 
 /**

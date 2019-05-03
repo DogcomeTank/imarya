@@ -28,22 +28,22 @@ router.post('/addItem', (req, res) => {
     });
 });
 
-router.get('/productInfo',(req, res)=>{
-    newInfo = {
-        productId: '5a792cd27db0582524720c65',
-        description:'testing',
-        price: '3.44',
-    }
+// router.get('/productInfo',(req, res)=>{
+//     newInfo = {
+//         productId: '5a792cd27db0582524720c65',
+//         description:'testing',
+//         price: '3.44',
+//     }
     
-    const newProductInfo = new ProductInfo(newInfo);
-    newProductInfo.save((err,doc)=>{
-        if(err){
-            console.log(err);
-            return next(err);
-        }
-        res.send(doc);
-    });
-});
+//     const newProductInfo = new ProductInfo(newInfo);
+//     newProductInfo.save((err,doc)=>{
+//         if(err){
+//             console.log(err);
+//             return next(err);
+//         }
+//         res.send(doc);
+//     });
+// });
 
 router.get('/deleteItem', (req, res) => {
     res.send('delete');

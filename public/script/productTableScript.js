@@ -150,6 +150,8 @@ $(document).ready(function () {
                 newProductFormDataArray
             },
             success: function(newAddedProduct){
+
+                // add new row to datatables
                 var row = newAddedProduct;
                 table.row.add(row).draw(false);
                 table.order([1, 'asc']).draw();
@@ -291,20 +293,20 @@ function modalAddNewCategoryBtn() {
     }
 }
 
-function navNewProductBtn() {
-    document.getElementById('addNewProduct').style.display = 'block';
-    $('#addNewProductCategoryList').empty();
-    $.ajax({
-        type: "get",
-        dataType: "json",
-        url: "/api/category",
-        success: function (catList) {
-            for (var i in catList) {
-                $('<input class="w3-check" type="checkbox" name="' + catList[i].category + '" value="' + catList[i]._id + '"><label>' + catList[i].category + '</label>').appendTo('#addNewProductCategoryList');
-            }
-        }
-    });
-}
+// function navNewProductBtn() {
+//     document.getElementById('addNewProduct').style.display = 'block';
+//     $('#addNewProductCategoryList').empty();
+//     $.ajax({
+//         type: "get",
+//         dataType: "json",
+//         url: "/api/category",
+//         success: function (catList) {
+//             for (var i in catList) {
+//                 $('<input class="w3-check" type="checkbox" name="' + catList[i].category + '" value="' + catList[i]._id + '"><label>' + catList[i].category + '</label>').appendTo('#addNewProductCategoryList');
+//             }
+//         }
+//     });
+// }
 
 // function modalAddNewProductBtn() {
 //     event.preventDefault();

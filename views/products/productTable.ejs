@@ -23,7 +23,7 @@
     <div class="w3-bar productManagementNav">
         <a href="/products/" class="w3-bar-item w3-button">Home</a>
         <a href="/products/receiving" class="w3-bar-item w3-button">Receiving</a>
-        <button class="w3-bar-item w3-button" onclick="navNewProductBtn()">New Product</button>
+        <a href="/api/addNewProduct" class="w3-bar-item w3-button">New Product</a>
         <button class="w3-bar-item w3-button" onclick="navProductLocationBtn()">New Location</button>
         <button class="w3-bar-item w3-button" onclick="navCategoryBtn()">New Category</button>
     </div>
@@ -110,6 +110,17 @@
                     <label>Image</label>
                     <input class="w3-input w3-border-bottom" type="text" name="img" id="img">
 
+                    <br>
+                    
+                    <select class="w3-select" name="availability">
+                        <option selected disabled>Display on website?</option>
+                        <option value="0">No</option>
+                        <option value="1">Show on website</option>
+                        <option value="2">Show on Admin login only</option>
+                    </select>
+
+                    <br>
+
                     <input type="submit" class="w3-btn w3-margin-top w3-deep-orange" value="Submit" id="modalUpdateProductBtn">
 
                 </form>
@@ -173,6 +184,10 @@
                     <input class="w3-input w3-border-bottom" type="text" name="img" id="newImg">
 
                     <br>
+                    <label>Img</label>
+                    <input name="myImage" id="myImage" type="file">
+
+                    <br><br>
                     <label>Category: </label>
 
                     <div id="addNewProductCategoryList">

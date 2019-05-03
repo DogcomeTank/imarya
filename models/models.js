@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const ProductSchema = new Schema({
     ipn: {
-        type: String,
+        type: Number,
         unique: true,
     },
     productName: String,
@@ -11,6 +11,10 @@ const ProductSchema = new Schema({
     by: String,
     img: String,
     price: String,
+    availability: {
+        type: Number,
+        default: 0
+    },
     createDay: {
         type: Date,
         default: Date.now

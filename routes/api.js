@@ -3,11 +3,26 @@ const router = express.Router();
 const m = require('../models/models');
 const path = require('path');
 const multer = require('multer');
+const formidable = require('formidable');
+const fs = require('fs');
 
 
 
-
-
+router.post('/displayProductByCategory', (req, res)=>{
+    let myData = req.body;
+    if(myData.categoryId == 'navAllItems'){
+        m.ProductCategory.find({}).populate('productId').exec((err, doc)=>{
+            res.json(doc);
+        });
+    }else{
+        m.ProductCategory.find(myData).populate('productId').exec((err, doc)=>{
+            res.json(doc);
+        });
+    }
+    // m.ProductCategory.find(myData).populate('productId').exec((err, doc)=>{
+    //     res.json(doc);
+    // });
+});
 
 router.get('/', (req, res) => {
     let login = {
@@ -42,6 +57,7 @@ router.post('/addToCartModal', (req, res) => {
         if (err) {
             return next(err);
         } else {
+
             m.ProductQty.find({
                 productId: p._id
             }, (err, pQty) => {
@@ -71,6 +87,34 @@ router.get('/allProducts', (req, res) => {
     });
 
 });
+
+//delete prodroduct
+router.get('/deleteProduct', (req, res)=>{
+    res.send('<form method="post" action="/api/deleteProduct"><input autofocus type="text" name="productId"><br><br><input type="submit" value="Submit"></form>');
+});
+
+router.post('/deleteProduct', (req, res)=>{
+    let productToDelete = req.body.productId;
+    m.Products.remove(({'_id': productToDelete}), (err, doc)=>{
+        console.log('Remove from Products.');
+    });
+    m.ProductCategory.remove(req.body, (err, doc)=>{
+        console.log('Remove from ProductCategory.');
+    });
+    m.ProductHistory.remove(req.body, (err, doc)=>{
+        console.log('Remove from ProductHistory.');
+    });
+    m.ProductQty.remove(req.body, (err, doc)=>{
+        console.log('Remove from ProductQty.');
+    });
+
+    res.send('<form method="post" action="/api/deleteProduct"><input autofocus type="text" name="productId"><br><br><input type="submit" value="Submit"></form>');
+});
+
+
+
+
+
 // get one product by ID
 router.post('/getProductById', (req, res) => {
     m.Products.findById(req.body.productId, (err, item) => {
@@ -93,6 +137,18 @@ router.post('/showProductQty', (req, res) => {
         if (err) return handleError(err);
         res.json(itemInfo);
     });;
+});
+
+// product Info modal size and color on change
+router.post('/colorSizeOnChange', (req, res) => {
+    
+    let dataToFind = req.body;
+    dataToFind = JSON.parse(dataToFind.selectedData);
+    m.ProductQty.find(dataToFind.findData).select(['qty']).exec(
+        (err, doc) => {
+            res.json(doc);
+        }
+    );
 });
 
 router.post('/qtyUpdate', (req, res) => {
@@ -129,7 +185,8 @@ router.post('/updateProductInformation', (req, res) => {
             description: formDataForUpdate.description,
             by: formDataForUpdate.by,
             price: formDataForUpdate.price,
-            img: formDataForUpdate.img
+            img: formDataForUpdate.img,
+            availability: formDataForUpdate.availability,
         });
         updatedItem.save(function (err, updatedupdatedItem) {
             if (err) return handleError(err);
@@ -140,60 +197,14 @@ router.post('/updateProductInformation', (req, res) => {
 });
 
 router.get('/imgUpload', (req, res) => {
+
     res.render('products/imgUpload');
 });
 
 router.post('/imgUpload', (req, res) => {
 
-    // Set The Storage Engine
-    const storage = multer.diskStorage({
-        destination: './public/imgUpload/',
-        filename: function (req, file, cb) {
-            cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-        }
-    });
+    uploadImage(req, res);
 
-    // Init Upload
-    const upload = multer({
-        storage: storage,
-        limits: {
-            fileSize: 1000000
-        },
-        fileFilter: function (req, file, cb) {
-            checkFileType(file, cb);
-        }
-    }).single('myImage');
-
-    //upload
-    upload(req, res, (err) => {
-        if(err){
-          throw err;
-        } else {
-          if(req.file == undefined){
-            res.send('undefine');
-          } else {
-            let msg = "uploads" + req.file.filename;
-
-            res.send(msg);
-          }
-        }
-      });
-
-    // Check File Type
-    function checkFileType(file, cb) {
-        // Allowed ext
-        const filetypes = /jpeg|jpg|png|gif/;
-        // Check ext
-        const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-        // Check mime
-        const mimetype = filetypes.test(file.mimetype);
-
-        if (mimetype && extname) {
-            return cb(null, true);
-        } else {
-            cb('Error: Images Only!');
-        }
-    }
 
 
 });
@@ -242,9 +253,9 @@ router.get('/location', (req, res) => {
     )
 });
 router.post('/location', (req, res) => {
-    var l = req.body.location;
+    var newLoc = req.body.location;
     var newLocation = new m.Location({
-        location: l
+        location: newLoc
     });
     newLocation.save((err, doc) => {
         res.json(doc);
@@ -269,20 +280,62 @@ router.post('/category', (req, res) => {
 });
 
 
-router.post('/addNewProduct', (req, res) => {
-    let newProduct = JSON.parse(req.body.newProductFormDataArray);
-    const product = new m.Products(newProduct);
-    product.save((err, doc) => {
-        if (err) {
-            console.log("err:  " + err);
-            return next(err);
-        }
-        res.json(doc);
-    });
+router.get('/addNewProduct', (req, res) => {
+
+    m.Category.find({}, (err, pCateg) => {
+        let doc = false;
+        res.render('products/addNewProduct', {
+            doc,
+            pCateg
+        });
+    })
 });
 
+router.post('/addNewProduct', (req, res) => {
+    var form = new formidable.IncomingForm();
+    let theImgName = '';
+    form.uploadDir = "./public/img/";
+    form.keepExtensions = true;
+    form.maxFieldsSize = 2 * 1024 * 1024;
+    form.multiples = false;
+    /* this is where the renaming happens */
+    form.on('fileBegin', function (name, file) {
+        theImgName = Date.now() + '_' + file.name;
+        //rename the incoming file to the file's name
+        file.path = form.uploadDir + "/" + theImgName;
+    })
 
+    form.parse(req, function (err, fields, files) {
+        // ...
+        fields.img = theImgName;
+        insertToProducts(theImgName, fields);
+    });
 
+    function insertToProducts(pinfo, fieldsInfo) {
+
+        const product = new m.Products(fieldsInfo);
+        product.save((err, doc) => {
+            if (err) throw err;
+
+            let subString = 'category';
+            for (let key in fieldsInfo) {
+                if (key.indexOf(subString) !== -1) {
+                    let productCate = new m.ProductCategory({
+                        productId: doc._id,
+                        categoryId: fieldsInfo[key]
+                    });
+                    productCate.save();
+                }
+            }
+            m.Category.find({}, (err, pCateg) => {
+                res.render('products/addNewProduct', {
+                    doc,
+                    pCateg
+                });
+            });
+        });
+    }
+});
 
 
 
